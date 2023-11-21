@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 18:02:58 by tbourdea          #+#    #+#             */
-/*   Updated: 2022/12/08 18:43:34 by tbourdea         ###   ########.fr       */
+/*   Created: 2022/11/28 11:46:59 by tgeorge           #+#    #+#             */
+/*   Updated: 2023/05/09 13:52:49 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stddef.h>
-# include <unistd.h>
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 100
 # endif
 
+size_t	ft_strlen_gnl(const char *str);
 char	*get_next_line(int fd);
-char	*ft_newline(char *arch, int size);
-char	*ft_row(char *arch);
-int		ft_gotcha(char *arch);
-int		ft_strlen(char *str);
-char	*ft_empty_str(int len);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr_gnl(const char *s, int c);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+void	*ft_calloc_gnl(size_t nmemb, size_t size);
 
 #endif

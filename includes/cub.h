@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:22:31 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/21 12:47:14 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:12:43 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "../mlx_linux/mlx.h"
-# include "get_next_line.h"
+# include "../libft/libft.h"
 
 typedef struct s_img
 {
@@ -42,9 +42,6 @@ typedef struct s_cub
 }			t_cub;
 
 /*		TOOLS		*/
-void	ft_putstr_fd(char *txt, int fd);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
 char	*ft_strnchr(const char *s, int c, int size);
 
 #endif

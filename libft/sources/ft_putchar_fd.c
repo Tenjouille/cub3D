@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:03:19 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/20 16:04:06 by tbourdea         ###   ########.fr       */
+/*   Created: 2022/11/10 17:58:28 by tgeorge           #+#    #+#             */
+/*   Updated: 2023/05/03 15:59:15 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_putchar_fd(char c, int fd)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (1);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	write(fd, &c, 1);
 }

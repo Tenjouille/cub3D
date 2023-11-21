@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 14:03:29 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/17 14:07:33 by tbourdea         ###   ########.fr       */
+/*   Created: 2022/12/07 17:16:30 by tgeorge           #+#    #+#             */
+/*   Updated: 2022/12/08 19:22:40 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *txt, int fd)
+int	ft_putstr(char *str)
 {
 	int	i;
-	
-	i = -1;
-	while (txt[++i])
-		write(fd, &txt[i], 1);
+
+	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
 }

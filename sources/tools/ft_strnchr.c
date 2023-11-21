@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:41:19 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/21 12:46:33 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:22:39 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strnchr(const char *s, int c, int size)
 	int	i;
 
 	i = 0;
-	if (n == 0 && !s)
+	if (size == 0 && !s)
 		return (NULL);
 	while (s[i] && i <= size)
 	{

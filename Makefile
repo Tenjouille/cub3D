@@ -1,105 +1,65 @@
-# NAME = minishell
-# CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -g3
-# LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-# HEAD = includes/
-# HEADER = includes/cub.h
-# SRCS = main.c
-# OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
-# OBJ_DIR = obj
-
-# all: $(NAME)
-
-# $(NAME): $(OBJS) $(HEADER)
-# 	$(CC) $(CFLAGS) -I $(HEAD) $(OBJS) $(LFLAGS) -o $(NAME)
-
-# $(OBJ_DIR)/%.o: %.c
-# 	mkdir -p $(dir $@)
-# 	$(CC) $(CFLAGS) -I $(HEAD) -I/usr/include -Imlx_linux -c $< -o $@
-
-
-# clean: 
-# 	rm -rf $(OBJ_DIR)
-
-# fclean: clean
-# 	rm $(NAME)
-
-# re: clean all
-
-# .PHONY: all clean fclean re
-
 NAME = cub3D
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -MMD
 HEADERS = -I ./include
-# MLX_DIR=./mlx_linux
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \
-	get_next_line/get_next_line.c \
-	get_next_line/get_next_line_utils.c \
-	tools/ft_putstr_fd.c \
-	tools/ft_strcmp.c
-OBJ = $(SRC:.c=.o)
+	tools/ft_strnchr.c
+SRC_PATH = sources/
+MY_SOURCES := $(addprefix $(SRC_PATH),$(SRC))
+OBJ = $(MY_SOURCES:.c=.o)
+MY_OBJECTS := $(addprefix build/, $(OBJ))
 RM = rm -rf
+DEPS := $(MY_OBJECTS:.o=.d)
+LIBFT_PATH = libft/
+LIBFT_FILE = libft.a
+LIBFT_LIB = $(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
+FTPRINTF_PATH = libft/ft_printf/
+FTPRINTF_FILE = libftprintf.a
+FTPRINTF_LIB = $(addprefix $(FTPRINTF_PATH), $(FTPRINTF_FILE))
+GNL_PATH = libft/get_next_line/
+GNL_FILE = get_next_line.a
+GNL_LIB	= $(addprefix $(GNL_PATH), $(GNL_FILE))
+MLX_PATH = mlx_linux/
+MLX_LIB = $(MLX_PATH)libmlx.a
 
-all: ${NAME}
- 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME)
-	
-debug: clean
-	$(CC) $(SRC) $(LIBS) $(HEADERS) $(LFLAGS)  -g3 -O3 -o $(NAME) 
+all: subsystems $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(HEADERS) -I/usr/include -Imlx_linux -c $< -o $@
+$(NAME): $(addprefix $(LIBFT_PATH), $(LIBFT_FILE)) $(MY_OBJECTS)
+		@$(CC) $(CFLAGS) $(MY_OBJECTS) $(LIBFT_LIB) $(FTPRINTF_LIB) $(GNL_LIB) $(LFLAGS)  -o $(NAME)
+
+$(addprefix $(LIBFT_PATH), $(LIBFT_FILE)):
+		@make -sC $(LIBFT_PATH)
+
+libft: $(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
 
 clean:
-	$(RM) ${OBJ}
+		@make clean -sC $(LIBFT_PATH)
+		@make -C $(MLX_PATH) clean
+		rm -rf build/sources
+		rm -rf build
+		@$(RM) $(MY_OBJECTS)
+		@$(RM) $(DEPS)
 
 fclean: clean
-	$(RM) ${NAME}
+		@$(RM) $(LIBFT_LIB)
+		@$(RM) $(FTPRINTF_LIB)
+		@$(RM) $(GNL_LIB)
+		@$(RM) $(NAME)
 
-re: fclean all
+re: fclean $(NAME)
 
-.PHONY: debug clean fclean re
+subsystems: 
+	@make -C $(MLX_PATH) all
 
-# NAME = cub3D
-# CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -g3
-# INCLUDES = -I./includes
-# MLX_INCLUDE =
-# MLX_DIR=./mlx_linux
-# MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+build:
+	mkdir build
+	mkdir build/sources
+	mkdir build/sources/tools
 
-# #source
-# SRCS_DIR = sources/
-# SRCS = main.c
+build/%.o: %.c | build
+	@$(CC) $(CFLAGS) $(HEADERS) -I/usr/include -Imlx_linux -c $< -o $@
 
-# SRCS_PREFIXED = $(addprefix $(SRCS_DIR), $(SRCS))
+.PHONY : all clean fclean re libft
 
-# #objsm
-# OBJS = $(SRCS_PREFIXED:.c=.o)
-
-# all : $(NAME)
-
-# %.o: %.c ./includes/cub3d.h
-# 	@$(CC) $(CFLAGS) -I $(MLX_DIR) -c $< -o $@
-
-# $(NAME): $(OBJS)
-# 	@$(MAKE) -C $(MLX_DIR)
-# 	@$(CC) $(CFLAGS) $(OBJS) -lm $(MLX_FLAGS) -o $(NAME)
-# 	@echo $(NAME) is built
-
-# clean :
-# 	@$(MAKE) clean -C $(MLX_DIR)
-# 	@rm -rf $(OBJS)
-# 	@echo cleaning
-
-# fclean : clean
-# 	@rm -rf $(NAME)
-# 	@rm -rf libmlx.dylib
-# 	@echo "full clean"
-
-# re : fclean all
-
-# .PHONY	: all clean fclean re help
+-include $(DEPS)
