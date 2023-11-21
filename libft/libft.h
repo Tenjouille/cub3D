@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Gurse <Gurse@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:13 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/06/26 21:58:02 by Gurse            ###   ########.fr       */
+/*   Updated: 2023/11/21 17:43:04 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 // # include <bsd/string.h>
 # include <stdint.h>
 # include <limits.h>
-# include "./ft_printf/ft_printf.h"
-# include "./get_next_line/get_next_line.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

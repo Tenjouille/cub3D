@@ -1,39 +1,39 @@
 #include "../includes/cub.h"
 
-int	end_of_prog(t_cub *cub)
-{
-	mlx_destroy_window(cub->mlx, cub->win);
-	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	exit (1);
-}
+// int	end_of_prog(t_cub *cub)
+// {
+// 	mlx_destroy_window(cub->mlx, cub->win);
+// 	mlx_destroy_display(cub->mlx);
+// 	free(cub->mlx);
+// 	exit (1);
+// }
 
-int	keyboard_stuff(int keysym, t_cub *cub)
-{
-	if (keysym == XK_Escape)
-		end_of_prog(cub);
-	else
-		return (0);
-	return (42);
-}
+// int	keyboard_stuff(int keysym, t_cub *cub)
+// {
+// 	if (keysym == XK_Escape)
+// 		end_of_prog(cub);
+// 	else
+// 		return (0);
+// 	return (42);
+// }
 
-int	ft_argv_parsing(int ac, char **av)
-{
-	int	i;
+// int	ft_argv_parsing(int ac, char **av)
+// {
+// 	int	i;
 
-	if (ac == 1)
-		return (ft_putstr_fd("Please, enter a map to play with\n", 2), 1);
-	if (ac != 2)
-		return (ft_putstr_fd("Too many arguments to run cub\n", 2), 1);
-	i = ft_strlen(av[1]) - 1;
-	while (av[1][i] != '.' && i != 0)
-		i--;
-	if (av[1][i] != '.')
-		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
-	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
-		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
-	return (0);
-}
+// 	if (ac == 1)
+// 		return (ft_putstr_fd("Please, enter a map to play with\n", 2), 1);
+// 	if (ac != 2)
+// 		return (ft_putstr_fd("Too many arguments to run cub\n", 2), 1);
+// 	i = ft_strlen(av[1]) - 1;
+// 	while (av[1][i] != '.' && i != 0)
+// 		i--;
+// 	if (av[1][i] != '.')
+// 		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+// 	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
+// 		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+// 	return (0);
+// }
 
 // int	ft_manage_quote(char *path, char quote, int i)
 // {
@@ -123,30 +123,40 @@ int	ft_argv_parsing(int ac, char **av)
 // 	return (0);
 // }
 
-int	ft_parsing(int ac, char **av, t_cub *cub)
-{
-	(void) cub;
-	if (ft_argv_parsing(ac, av))
-		return (1);
-	// if (ft_file_parsing(av[1]))
-	// 	return (1);
-	return (0);
-}
+// int	ft_parsing(int ac, char **av, t_cub *cub)
+// {
+// 	(void) cub;
+// 	if (ft_argv_parsing(ac, av))
+// 		return (1);
+// 	// if (ft_file_parsing(av[1]))
+// 	// 	return (1);
+// 	return (0);
+// }
 
 int	main(int ac, char **av)
 {
-	t_cub	cub;
+	int	fd;
+	char	*line;
 
-	if (ft_parsing(ac, av, &cub))
-		return (1);
-	cub.mlx = mlx_init();
-	if (!cub.mlx)
-		return (1);
-	cub.win = mlx_new_window(cub.mlx, 1280, 720, "Cub3D");
-	if (!cub.win)
-		return (1);
-	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
-	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
-	mlx_loop(cub.mlx);
-	return (0);
+	(void)av;
+	(void)ac;
+	fd = open("maps/basic_map.cub", O_RDONLY);
+	line = get_next_line(fd);
+	printf("%s", line);
+	
+	close(fd);
+	// t_cub	cub;
+
+	// if (ft_parsing(ac, av, &cub))
+	// 	return (1);
+	// cub.mlx = mlx_init();
+	// if (!cub.mlx)
+	// 	return (1);
+	// cub.win = mlx_new_window(cub.mlx, 1280, 720, "Cub3D");
+	// if (!cub.win)
+	// 	return (1);
+	// mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
+	// mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
+	// mlx_loop(cub.mlx);
+	// return (0);
 }

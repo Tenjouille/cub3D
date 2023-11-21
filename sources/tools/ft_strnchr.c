@@ -1,4 +1,4 @@
-#include "../includes/cub.h"
+#include "../../includes/cub.h"
 
 char	*ft_strnchr(const char *s, int c, int size)
 {
