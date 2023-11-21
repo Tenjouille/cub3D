@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:22:31 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/21 17:46:28 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:25:13 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_cub
 {
 	void	*mlx;
 	void	*win;
+	char	**map;
 	t_img	img;
 }			t_cub;
 
