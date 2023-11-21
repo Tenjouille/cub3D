@@ -23,10 +23,11 @@ GNL_LIB	= $(addprefix $(GNL_PATH), $(GNL_FILE))
 MLX_PATH = mlx_linux/
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-all: subsystems $(NAME)
-
 $(NAME): $(addprefix $(LIBFT_PATH), $(LIBFT_FILE)) $(MY_OBJECTS)
+		@make -C $(MLX_PATH) all
 		@$(CC) $(CFLAGS) $(MY_OBJECTS) $(LIBFT_LIB) $(FTPRINTF_LIB) $(GNL_LIB) $(LFLAGS)  -o $(NAME)
+
+all: $(NAME)
 
 $(addprefix $(LIBFT_PATH), $(LIBFT_FILE)):
 		@make -sC $(LIBFT_PATH)
@@ -48,9 +49,6 @@ fclean: clean
 		@$(RM) $(NAME)
 
 re: fclean $(NAME)
-
-subsystems: 
-	@make -C $(MLX_PATH) all
 
 build:
 	mkdir build
