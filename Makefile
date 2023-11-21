@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD
 HEADERS = -I ./include
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \
-	tools/ft_strnchr.c
+	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c
 SRC_PATH = sources/
 MY_SOURCES := $(addprefix $(SRC_PATH),$(SRC))
 OBJ = $(MY_SOURCES:.c=.o)
@@ -14,19 +14,14 @@ DEPS := $(MY_OBJECTS:.o=.d)
 LIBFT_PATH = libft/
 LIBFT_FILE = libft.a
 LIBFT_LIB = $(addprefix $(LIBFT_PATH), $(LIBFT_FILE))
-FTPRINTF_PATH = libft/ft_printf/
-FTPRINTF_FILE = libftprintf.a
-FTPRINTF_LIB = $(addprefix $(FTPRINTF_PATH), $(FTPRINTF_FILE))
-GNL_PATH = libft/get_next_line/
-GNL_FILE = get_next_line.a
-GNL_LIB	= $(addprefix $(GNL_PATH), $(GNL_FILE))
 MLX_PATH = mlx_linux/
 MLX_LIB = $(MLX_PATH)libmlx.a
 
-all: subsystems $(NAME)
+all: $(NAME)
 
 $(NAME): $(addprefix $(LIBFT_PATH), $(LIBFT_FILE)) $(MY_OBJECTS)
-		@$(CC) $(CFLAGS) $(MY_OBJECTS) $(LIBFT_LIB) $(FTPRINTF_LIB) $(GNL_LIB) $(LFLAGS)  -o $(NAME)
+		@make -C $(MLX_PATH) all
+		@$(CC) $(CFLAGS) $(MY_OBJECTS) $(LIBFT_LIB) $(LFLAGS) -o $(NAME)
 
 $(addprefix $(LIBFT_PATH), $(LIBFT_FILE)):
 		@make -sC $(LIBFT_PATH)
@@ -43,14 +38,9 @@ clean:
 
 fclean: clean
 		@$(RM) $(LIBFT_LIB)
-		@$(RM) $(FTPRINTF_LIB)
-		@$(RM) $(GNL_LIB)
 		@$(RM) $(NAME)
 
 re: fclean $(NAME)
-
-subsystems: 
-	@make -C $(MLX_PATH) all
 
 build:
 	mkdir build

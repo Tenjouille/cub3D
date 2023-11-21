@@ -6,11 +6,11 @@
 /*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:24 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/05/09 13:51:41 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:44:04 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 char	*read_line(int fd, char *remember)
 {

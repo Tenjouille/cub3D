@@ -6,11 +6,11 @@
 /*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:39 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/05/09 13:50:53 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:43:53 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/get_next_line.h"
 
 size_t	ft_strlen_gnl(const char *str)
 {

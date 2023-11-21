@@ -6,7 +6,7 @@
 /*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:22:31 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/21 15:12:43 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/21 17:46:28 by tgeorge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <X11/keysym.h>
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
+# include "get_next_line.h"
 
 typedef struct s_img
 {

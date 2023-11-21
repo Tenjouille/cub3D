@@ -13,18 +13,6 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 
 SRC_PATH = ./sources/
 
-PRINTF_PATH = ft_printf/
-
-PRINTF_FILE	= libftprintf.a
-
-PRINTF_LIB	= $(addprefix $(PRINTF_PATH), $(PRINTF_FILE))
-
-GNL_PATH = get_next_line/
-
-GNL_FILE = get_next_line.a
-
-GNL_LIB	= $(addprefix $(GNL_PATH), $(GNL_FILE))
-
 MY_SOURCES = $(addprefix $(SRC_PATH),$(SRC))
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
@@ -35,25 +23,15 @@ RM = rm -f
 
 CC = cc
 
-all: printf gnl $(NAME)
+all: $(NAME)
 
 $(NAME): $(MY_OBJECTS)
 		ar -rcs $(NAME) $(MY_OBJECTS)
 
-printf: 
-		@make -sC $(PRINTF_PATH) all 
-
-gnl:
-		@make -sC $(GNL_PATH) all
-
 clean:
-		@make -C $(PRINTF_PATH) clean
-		@make -C $(GNL_PATH) clean
 		$(RM) $(MY_OBJECTS)
 
 fclean: clean
-		$(RM) $(PRINTF_PATH)libftprintf.a
-		$(RM) $(GNL_PATH)get_next_line.a
 		$(RM) $(NAME)
 
 re: fclean $(NAME)
