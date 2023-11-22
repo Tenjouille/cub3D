@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD
 HEADERS = -I ./include
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \
-	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c
+	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c \
+	errors/error_msg.c
 SRC_PATH = sources/
 MY_SOURCES := $(addprefix $(SRC_PATH),$(SRC))
 OBJ = $(MY_SOURCES:.c=.o)
@@ -47,7 +48,8 @@ re: fclean $(NAME)
 build:
 	mkdir build
 	mkdir build/sources
-	mkdir build/sources/tools
+	mkdir build/sources/tools	
+	mkdir build/sources/errors
 
 build/%.o: %.c | build
 	@$(CC) $(CFLAGS) $(HEADERS) -I/usr/include -Imlx_linux -c $< -o $@

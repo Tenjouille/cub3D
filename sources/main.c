@@ -125,9 +125,20 @@ int	ft_argv_parsing(int ac, char **av)
 // 	return (0);
 // }
 
-char	**ft_map_scanning(char **desc)
+int	ft_empty_line(char *str)
 {
-	// char	*buf;
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i] == '\n' || str[i] == '\0')
+		return (1);
+	return (0);
+}
+
+char	**ft_get_map(char **desc)
+{
 	char	**map;
 	int		i;
 	int		j;
@@ -136,40 +147,16 @@ char	**ft_map_scanning(char **desc)
 	i = 0;
 	j = 0;
 	k = 0;
-
 	while (desc[i])
 		i++;
-	i--;
-	j = i;
+	j = i - 1;
 	while (!ft_strchr(desc[j], '.'))
 		j--;
 	j++;
-	while (desc[j][k] == ' ' || desc[j][k] == '\t' || desc[j][k] == '\n')
-	{
-		if (desc[j][k] == '\n')
-		{
-			k = 0;
-			j++;
-		}
-		else
-			k++;
-	}
-	k = 0;
-	while (desc[i][k] == ' ' || desc[i][k] == '\t' || desc[i][k] == '\n')
-	{
-		if (desc[i][k] == '\n')
-		{
-			k = 0;
-			i--;
-		}
-		else
-			k++;
-	}
-	k = 0;
-	map = malloc(sizeof(char*) * (i - j + 2));
+	map = malloc(sizeof(char*) * (i - j + 1));
 	if (!map)
 		return (ft_putstr_fd("MALLOC FAILURE\n", 2), NULL);
-	while (desc[j] && j <= i)
+	while (desc[j] && j < i)
 		map[k++] = ft_strdup(desc[j++]);
 	map[k] = 0;
 	return (map);
@@ -188,31 +175,160 @@ int	ft_desclen(char *desc)
 	buf = get_next_line(fd);
 	while (buf)
 	{
+		if (ft_empty_line(buf))
+		{
+			free(buf);
+			buf = get_next_line(fd);
+			continue ;
+		}
 		free(buf);
 		i++;
 		buf = get_next_line(fd);
 	}
+	printf("%d\n", i);
 	return (close(fd), free(buf), i);
 }
 
-int	ft_parsing(int ac, char **av, t_cub *cub)
+char	**ft_get_desc(char *file)
 {
 	int		fd;
 	int		i;
 	char	**desc;
 
+	i = 0;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (ft_putstr_fd("OPEN FAILURE\n", 2), NULL);
+	desc = ft_calloc(sizeof(char*), ft_desclen(file) + 1);
+	if (!desc)
+		return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
+	desc[i] = get_next_line(fd);
+	while (desc[i])
+	{
+		if (ft_empty_line(desc[i]))
+			free(desc[i]);
+		else
+			i++;
+		desc[i] = get_next_line(fd);
+	}
+	return (desc);
+}
+
+int	ft_check_texture_path(char *path)
+{
+	(void) path;
+	return (0);
+}
+
+// int	ft_check_NSEW(char **desc, char *dir)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 		j++;
+// 	while (desc[i] && desc[i][j] != dir[0] && desc[i][j + 1] != dir[1])
+// 	{
+// 		j = 0;
+// 		i++;
+// 		while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 			j++;
+// 	}
+// 	if (!desc[i])
+// 		return (1);
+// 	while (desc[i][j] == ' ' || desc[i][j] == '\t')
+// 		j++;
+// 	if (ft_check_texture_path(&desc[i][j]))
+// 		return (1);
+// 	return (0);
+// }
+
+// int	ft_check_color(char *color)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*buf;
+
+// 	i = 0;
+// 	while (color[i] != '.')
+// 	{
+// 		if (color[i] == ' ' || color[i] == '\t')
+// 			i++;
+		
+// 	}
+// 	buf = ft_calloc(sizeof(char), len + 1)
+// }
+
+// int	ft_check_FC(char **desc, char FC)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 		j++;
+// 	while (desc[i] && desc[i][j] != FC)
+// 	{
+// 		j = 0;
+// 		i++;
+// 		while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 			j++;
+// 	}
+// 	if (!desc[i])
+// 		return (1);
+// 	while (desc[i][j] == ' ' || desc[i][j] == '\t')
+// 		j++;
+// 	// if (ft_check_color(&desc[i][j]))
+// 	// 	return (1);
+// 	return (0);
+// }
+
+// int	ft_check_all_dir(char **desc)
+// {
+// 	int	check;
+
+// 	check = 0;
+// 	check += ft_check_NSEW(desc, "NO");
+// 	check += ft_check_NSEW(desc, "SO");
+// 	check += ft_check_NSEW(desc, "WE");
+// 	check += ft_check_NSEW(desc, "EA");
+// 	check += ft_check_FC(desc, 'F');
+// 	check += ft_check_FC(desc, 'C');
+// 	return (check);
+// }
+
+int	ft_scan_desc(char **desc)
+{
+	int	i;
+
+	i = 0;
+	while (ft_strchr(desc[i], '.'))
+		i++;
+	if (i != 6)
+		return (ft_map_error_msg(), 1);
+	// if (ft_check_all_dir(desc))
+	// 	return (ft_map_error_msg(), 1);
+	return (0);
+}
+
+int	ft_parsing(int ac, char **av, t_cub *cub)
+{
+	int		i;
+
+	i = 0;
 	if (ft_argv_parsing(ac, av))
 		return (1);
+	cub->desc = ft_get_desc(av[1]);
+	if (ft_scan_desc(cub->desc))
+		return (1);
+	cub->map = ft_get_map(cub->desc);
+	while (cub->desc[i])
+		printf("%s", cub->desc[i++]);
+	printf("\n");
 	i = 0;
-	desc = ft_calloc(sizeof(char*), ft_desclen(av[1]) + 1);
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		return (ft_putstr_fd("OPEN FAILURE\n", 2), 1);
-	while (i < ft_desclen(av[1]))
-		desc[i++] = get_next_line(fd);
-	desc[i] = 0;
-	i = 0;
-	cub->map = ft_map_scanning(desc);
 	while (cub->map[i])
 		printf("%s", cub->map[i++]);
 	// if (ft_file_parsing(av[1]))
