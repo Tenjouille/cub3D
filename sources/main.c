@@ -185,7 +185,7 @@ int	ft_desclen(char *desc)
 		i++;
 		buf = get_next_line(fd);
 	}
-	printf("%d\n", i);
+	// printf("%d\n", i);
 	return (close(fd), free(buf), i);
 }
 
@@ -316,21 +316,21 @@ int	ft_scan_desc(char **desc)
 
 int	ft_parsing(int ac, char **av, t_cub *cub)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	if (ft_argv_parsing(ac, av))
 		return (1);
 	cub->desc = ft_get_desc(av[1]);
 	if (ft_scan_desc(cub->desc))
 		return (1);
 	cub->map = ft_get_map(cub->desc);
-	while (cub->desc[i])
-		printf("%s", cub->desc[i++]);
-	printf("\n");
-	i = 0;
-	while (cub->map[i])
-		printf("%s", cub->map[i++]);
+	// while (cub->desc[i])
+	// 	printf("%s", cub->desc[i++]);
+	// printf("\n");
+	// i = 0;
+	// while (cub->map[i])
+	// 	printf("%s", cub->map[i++]);
 	// if (ft_file_parsing(av[1]))
 	// 	return (1);
 	// cub->map = ft_map_scanning(av[1]);
@@ -341,14 +341,18 @@ int	main(int ac, char **av)
 {
 	t_cub	cub;
 
+	cub.window_x = 1280;
+	cub.window_y = 720;
 	if (ft_parsing(ac, av, &cub))
 		return (1);
 	cub.mlx = mlx_init();
 	if (!cub.mlx)
 		return (1);
-	cub.win = mlx_new_window(cub.mlx, 1280, 720, "Cub3D");
+	cub.win = mlx_new_window(cub.mlx, cub.window_x, cub.window_y, "Cub3D");
 	if (!cub.win)
 		return (1);
+	game_init(&cub);
+	// draw_test(&cub);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
 	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
 	mlx_loop(cub.mlx);
