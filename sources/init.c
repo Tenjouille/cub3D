@@ -89,9 +89,10 @@ void	draw_lines(t_cub *cub, int line_height, int side, int x)
 	int		draw_start;
 	int		draw_end;
 	int		color;
+	int		i;
 
 	draw_start = -line_height / 2 + cub->window_y / 2;
-	if (draw_start < 0)
+	if (draw_start < 0 || draw_start > cub->window_y)
 		draw_start = 0;
 	draw_end = line_height / 2 + cub->window_y / 2;
 	if (draw_end >= cub->window_y)
@@ -100,12 +101,31 @@ void	draw_lines(t_cub *cub, int line_height, int side, int x)
 		color = 0x00FF0000;
 	else
 		color = 0x0000FF00;
-	while (draw_start <= draw_end)
+	// i = 0;
+	printf("start = %d\n", draw_start);
+	i = draw_start;
+	while (i >= 0)
 	{
-		my_mlx_pixel_put(cub->img, x, draw_start, color);
-		draw_start++;
+		my_mlx_pixel_put(cub->img, x, i, 0x00FFFF00);
+		i--;
+	}
+	i = draw_start;
+	while (i <= draw_end)
+	{
+		my_mlx_pixel_put(cub->img, x, i, color);
+		i++;
+	}
+	while (i < cub->window_y - 1)
+	{
+		my_mlx_pixel_put(cub->img, x, i, 0x00FFFFFF);
+		i++;
 	}
 }
+
+// void	draw_fov(t_cub *cub, double xray, double yray)
+// {
+// 	my_mlx_pixel_put(cub->img, fabs(yray * 500) + 200, fabs(xray * 500) + 200, 0x0000FF00);
+// }
 
 void	init_camera(t_cub *cub)
 {
@@ -128,6 +148,7 @@ void	init_camera(t_cub *cub)
 	int		step_x;
 	int		step_y;
 	int		hit;
+	// int		nbhit;
 	int		side;
 
 	int		line_height;
@@ -139,14 +160,17 @@ void	init_camera(t_cub *cub)
 	x = 0;
 	while (x < cub->window_x)
 	{
+		printf("valeur de x : %d\n", x);
 		camera = 2 * x / (double)cub->window_x - 1;
 		// printf("camera : %f\n", camera);
 		diray_x = cub->game->p_ori_x + cub->game->fov_length * camera;
       	diray_y = cub->game->p_ori_y + cub->game->fov_width * camera;
 		// printf("ray x : %f\n", diray_x);
+		// printf("ray y : %f\n", diray_y);
 		map_x = (int)cub->game->p_pos_x;
 		map_y = (int)cub->game->p_pos_y;
-		// printf("valeur de x : %d\n", x);
+		// printf("map x : %d\n", map_x);
+		// printf("map y : %d\n", map_y);
 		if (diray_x != 0)
 			delta_dist_x = fabs(1 / diray_x);
 		else
@@ -158,7 +182,6 @@ void	init_camera(t_cub *cub)
 			delta_dist_y = fabs(1 / pow(10, 30));
 		// printf("delta_y : %f\n", delta_dist_y);
 		// printf("\n");
-		hit = 0;
 		if (diray_x < 0)
 		{
 			step_x = -1;
@@ -179,6 +202,11 @@ void	init_camera(t_cub *cub)
 			step_y = 1;
 			side_dist_y = ((double)map_y + 1 - cub->game->p_pos_y) * delta_dist_y;
 		}
+		hit = 0;
+		// nbhit = 0;
+		// printf("sidedist x : %f\n", side_dist_x);
+		// printf("sidedist y : %f\n", side_dist_y);
+		printf("\n");
 		while (hit == 0)
 		{
 			if (side_dist_x < side_dist_y)
@@ -193,18 +221,27 @@ void	init_camera(t_cub *cub)
 				map_y += step_y;
 				side = 1;
 			}
-			if (cub->map[map_x][map_y] != 0)
+			// printf("map x : %d\n", map_x);
+			// printf("map y : %d\n", map_y);
+			// printf("\n");
+			// printf("\n");
+			if (cub->map[map_y][map_x] != 0)
 				hit = 1;
+			// nbhit++;
 		}
+		// if (nbhit > 1)
+			// printf("nbhit a x : %d\n", x);
 		if (side == 0)
 			ray_length = side_dist_x - delta_dist_x;
 		else
 			ray_length = side_dist_y - delta_dist_y;
-		line_height = cub->window_y / (ray_length * 4);
+		line_height = cub->window_y / (ray_length * 3);
+		// draw_fov(cub, diray_x, diray_y);
 		draw_lines(cub, line_height, side, x);
 		// printf("line height : %d\n", line_height);
 		x++;
 	}
+	// (void)line_height;
 	// printf("line height : %d\n", line_height);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
 }
