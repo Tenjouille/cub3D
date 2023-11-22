@@ -1,39 +1,41 @@
 #include "../includes/cub.h"
 
-// int	end_of_prog(t_cub *cub)
-// {
-// 	mlx_destroy_window(cub->mlx, cub->win);
-// 	mlx_destroy_display(cub->mlx);
-// 	free(cub->mlx);
-// 	exit (1);
-// }
+int	end_of_prog(t_cub *cub)
+{
+	mlx_destroy_window(cub->mlx, cub->win);
+	mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+	exit (1);
+}
 
-// int	keyboard_stuff(int keysym, t_cub *cub)
-// {
-// 	if (keysym == XK_Escape)
-// 		end_of_prog(cub);
-// 	else
-// 		return (0);
-// 	return (42);
-// }
+int	keyboard_stuff(int keysym, t_cub *cub)
+{
+	if (keysym == XK_Escape)
+		end_of_prog(cub);
+	else
+		return (0);
+	return (42);
+}
 
-// int	ft_argv_parsing(int ac, char **av)
-// {
-// 	int	i;
+int	ft_argv_parsing(int ac, char **av)
+{
+	int	i;
 
-// 	if (ac == 1)
-// 		return (ft_putstr_fd("Please, enter a map to play with\n", 2), 1);
-// 	if (ac != 2)
-// 		return (ft_putstr_fd("Too many arguments to run cub\n", 2), 1);
-// 	i = ft_strlen(av[1]) - 1;
-// 	while (av[1][i] != '.' && i != 0)
-// 		i--;
-// 	if (av[1][i] != '.')
-// 		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
-// 	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
-// 		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
-// 	return (0);
-// }
+	if (ac == 1)
+		return (ft_putstr_fd("Please, enter a map to play with\n", 2), 1);
+	if (ac != 2)
+		return (ft_putstr_fd("Too many arguments to run cub\n", 2), 1);
+	i = ft_strlen(av[1]) - 1;
+	if (i < 0)
+		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+	while (av[1][i] != '.' && i != 0)
+		i--;
+	if (av[1][i] != '.')
+		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
+		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+	return (0);
+}
 
 // int	ft_manage_quote(char *path, char quote, int i)
 // {
@@ -123,40 +125,232 @@
 // 	return (0);
 // }
 
-// int	ft_parsing(int ac, char **av, t_cub *cub)
+int	ft_empty_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i] == '\n' || str[i] == '\0')
+		return (1);
+	return (0);
+}
+
+char	**ft_get_map(char **desc)
+{
+	char	**map;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (desc[i])
+		i++;
+	j = i - 1;
+	while (!ft_strchr(desc[j], '.'))
+		j--;
+	j++;
+	map = malloc(sizeof(char*) * (i - j + 1));
+	if (!map)
+		return (ft_putstr_fd("MALLOC FAILURE\n", 2), NULL);
+	while (desc[j] && j < i)
+		map[k++] = ft_strdup(desc[j++]);
+	map[k] = 0;
+	return (map);
+}
+
+int	ft_desclen(char *desc)
+{
+	int		fd;
+	int		i;
+	char	*buf;
+
+	i = 0;
+	fd = open(desc, O_RDONLY);
+	if (fd < 0)
+		return (ft_putstr_fd("OPEN FAILURE\n", 2), 1);
+	buf = get_next_line(fd);
+	while (buf)
+	{
+		if (ft_empty_line(buf))
+		{
+			free(buf);
+			buf = get_next_line(fd);
+			continue ;
+		}
+		free(buf);
+		i++;
+		buf = get_next_line(fd);
+	}
+	printf("%d\n", i);
+	return (close(fd), free(buf), i);
+}
+
+char	**ft_get_desc(char *file)
+{
+	int		fd;
+	int		i;
+	char	**desc;
+
+	i = 0;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (ft_putstr_fd("OPEN FAILURE\n", 2), NULL);
+	desc = ft_calloc(sizeof(char*), ft_desclen(file) + 1);
+	if (!desc)
+		return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
+	desc[i] = get_next_line(fd);
+	while (desc[i])
+	{
+		if (ft_empty_line(desc[i]))
+			free(desc[i]);
+		else
+			i++;
+		desc[i] = get_next_line(fd);
+	}
+	return (desc);
+}
+
+int	ft_check_texture_path(char *path)
+{
+	(void) path;
+	return (0);
+}
+
+// int	ft_check_NSEW(char **desc, char *dir)
 // {
-// 	(void) cub;
-// 	if (ft_argv_parsing(ac, av))
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 		j++;
+// 	while (desc[i] && desc[i][j] != dir[0] && desc[i][j + 1] != dir[1])
+// 	{
+// 		j = 0;
+// 		i++;
+// 		while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 			j++;
+// 	}
+// 	if (!desc[i])
 // 		return (1);
-// 	// if (ft_file_parsing(av[1]))
+// 	while (desc[i][j] == ' ' || desc[i][j] == '\t')
+// 		j++;
+// 	if (ft_check_texture_path(&desc[i][j]))
+// 		return (1);
+// 	return (0);
+// }
+
+// int	ft_check_color(char *color)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*buf;
+
+// 	i = 0;
+// 	while (color[i] != '.')
+// 	{
+// 		if (color[i] == ' ' || color[i] == '\t')
+// 			i++;
+		
+// 	}
+// 	buf = ft_calloc(sizeof(char), len + 1)
+// }
+
+// int	ft_check_FC(char **desc, char FC)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 		j++;
+// 	while (desc[i] && desc[i][j] != FC)
+// 	{
+// 		j = 0;
+// 		i++;
+// 		while (desc[i][j] == ' ' || desc[i][j] == '/t')
+// 			j++;
+// 	}
+// 	if (!desc[i])
+// 		return (1);
+// 	while (desc[i][j] == ' ' || desc[i][j] == '\t')
+// 		j++;
+// 	// if (ft_check_color(&desc[i][j]))
 // 	// 	return (1);
 // 	return (0);
 // }
 
+// int	ft_check_all_dir(char **desc)
+// {
+// 	int	check;
+
+// 	check = 0;
+// 	check += ft_check_NSEW(desc, "NO");
+// 	check += ft_check_NSEW(desc, "SO");
+// 	check += ft_check_NSEW(desc, "WE");
+// 	check += ft_check_NSEW(desc, "EA");
+// 	check += ft_check_FC(desc, 'F');
+// 	check += ft_check_FC(desc, 'C');
+// 	return (check);
+// }
+
+int	ft_scan_desc(char **desc)
+{
+	int	i;
+
+	i = 0;
+	while (ft_strchr(desc[i], '.'))
+		i++;
+	if (i != 6)
+		return (ft_map_error_msg(), 1);
+	// if (ft_check_all_dir(desc))
+	// 	return (ft_map_error_msg(), 1);
+	return (0);
+}
+
+int	ft_parsing(int ac, char **av, t_cub *cub)
+{
+	int		i;
+
+	i = 0;
+	if (ft_argv_parsing(ac, av))
+		return (1);
+	cub->desc = ft_get_desc(av[1]);
+	if (ft_scan_desc(cub->desc))
+		return (1);
+	cub->map = ft_get_map(cub->desc);
+	while (cub->desc[i])
+		printf("%s", cub->desc[i++]);
+	printf("\n");
+	i = 0;
+	while (cub->map[i])
+		printf("%s", cub->map[i++]);
+	// if (ft_file_parsing(av[1]))
+	// 	return (1);
+	// cub->map = ft_map_scanning(av[1]);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
-	int	fd;
-	char	*line;
+	t_cub	cub;
 
-	(void)av;
-	(void)ac;
-	fd = open("maps/basic_map.cub", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
-	
-	close(fd);
-	// t_cub	cub;
-
-	// if (ft_parsing(ac, av, &cub))
-	// 	return (1);
-	// cub.mlx = mlx_init();
-	// if (!cub.mlx)
-	// 	return (1);
-	// cub.win = mlx_new_window(cub.mlx, 1280, 720, "Cub3D");
-	// if (!cub.win)
-	// 	return (1);
-	// mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
-	// mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
-	// mlx_loop(cub.mlx);
-	// return (0);
+	if (ft_parsing(ac, av, &cub))
+		return (1);
+	cub.mlx = mlx_init();
+	if (!cub.mlx)
+		return (1);
+	cub.win = mlx_new_window(cub.mlx, 1280, 720, "Cub3D");
+	if (!cub.win)
+		return (1);
+	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
+	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
+	mlx_loop(cub.mlx);
+	return (0);
 }
