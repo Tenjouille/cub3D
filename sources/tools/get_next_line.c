@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:24 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/21 17:44:04 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:25:28 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*read_line(int fd, char *remember)
 	char	*buff;
 	int		size;
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buff = ft_malloc((BUFFER_SIZE + 1) * sizeof(char), 0, 0, 0);
 	if (!buff)
 		return (0);
 	size = 1;
@@ -46,7 +46,7 @@ char	*current_line(char	*remember)
 		return (0);
 	while (remember[len] && remember[len] != '\n')
 		len++;
-	curr_line = malloc((len + 2) * sizeof(char));
+	curr_line = ft_malloc((len + 2) * sizeof(char), 0, 0, 0);
 	if (!curr_line)
 		return (0);
 	len = 0;
@@ -78,7 +78,7 @@ char	*next_line(char *remember)
 		free(remember);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1));
+	str = (char *)ft_malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1), 0, 0, 0);
 	if (!str)
 		return (NULL);
 	i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 13:26:17 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/05/03 15:59:29 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:21:42 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	ft_lentemp(char const *s, char c)
 	return (i);
 }
 
-void	ft_free(char **res, int index)
-{
-	while (index >= 0)
-	{
-		free(res[index]);
-		index--;
-	}
-	free(res);
-}
+// void	ft_free(char **res, int index)
+// {
+// 	while (index >= 0)
+// 	{
+// 		free(res[index]);
+// 		index--;
+// 	}
+// 	free(res);
+// }
 
 char	**ft_init(char const *s, char c)
 {
@@ -59,7 +59,7 @@ char	**ft_init(char const *s, char c)
 
 	if (!s)
 		return (0);
-	res = malloc(sizeof(char *) * (ft_nbstring(s, c) + 1));
+	res = ft_malloc(sizeof(char *) * (ft_nbstring(s, c) + 1), 0, 0, 0);
 	if (!res)
 		return (0);
 	return (res);
@@ -81,10 +81,7 @@ char	**ft_split(char const *s, char c)
 			break ;
 		temp = ft_substr(s, 0, ft_lentemp(s, c));
 		if (!temp)
-		{
-			ft_free(res, index - 1);
 			return (0);
-		}
 		res[index] = temp;
 		index++;
 		while (*s != '\0' && *s != c)
