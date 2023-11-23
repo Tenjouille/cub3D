@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:22:31 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/23 16:22:53 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int		ft_scan_desc(char **desc, t_cub *cub);
 // void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
 // void	ft_free(t_mem **memory, void *data);
 // void	ft_memclear(t_mem **lst, int stop);
-// void	exit_failure_ft_malloc(void *data);
+// void	exit_failure_malloc(void *data);
 // t_mem	*ft_create_elem(void *data);
 // void	ft_list_push_back(t_mem **begin_list, void *data);
-// void	*ft_malloc(size_t size, int clear, int clear_one, void *data);
+// void	*malloc(size_t size, int clear, int clear_one, void *data);
 /*		MAIN		*/
 char	**ft_get_map(char **desc);
 int		ft_argv_parsing(int ac, char **av);

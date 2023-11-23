@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:13 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 16:19:45 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:16 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	free_list(t_mem *list_ptr);
 void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
 void	ft_free(t_mem **memory, void *data);
 void	ft_memclear(t_mem **lst, int stop);
-void	exit_failure_ft_malloc(void *data);
+void	exit_failure_malloc(void *data);
 t_mem	*ft_create_elem(void *data);
 void	ft_list_push_back(t_mem **begin_list, void *data);
 void	*ft_malloc(size_t size, int clear, int clear_one, void *data);

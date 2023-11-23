@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 13:26:17 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 16:21:42 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_init(char const *s, char c)
 
 	if (!s)
 		return (0);
-	res = ft_malloc(sizeof(char *) * (ft_nbstring(s, c) + 1), 0, 0, 0);
+	res = malloc(sizeof(char *) * (ft_nbstring(s, c) + 1));
 	if (!res)
 		return (0);
 	return (res);

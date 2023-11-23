@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:40:06 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 16:20:48 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ char	*ft_initmal(char const *s, unsigned int start, size_t len)
 	char	*res;
 
 	if (len > ft_strlen(s) - start)
-		res = ft_malloc(sizeof(char) * (ft_strlen(s) - start + 1), 0, 0, 0);
+		res = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
 	else
 	{
 		if (len <= ft_strlen(s))
-			res = ft_malloc(sizeof(char) * (len + 1), 0, 0, 0);
+			res = malloc(sizeof(char) * (len + 1));
 		else
-			res = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0, 0, 0);
+			res = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	}
 	if (!res)
 		return (0);
@@ -61,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	if (start >= ft_strlen(s))
 	{
-		res = ft_malloc(sizeof(char) * 1, 0, 0, 0);
+		res = malloc(sizeof(char) * 1);
 		res[0] = '\0';
 		return (res);
 	}

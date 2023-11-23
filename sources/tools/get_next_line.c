@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:24 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 16:25:28 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*read_line(int fd, char *remember)
 	char	*buff;
 	int		size;
 
-	buff = ft_malloc((BUFFER_SIZE + 1) * sizeof(char), 0, 0, 0);
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (0);
 	size = 1;
@@ -46,7 +46,7 @@ char	*current_line(char	*remember)
 		return (0);
 	while (remember[len] && remember[len] != '\n')
 		len++;
-	curr_line = ft_malloc((len + 2) * sizeof(char), 0, 0, 0);
+	curr_line = malloc((len + 2) * sizeof(char));
 	if (!curr_line)
 		return (0);
 	len = 0;
@@ -78,7 +78,7 @@ char	*next_line(char *remember)
 		free(remember);
 		return (NULL);
 	}
-	str = (char *)ft_malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1), 0, 0, 0);
+	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;

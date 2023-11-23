@@ -53,9 +53,9 @@ char	**ft_get_map(char **desc)
 	while (!ft_strchr(desc[j], '.') && !ft_strchr(desc[j], ','))
 		j--;
 	j++;
-	map = ft_malloc(sizeof(char*) * (i - j + 1), 0, 0, 0);
+	map = malloc(sizeof(char*) * (i - j + 1));
 	if (!map)
-		return (ft_putstr_fd("ft_malloc FAILURE\n", 2), NULL);
+		return (ft_putstr_fd("malloc FAILURE\n", 2), NULL);
 	while (desc[j] && j < i)
 		map[k++] = ft_strdup(desc[j++]);
 	map[k] = 0;

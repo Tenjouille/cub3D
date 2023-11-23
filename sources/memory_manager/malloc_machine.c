@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc_machine.c                                   :+:      :+:    :+:   */
+/*   malloc_machine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rleger <rleger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,7 +33,7 @@ void	ft_memclear(t_mem **lst, int stop)
 		exit(1);
 }
 
-void	exit_failure_ft_malloc(void *data)
+void	exit_failure_malloc(void *data)
 {
 	free(data);
 	exit(1);
@@ -43,7 +43,7 @@ t_mem	*ft_create_elem(void *data)
 {
 	t_mem	*ptr;
 
-	ptr = ft_malloc(sizeof(*ptr), 0, 0, 0);
+	ptr = malloc(sizeof(*ptr));
 	if (!ptr)
 		return (0);
 	ptr->next = 0;
@@ -59,7 +59,7 @@ void	ft_list_push_back(t_mem **begin_list, void *data)
 	{
 		*begin_list = ft_create_elem(data);
 		if (!(*begin_list))
-			exit_failure_ft_malloc(data);
+			exit_failure_malloc(data);
 		return ;
 	}
 	ptr = *begin_list;
@@ -88,7 +88,7 @@ void	*ft_malloc(size_t size, int clear, int clear_one, void *data)
 		ft_free(&memory, data);
 		return (NULL);
 	}
-	mem_ptr = ft_malloc(size, 0, 0, 0);
+	mem_ptr = malloc(size);
 	if (!mem_ptr)
 		ft_memclear(&memory, 1);
 	ft_list_push_back(&memory, mem_ptr);

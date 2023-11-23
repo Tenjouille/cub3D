@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:10:14 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 16:16:56 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size2 = 0;
 	if (!s1 || !s2)
 		return (ft_strdup(""));
-	res = ft_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1), 0, 0, 0);
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
 		return (0);
 	while (s1[size1])

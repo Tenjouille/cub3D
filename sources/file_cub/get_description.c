@@ -15,7 +15,7 @@ char	*ft_strdup_better(char *str)
 		else if (str[i++])
 			len++;
 	}
-	res = ft_malloc(sizeof(char) * (len + 1), 0, 0, 0);
+	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
