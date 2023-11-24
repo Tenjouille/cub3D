@@ -12,6 +12,29 @@ int	keyboard_stuff(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
 		end_of_prog(cub);
+	if (keysym == KEY_W)
+		cub->game->key_w = 1;
+	if (keysym == KEY_S)
+		cub->game->key_s = 1;
+	if (keysym == KEY_A)
+		cub->game->key_a = 1;
+	if (keysym == KEY_D)
+		cub->game->key_d = 1;
+	else
+		return (0);
+	return (42);
+}
+
+int	keyboard_release(int keysym, t_cub *cub)
+{
+	if (keysym == KEY_W)
+		cub->game->key_w = 0;
+	if (keysym == KEY_S)
+		cub->game->key_s = 0;
+	if (keysym == KEY_A)
+		cub->game->key_a = 0;
+	if (keysym == KEY_D)
+		cub->game->key_d = 0;
 	else
 		return (0);
 	return (42);
@@ -352,9 +375,10 @@ int	main(int ac, char **av)
 	if (!cub.win)
 		return (1);
 	game_init(&cub);
-	// draw_test(&cub);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
+	mlx_hook(cub.win, KeyRelease, KeyReleaseMask, &keyboard_release, &cub);
 	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
+	mlx_loop_hook(cub.mlx, game_loop, &cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }

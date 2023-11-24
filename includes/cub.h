@@ -14,6 +14,13 @@
 # include "../libft/libft.h"
 # include "get_next_line.h"
 
+
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_S 115
+# define MOVESPEED 0.05
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -33,6 +40,10 @@ typedef struct s_game
 	double	fov_width;
 	double	cur_time;
 	double	old_time;
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
 }			t_game;
 
 typedef struct s_textures
@@ -62,7 +73,12 @@ char	*ft_strnchr(const char *s, int c, int size);
 void	ft_map_error_msg(void);
 /*		INIT		*/
 void	game_init(t_cub *cub);
+int		game_loop(t_cub *cub);
 /*		DRAW		*/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	draw_test(t_cub *cub);
+/*		MOVES		*/
+void	move_up(t_cub *cub);
+void	move_left(t_cub *cub);
+void	move_down(t_cub *cub);
+void	move_right(t_cub *cub);
 #endif

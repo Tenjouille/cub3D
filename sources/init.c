@@ -25,28 +25,34 @@ void	get_first_orientation(t_cub *cub, char c)
 	{
 		cub->game->p_ori_x = 0;
 		cub->game->p_ori_y = -1;
+		cub->game->fov_length = 0.66;
+		cub->game->fov_width = 0;
 	}
 	if (c == 'E')
 	{
 		cub->game->p_ori_x = 1;
 		cub->game->p_ori_y = 0;
+		cub->game->fov_length = 0;
+		cub->game->fov_width = 0.66;
 	}
 	if (c == 'S')
 	{
 		cub->game->p_ori_x = 0;
 		cub->game->p_ori_y = 1;
+		cub->game->fov_length = -0.66;
+		cub->game->fov_width = 0;
 	}
 	if (c == 'W')
 	{
 		cub->game->p_ori_x = -1;
 		cub->game->p_ori_y = 0;
+		cub->game->fov_length = 0;
+		cub->game->fov_width = -0.66;
 	}
 }
 
 void	init_fov_and_time(t_cub *cub)
 {
-	cub->game->fov_length = 1;
-	cub->game->fov_width = 0.66;
 	cub->game->cur_time = 0;
 	cub->game->old_time = 0;
 }
@@ -102,7 +108,7 @@ void	draw_lines(t_cub *cub, int line_height, int side, int x)
 	else
 		color = 0x0000FF00;
 	// i = 0;
-	printf("start = %d\n", draw_start);
+	// printf("start = %d\n", draw_start);
 	i = draw_start;
 	while (i >= 0)
 	{
@@ -127,7 +133,7 @@ void	draw_lines(t_cub *cub, int line_height, int side, int x)
 // 	my_mlx_pixel_put(cub->img, fabs(yray * 500) + 200, fabs(xray * 500) + 200, 0x0000FF00);
 // }
 
-void	init_camera(t_cub *cub)
+void	ray_cast(t_cub *cub)
 {
 	int		x;
 	double	camera;
@@ -162,24 +168,24 @@ void	init_camera(t_cub *cub)
 	{
 		printf("valeur de x : %d\n", x);
 		camera = 2 * x / (double)cub->window_x - 1;
-		// printf("camera : %f\n", camera);
+		printf("camera : %f\n", camera);
 		diray_x = cub->game->p_ori_x + cub->game->fov_length * camera;
       	diray_y = cub->game->p_ori_y + cub->game->fov_width * camera;
-		// printf("ray x : %f\n", diray_x);
-		// printf("ray y : %f\n", diray_y);
+		printf("ray x : %f\n", diray_x);
+		printf("ray y : %f\n", diray_y);
 		map_x = (int)cub->game->p_pos_x;
 		map_y = (int)cub->game->p_pos_y;
 		// printf("map x : %d\n", map_x);
 		// printf("map y : %d\n", map_y);
 		if (diray_x != 0)
 			delta_dist_x = fabs(1 / diray_x);
-		else
-			delta_dist_x = fabs(1 / pow(10, 30));
+		// else
+		// 	delta_dist_x = fabs(1 / pow(10, 30));
 		// printf("delta_x : %f\n", delta_dist_x);
 		if (diray_y != 0)
 			delta_dist_y = fabs(1 / diray_y);
-		else
-			delta_dist_y = fabs(1 / pow(10, 30));
+		// else
+		// 	delta_dist_y = fabs(1 / pow(10, 30));
 		// printf("delta_y : %f\n", delta_dist_y);
 		// printf("\n");
 		if (diray_x < 0)
@@ -225,7 +231,7 @@ void	init_camera(t_cub *cub)
 			// printf("map y : %d\n", map_y);
 			// printf("\n");
 			// printf("\n");
-			if (cub->map[map_y][map_x] != 0)
+			if (cub->map[map_y][map_x] != '0')
 				hit = 1;
 			// nbhit++;
 		}
@@ -235,7 +241,7 @@ void	init_camera(t_cub *cub)
 			ray_length = side_dist_x - delta_dist_x;
 		else
 			ray_length = side_dist_y - delta_dist_y;
-		line_height = cub->window_y / (ray_length * 3);
+		line_height = cub->window_y / (ray_length);
 		// draw_fov(cub, diray_x, diray_y);
 		draw_lines(cub, line_height, side, x);
 		// printf("line height : %d\n", line_height);
@@ -251,72 +257,32 @@ void	init_camera(t_cub *cub)
 
 // }
 
+void	init_values(t_cub * cub)
+{
+	cub->game->key_w = 0;
+	cub->game->key_a = 0;
+	cub->game->key_s = 0;
+	cub->game->key_d = 0;
+	init_fov_and_time(cub);
+}
+
 void	game_init(t_cub *cub)
 {
 	cub->game = malloc(sizeof(t_game) * 1);
-	init_fov_and_time(cub);
+	init_values(cub);
 	get_player_pos(cub);
-	init_camera(cub);
 }
 
-// void	draw_test(t_cub *cub)
-// {
-// 	int		color;
-// 	int		side;
-// 	int		y;
-// 	int		x;
-// 	// t_img	img;
-
-// 	cub->img = malloc(sizeof(t_img) * 1);
-// 	cub->img->mlx_img = mlx_new_image(cub->mlx, 500, 600);
-// 	cub->img->addr = mlx_get_data_addr(cub->img->mlx_img, &cub->img->bpp, &cub->img->rowlen,
-// 								&cub->img->end);
-// 	side = 1;
-// 	if (side == 1)
-// 		color = 0x0000FF00;
-// 	else
-// 		color = 0x00FF0000;
-// 	x = 100;
-// 	while (x <= 400)
-// 	{
-// 		y = 100;
-// 		while (y <= 200)
-// 		{
-// 			my_mlx_pixel_put(cub->img, x, y, color);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
-// }
-
-// void	draw_test(t_cub *cub)
-// {
-// 	int		color;
-// 	int		side;
-// 	int		y;
-// 	int		x;
-// 	t_img	img;
-
-// 	// cub->img = malloc(sizeof(t_img) * 1);
-// 	img.mlx_img = mlx_new_image(cub->mlx, 500, 600);
-// 	img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.rowlen,
-// 								&img.end);
-// 	side = 1;
-// 	if (side == 1)
-// 		color = 0x0000FF00;
-// 	else
-// 		color = 0x00FF0000;
-// 	x = 100;
-// 	while (x <= 400)
-// 	{
-// 		y = 100;
-// 		while (y <= 200)
-// 		{
-// 			my_mlx_pixel_put(&img, x, y, color);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// 	mlx_put_image_to_window(cub->mlx, cub->win, img.mlx_img, 0, 0);
-// }
+int	game_loop(t_cub *cub)
+{
+	if (cub->game->key_w)
+		move_up(cub);
+	if (cub->game->key_a)
+		move_left(cub);
+	if (cub->game->key_s)
+		move_down(cub);
+	if (cub->game->key_d)
+		move_right(cub);
+	ray_cast(cub);
+	return (0);
+}
