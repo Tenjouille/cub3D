@@ -19,7 +19,16 @@
 # define KEY_A 97
 # define KEY_D 100
 # define KEY_S 115
-# define MOVESPEED 0.05
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+
+# define WINWIDTH 1280
+# define WINHEIGHT 720
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+
+# define MOVESPEED 0.03
+# define ROTSPEED 0.03
 
 typedef struct s_img
 {
@@ -44,6 +53,8 @@ typedef struct s_game
 	int		key_s;
 	int		key_a;
 	int		key_d;
+	int		key_right;
+	int		key_left;
 }			t_game;
 
 typedef struct s_textures
@@ -81,4 +92,6 @@ void	move_up(t_cub *cub);
 void	move_left(t_cub *cub);
 void	move_down(t_cub *cub);
 void	move_right(t_cub *cub);
+void	rotate_right(t_cub *cub);
+void	rotate_left(t_cub *cub);
 #endif

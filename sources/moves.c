@@ -59,3 +59,35 @@ void	move_right(t_cub *cub)
 	if (cub->map[y][x] != '1')
 		cub->game->p_pos_x += cub->game->fov_length * MOVESPEED;
 }
+
+void	rotate_right(t_cub *cub)
+{
+	double		old_dir_x;
+	double		old_plane_x;
+
+	old_dir_x = cub->game->p_ori_x;
+	cub->game->p_ori_x = cub->game->p_ori_x * cos(ROTSPEED) - cub->game->p_ori_y * sin(ROTSPEED);
+	cub->game->p_ori_y = old_dir_x * sin(ROTSPEED) + cub->game->p_ori_y * cos(ROTSPEED);
+	old_plane_x = cub->game->fov_length;
+	cub->game->fov_length = cub->game->fov_length * cos(ROTSPEED) - \
+		cub->game->fov_width * sin(ROTSPEED);
+	cub->game->fov_width = old_plane_x * sin(ROTSPEED) +\
+		cub->game->fov_width * cos(ROTSPEED);
+}
+
+void	rotate_left(t_cub *cub)
+{
+	double		old_dir_x;
+	double		old_plane_x;
+
+	old_dir_x = cub->game->p_ori_x;
+	cub->game->p_ori_x = cub->game->p_ori_x * cos(-ROTSPEED) -\
+		cub->game->p_ori_y * sin(-ROTSPEED);
+	cub->game->p_ori_y = old_dir_x * sin(-ROTSPEED) +\
+		cub->game->p_ori_y * cos(-ROTSPEED);
+	old_plane_x = cub->game->fov_length;
+	cub->game->fov_length = cub->game->fov_length * cos(-ROTSPEED) -\
+		cub->game->fov_width * sin(-ROTSPEED);
+	cub->game->fov_width = old_plane_x * sin(-ROTSPEED) +\
+		cub->game->fov_width * cos(-ROTSPEED);
+}

@@ -112,7 +112,7 @@ void	draw_lines(t_cub *cub, int line_height, int side, int x)
 	i = draw_start;
 	while (i >= 0)
 	{
-		my_mlx_pixel_put(cub->img, x, i, 0x00FFFF00);
+		my_mlx_pixel_put(cub->img, x, i, 0x000000FF);
 		i--;
 	}
 	i = draw_start;
@@ -166,13 +166,13 @@ void	ray_cast(t_cub *cub)
 	x = 0;
 	while (x < cub->window_x)
 	{
-		printf("valeur de x : %d\n", x);
+		// printf("valeur de x : %d\n", x);
 		camera = 2 * x / (double)cub->window_x - 1;
-		printf("camera : %f\n", camera);
+		// printf("camera : %f\n", camera);
 		diray_x = cub->game->p_ori_x + cub->game->fov_length * camera;
       	diray_y = cub->game->p_ori_y + cub->game->fov_width * camera;
-		printf("ray x : %f\n", diray_x);
-		printf("ray y : %f\n", diray_y);
+		// printf("ray x : %f\n", diray_x);
+		// printf("ray y : %f\n", diray_y);
 		map_x = (int)cub->game->p_pos_x;
 		map_y = (int)cub->game->p_pos_y;
 		// printf("map x : %d\n", map_x);
@@ -212,7 +212,7 @@ void	ray_cast(t_cub *cub)
 		// nbhit = 0;
 		// printf("sidedist x : %f\n", side_dist_x);
 		// printf("sidedist y : %f\n", side_dist_y);
-		printf("\n");
+		// printf("\n");
 		while (hit == 0)
 		{
 			if (side_dist_x < side_dist_y)
@@ -231,12 +231,10 @@ void	ray_cast(t_cub *cub)
 			// printf("map y : %d\n", map_y);
 			// printf("\n");
 			// printf("\n");
-			if (cub->map[map_y][map_x] != '0')
+			if (cub->map[map_y][map_x] == '1')
 				hit = 1;
 			// nbhit++;
 		}
-		// if (nbhit > 1)
-			// printf("nbhit a x : %d\n", x);
 		if (side == 0)
 			ray_length = side_dist_x - delta_dist_x;
 		else
@@ -250,6 +248,8 @@ void	ray_cast(t_cub *cub)
 	// (void)line_height;
 	// printf("line height : %d\n", line_height);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
+	mlx_destroy_image(cub->mlx, cub->img->mlx_img);
+	free(cub->img);
 }
 
 // void	affiche_map(t_cub *cub)
@@ -263,6 +263,8 @@ void	init_values(t_cub * cub)
 	cub->game->key_a = 0;
 	cub->game->key_s = 0;
 	cub->game->key_d = 0;
+	cub->game->key_left = 0;
+	cub->game->key_right = 0;
 	init_fov_and_time(cub);
 }
 
@@ -283,6 +285,10 @@ int	game_loop(t_cub *cub)
 		move_down(cub);
 	if (cub->game->key_d)
 		move_right(cub);
+	if (cub->game->key_right)
+		rotate_right(cub);
+	if (cub->game->key_left)
+		rotate_left(cub);
 	ray_cast(cub);
 	return (0);
 }
