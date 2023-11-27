@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:39 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/21 17:43:53 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*ft_fill_join(char *res, char *s1, char *s2)
 char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*res;
+	int		len;
 
 	if (!s1)
 	{
@@ -71,7 +72,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (0);
-	res = malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	len = ft_strlen_gnl(s1) + ft_strlen_gnl(s2);
+	res = malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (0);
 	res = ft_fill_join(res, s1, s2);

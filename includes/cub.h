@@ -14,7 +14,6 @@
 # include "../libft/libft.h"
 # include "get_next_line.h"
 
-
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_D 100
@@ -82,10 +81,20 @@ typedef struct s_cub
 	t_game		*game;
 	t_textures	*textures;
 	t_img		*img;
+	void	*mlx;
+	void	*win;
+	char	**desc;
+	int		floor[4];
+	int		ceiling[4];
+	char	**map;
+	t_img	img;
 }			t_cub;
 
 /*		TOOLS		*/
 char	*ft_strnchr(const char *s, int c, int size);
+int		ft_empty_line(char *str);
+int		ft_is_char(char c, char *charset);
+int		ft_is_char(char c, char *charset);
 /*		ERRORS		*/
 void	ft_map_error_msg(void);
 /*		INIT		*/
@@ -104,4 +113,34 @@ void	rotate_right(t_cub *cub);
 void	rotate_left(t_cub *cub);
 /*		RAYCASTING		*/
 void	ray_cast(t_cub *cub);
+/*		FILE_CUB	*/
+char	*ft_strdup_better(char *str);
+char	**ft_sorting_tab(char **unsort, char **res);
+char	**ft_sort_desc(char	**unsort);
+int		ft_desclen(char *desc);
+char	**ft_get_desc(char *file);
+/*		PARSING		*/
+int		ft_parsing(int ac, char **av, t_cub *cub);
+int		ft_find_not_digit(char *str);
+int		ft_check_texture_path(char *path);
+int		ft_check_NSEW(char **desc, char *dir);
+int		ft_check_color(char *color, char FC, t_cub *cub);
+int		ft_check_FC(char **desc, char FC, t_cub *cub);
+int		ft_scan_desc(char **desc, t_cub *cub);
+int		ft_scan_map(char **map, t_cub *cub);
+// /*		MEMORY_MANAGER		*/
+// void	free_list(t_mem *list_ptr);
+// void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
+// void	ft_free(t_mem **memory, void *data);
+// void	ft_memclear(t_mem **lst, int stop);
+// void	exit_failure_malloc(void *data);
+// t_mem	*ft_create_elem(void *data);
+// void	ft_list_push_back(t_mem **begin_list, void *data);
+// void	*malloc(size_t size, int clear, int clear_one, void *data);
+/*		MAIN		*/
+char	**ft_get_map(char **desc);
+int		ft_argv_parsing(int ac, char **av);
+int		keyboard_stuff(int keysym, t_cub *cub);
+int		end_of_prog(t_cub *cub);
+
 #endif

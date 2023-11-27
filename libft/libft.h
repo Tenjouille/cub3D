@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:13 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/21 17:43:04 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:02:16 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct s_mem
+{
+	void				*data;
+	struct s_mem		*next;
+}						t_mem;
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -82,5 +88,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+/*		MEMORY_MANAGER		*/
+void	free_list(t_mem *list_ptr);
+void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
+void	ft_free(t_mem **memory, void *data);
+void	ft_memclear(t_mem **lst, int stop);
+void	exit_failure_malloc(void *data);
+t_mem	*ft_create_elem(void *data);
+void	ft_list_push_back(t_mem **begin_list, void *data);
+void	*ft_malloc(size_t size, int clear, int clear_one, void *data);
 
 #endif
