@@ -77,17 +77,12 @@ typedef struct s_cub
 	int			window_x;
 	int			window_y;
 	char		**desc;
-	char		**map;
 	t_game		*game;
 	t_textures	*textures;
 	t_img		*img;
-	void	*mlx;
-	void	*win;
-	char	**desc;
-	int		floor[4];
-	int		ceiling[4];
-	char	**map;
-	t_img	img;
+	int			floor[4];
+	int			ceiling[4];
+	char		**map;
 }			t_cub;
 
 /*		TOOLS		*/
