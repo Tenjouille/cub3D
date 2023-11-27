@@ -11,17 +11,17 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 int	get_color(t_cub *cub, int x, int y, int texture)
 {
 	if (texture == EA_TEXT)
-		return (*(int *)(cub->textures->ea->addr + (y * cub->textures->ea->rowlen + x
-				* (cub->textures->ea->bpp / 8))));
+		return (*(int *)(cub->textures[EA_TEXT].addr + (y * cub->textures[EA_TEXT].rowlen + x
+				* (cub->textures[EA_TEXT].bpp / 8))));
 	if (texture == WE_TEXT)
-		return (*(int *)(cub->textures->we->addr + (y * cub->textures->we->rowlen + x
-				* (cub->textures->we->bpp / 8))));
+		return (*(int *)(cub->textures[WE_TEXT].addr + (y * cub->textures[WE_TEXT].rowlen + x
+				* (cub->textures[WE_TEXT].bpp / 8))));
 	if (texture == NO_TEXT)
-		return (*(int *)(cub->textures->no->addr + (y * cub->textures->no->rowlen + x
-				* (cub->textures->no->bpp / 8))));
+		return (*(int *)(cub->textures[NO_TEXT].addr + (y * cub->textures[NO_TEXT].rowlen + x
+				* (cub->textures[NO_TEXT].bpp / 8))));
 	if (texture == SO_TEXT)
-		return (*(int *)(cub->textures->so->addr + (y * cub->textures->so->rowlen + x
-				* (cub->textures->so->bpp / 8))));
+		return (*(int *)(cub->textures[SO_TEXT].addr + (y * cub->textures[SO_TEXT].rowlen + x
+				* (cub->textures[SO_TEXT].bpp / 8))));
 	return (0);
 }
 

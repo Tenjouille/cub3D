@@ -15,6 +15,8 @@ int	ft_find_not_digit(char *str)
 int	ft_check_texture_path(char *path)
 {
 	(void) path;
+	// if (!ft_strcmp("NO", dir))
+
 	return (0);
 }
 
@@ -36,6 +38,7 @@ int	ft_check_NSEW(char **desc, char *dir)
 	}
 	if (!desc[i])
 		return (ft_map_error_msg(), 1);
+	j += 2;
 	while (desc[i][j] == ' ' || desc[i][j] == '\t')
 		j++;
 	if (ft_check_texture_path(&desc[i][j]))

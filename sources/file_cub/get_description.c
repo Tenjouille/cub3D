@@ -68,7 +68,7 @@ char	**ft_sort_desc(char	**unsort)
 	int		len;
 
 	i = 0;
-	desc = ft_calloc(sizeof(char), 7);
+	desc = ft_calloc(sizeof(char *), 7);
 	while (i < 7)
 	{
 		j = 0;
@@ -80,7 +80,7 @@ char	**ft_sort_desc(char	**unsort)
 			else if (unsort[i][j++])
 				len++;
 		}
-		desc[i] = calloc(sizeof(char), len + 1);
+		desc[i] = ft_calloc(sizeof(char), len + 1);
 		if (!desc[i])
 			return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
 		i++;

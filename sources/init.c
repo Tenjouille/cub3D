@@ -1,13 +1,13 @@
 #include "../includes/cub.h"
 
-void	init_textures(t_cub *cub)
-{
-	cub->textures = malloc(sizeof(t_textures) * 1);
-	cub->textures->ea = malloc(sizeof(t_img) * 1);
-	cub->textures->we = malloc(sizeof(t_img) * 1);
-	cub->textures->no = malloc(sizeof(t_img) * 1);
-	cub->textures->so = malloc(sizeof(t_img) * 1);
-}
+// void	init_textures(t_cub *cub)
+// {
+// 	cub->textures = malloc(sizeof(t_textures) * 1);
+// 	cub->textures->ea = malloc(sizeof(t_img) * 1);
+// 	cub->textures->we = malloc(sizeof(t_img) * 1);
+// 	cub->textures->no = malloc(sizeof(t_img) * 1);
+// 	cub->textures->so = malloc(sizeof(t_img) * 1);
+// }
 
 void	init_images(t_cub *cub)
 {
@@ -15,25 +15,26 @@ void	init_images(t_cub *cub)
 	int		x;
 	int		y;
 
-	init_textures(cub);
+	// init_textures(cub);
+	path = NULL;
 	x = 64;
 	y = 64;
-	path = "../textures/green.xpm";
-	cub->textures->no->mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
-	cub->textures->no->addr = mlx_get_data_addr(cub->textures->no->mlx_img,
-		&cub->textures->no->bpp, &cub->textures->no->rowlen, &cub->textures->no->end);
-	path = "../textures/red.xpm";
-	cub->textures->so->mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
-	cub->textures->so->addr = mlx_get_data_addr(cub->textures->so->mlx_img,
-		&cub->textures->so->bpp, &cub->textures->so->rowlen, &cub->textures->so->end);
-	path = "../textures/blue.xpm";
-	cub->textures->we->mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
-	cub->textures->we->addr = mlx_get_data_addr(cub->textures->we->mlx_img,
-		&cub->textures->we->bpp, &cub->textures->we->rowlen, &cub->textures->we->end);
-	path = "../textures/yellow.xpm";
-	cub->textures->ea->mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
-	cub->textures->ea->addr = mlx_get_data_addr(cub->textures->ea->mlx_img,
-		&cub->textures->ea->bpp, &cub->textures->ea->rowlen, &cub->textures->ea->end);
+	path = "textures/mur3.xpm";
+	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
+	cub->textures[NO_TEXT].addr = mlx_get_data_addr(cub->textures[NO_TEXT].mlx_img,
+		&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen, &cub->textures[NO_TEXT].end);
+	path = "textures/mur3.xpm";
+	cub->textures[SO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
+	cub->textures[SO_TEXT].addr = mlx_get_data_addr(cub->textures[SO_TEXT].mlx_img,
+		&cub->textures[SO_TEXT].bpp, &cub->textures[SO_TEXT].rowlen, &cub->textures[SO_TEXT].end);
+	path = "textures/mur3.xpm";
+	cub->textures[WE_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
+	cub->textures[WE_TEXT].addr = mlx_get_data_addr(cub->textures[WE_TEXT].mlx_img,
+		&cub->textures[WE_TEXT].bpp, &cub->textures[WE_TEXT].rowlen, &cub->textures[WE_TEXT].end);
+	path = "textures/mur3.xpm";
+	cub->textures[EA_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
+	cub->textures[EA_TEXT].addr = mlx_get_data_addr(cub->textures[EA_TEXT].mlx_img,
+		&cub->textures[EA_TEXT].bpp, &cub->textures[EA_TEXT].rowlen, &cub->textures[EA_TEXT].end);
 }
 
 void	get_first_orientation(t_cub *cub, char c)
@@ -115,7 +116,7 @@ void	game_init(t_cub *cub)
 {
 	cub->game = malloc(sizeof(t_game) * 1);
 	init_values(cub);
-	// init_images(cub);
+	init_images(cub);
 	get_player_pos(cub);
 }
 

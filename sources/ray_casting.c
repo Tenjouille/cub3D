@@ -107,9 +107,8 @@ void	ray_cast(t_cub *cub)
 		else
 			ray_length = side_dist_y - delta_dist_y;
 		line_height = cub->window_y / (ray_length);
-		// draw_fov(cub, diray_x, diray_y);
-		draw_lines(cub, line_height, side, x);
-		// draw_textures(cub, line_height, side, x, ray_length, diray_x, diray_y); 
+		// draw_lines(cub, line_height, side, x);
+		draw_textures(cub, line_height, side, x, ray_length, diray_x, diray_y); 
 		// printf("line height : %d\n", line_height);
 		x++;
 	}

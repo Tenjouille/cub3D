@@ -21,10 +21,10 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define NO_TEXT 1
-# define SO_TEXT 2
-# define WE_TEXT 3
-# define EA_TEXT 4
+# define NO_TEXT 0
+# define SO_TEXT 1
+# define WE_TEXT 2
+# define EA_TEXT 3
 
 # define WINWIDTH 1280
 # define WINHEIGHT 720
@@ -78,7 +78,7 @@ typedef struct s_cub
 	int			window_y;
 	char		**desc;
 	t_game		*game;
-	t_textures	*textures;
+	t_img		textures[4];
 	t_img		*img;
 	int			floor[4];
 	int			ceiling[4];

@@ -2,9 +2,9 @@
 
 int	ft_parsing(int ac, char **av, t_cub *cub)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	if (ft_argv_parsing(ac, av))
 		return (1);
 	cub->desc = ft_get_desc(av[1]);
@@ -17,9 +17,9 @@ int	ft_parsing(int ac, char **av, t_cub *cub)
 	// while (cub->desc[i])
 	// 	printf("%s", cub->desc[i++]);
 	// printf("\n\n");
-	i = 0;
-	while (cub->map[i])
-		printf("%s", cub->map[i++]);
+	// i = 0;
+	// while (cub->map[i])
+	// 	printf("%s", cub->map[i++]);
 	// if (ft_file_parsing(av[1]))
 	// 	return (1);
 	// cub->map = ft_map_scanning(av[1]);
