@@ -4,10 +4,10 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD
 HEADERS = -I ./include
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \
-	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c tools/ft_empty_line.c \
+	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c tools/ft_empty_line.c tools/ft_is_char.c \
 	errors/error_msg.c \
 	file_cub/get_description.c \
-	parsing/parsing.c parsing/parsing_description.c \
+	parsing/parsing.c parsing/parsing_description.c parsing/parsing_map.c \
 	memory_manager/ft_free.c memory_manager/malloc_machine.c
 SRC_PATH = sources/
 MY_SOURCES := $(addprefix $(SRC_PATH),$(SRC))

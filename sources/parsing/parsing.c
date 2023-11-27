@@ -11,10 +11,12 @@ int	ft_parsing(int ac, char **av, t_cub *cub)
 	if (ft_scan_desc(cub->desc, cub))
 		return (1);
 	cub->map = ft_get_map(cub->desc);
+	if (ft_scan_map(cub->map, cub))
+		return (1);
 	cub->desc = ft_sort_desc(cub->desc);
-	while (cub->desc[i])
-		printf("%s", cub->desc[i++]);
-	printf("\n\n");
+	// while (cub->desc[i])
+	// 	printf("%s", cub->desc[i++]);
+	// printf("\n\n");
 	i = 0;
 	while (cub->map[i])
 		printf("%s", cub->map[i++]);

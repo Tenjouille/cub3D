@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:22:31 by tbourdea          #+#    #+#             */
-/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:37:37 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_cub
 /*		TOOLS		*/
 char	*ft_strnchr(const char *s, int c, int size);
 int		ft_empty_line(char *str);
+int		ft_is_char(char c, char *charset);
+int		ft_is_char(char c, char *charset);
 /*		ERRORS		*/
 void	ft_map_error_msg(void);
 /*		FILE_CUB	*/
@@ -71,6 +73,7 @@ int		ft_check_NSEW(char **desc, char *dir);
 int		ft_check_color(char *color, char FC, t_cub *cub);
 int		ft_check_FC(char **desc, char FC, t_cub *cub);
 int		ft_scan_desc(char **desc, t_cub *cub);
+int		ft_scan_map(char **map, t_cub *cub);
 // /*		MEMORY_MANAGER		*/
 // void	free_list(t_mem *list_ptr);
 // void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
