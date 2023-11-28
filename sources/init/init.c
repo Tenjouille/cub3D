@@ -1,4 +1,4 @@
-#include "../includes/cub.h"
+#include "../../includes/cub.h"
 
 void	init_images(t_cub *cub)
 {
@@ -27,44 +27,6 @@ void	init_images(t_cub *cub)
 		&cub->textures[EA_TEXT].bpp, &cub->textures[EA_TEXT].rowlen, &cub->textures[EA_TEXT].end);
 }
 
-void	get_first_orientation(t_cub *cub, char c)
-{
-	if (c == 'N')
-	{
-		cub->game->p_ori_x = 0;
-		cub->game->p_ori_y = -1;
-		cub->game->plane_x = 0.66;
-		cub->game->plane_y = 0;
-	}
-	if (c == 'E')
-	{
-		cub->game->p_ori_x = 1;
-		cub->game->p_ori_y = 0;
-		cub->game->plane_x = 0;
-		cub->game->plane_y = 0.66;
-	}
-	if (c == 'S')
-	{
-		cub->game->p_ori_x = 0;
-		cub->game->p_ori_y = 1;
-		cub->game->plane_x = -0.66;
-		cub->game->plane_y = 0;
-	}
-	if (c == 'W')
-	{
-		cub->game->p_ori_x = -1;
-		cub->game->p_ori_y = 0;
-		cub->game->plane_x = 0;
-		cub->game->plane_y = -0.66;
-	}
-}
-
-void	init_fov_and_time(t_cub *cub)
-{
-	cub->game->cur_time = 0;
-	cub->game->old_time = 0;
-}
-
 void	get_player_pos(t_cub *cub)
 {
 	int	i;
@@ -78,33 +40,22 @@ void	get_player_pos(t_cub *cub)
 		{
 			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
 				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
-				{
-					cub->game->p_pos_x = j + 0.5;
-					cub->game->p_pos_y = i + 0.5;
-					get_first_orientation(cub, cub->map[i][j]);
-					return ;
-				}
+			{
+				cub->game->p_pos_x = j + 0.5;
+				cub->game->p_pos_y = i + 0.5;
+				get_first_orientation(cub, cub->map[i][j]);
+				return ;
+			}
 				j++;
 		}
 		i++;
 	}
 }
 
-void	init_values(t_cub * cub)
-{
-	cub->game->key_w = 0;
-	cub->game->key_a = 0;
-	cub->game->key_s = 0;
-	cub->game->key_d = 0;
-	cub->game->key_left = 0;
-	cub->game->key_right = 0;
-	cub->game->texture = 0;
-	init_fov_and_time(cub);
-}
-
 void	game_init(t_cub *cub)
 {
 	cub->game = malloc(sizeof(t_game) * 1);
+	cub->ray = malloc(sizeof(t_ray) * 1);
 	init_values(cub);
 	init_images(cub);
 	get_player_pos(cub);
