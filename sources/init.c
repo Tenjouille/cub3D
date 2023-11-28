@@ -1,37 +1,27 @@
 #include "../includes/cub.h"
 
-// void	init_textures(t_cub *cub)
-// {
-// 	cub->textures = malloc(sizeof(t_textures) * 1);
-// 	cub->textures->ea = malloc(sizeof(t_img) * 1);
-// 	cub->textures->we = malloc(sizeof(t_img) * 1);
-// 	cub->textures->no = malloc(sizeof(t_img) * 1);
-// 	cub->textures->so = malloc(sizeof(t_img) * 1);
-// }
-
 void	init_images(t_cub *cub)
 {
 	char	*path;
 	int		x;
 	int		y;
 
-	// init_textures(cub);
 	path = NULL;
 	x = 64;
 	y = 64;
-	path = "textures/mur3.xpm";
+	path = "textures/my_wall.xpm";
 	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[NO_TEXT].addr = mlx_get_data_addr(cub->textures[NO_TEXT].mlx_img,
 		&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen, &cub->textures[NO_TEXT].end);
-	path = "textures/mur3.xpm";
+	path = "textures/colorstone.xpm";
 	cub->textures[SO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[SO_TEXT].addr = mlx_get_data_addr(cub->textures[SO_TEXT].mlx_img,
 		&cub->textures[SO_TEXT].bpp, &cub->textures[SO_TEXT].rowlen, &cub->textures[SO_TEXT].end);
-	path = "textures/mur3.xpm";
+	path = "textures/eagle.xpm";
 	cub->textures[WE_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[WE_TEXT].addr = mlx_get_data_addr(cub->textures[WE_TEXT].mlx_img,
 		&cub->textures[WE_TEXT].bpp, &cub->textures[WE_TEXT].rowlen, &cub->textures[WE_TEXT].end);
-	path = "textures/mur3.xpm";
+	path = "textures/mossy.xpm";
 	cub->textures[EA_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[EA_TEXT].addr = mlx_get_data_addr(cub->textures[EA_TEXT].mlx_img,
 		&cub->textures[EA_TEXT].bpp, &cub->textures[EA_TEXT].rowlen, &cub->textures[EA_TEXT].end);
@@ -43,29 +33,29 @@ void	get_first_orientation(t_cub *cub, char c)
 	{
 		cub->game->p_ori_x = 0;
 		cub->game->p_ori_y = -1;
-		cub->game->fov_length = 0.66;
-		cub->game->fov_width = 0;
+		cub->game->plane_x = 0.66;
+		cub->game->plane_y = 0;
 	}
 	if (c == 'E')
 	{
 		cub->game->p_ori_x = 1;
 		cub->game->p_ori_y = 0;
-		cub->game->fov_length = 0;
-		cub->game->fov_width = 0.66;
+		cub->game->plane_x = 0;
+		cub->game->plane_y = 0.66;
 	}
 	if (c == 'S')
 	{
 		cub->game->p_ori_x = 0;
 		cub->game->p_ori_y = 1;
-		cub->game->fov_length = -0.66;
-		cub->game->fov_width = 0;
+		cub->game->plane_x = -0.66;
+		cub->game->plane_y = 0;
 	}
 	if (c == 'W')
 	{
 		cub->game->p_ori_x = -1;
 		cub->game->p_ori_y = 0;
-		cub->game->fov_length = 0;
-		cub->game->fov_width = -0.66;
+		cub->game->plane_x = 0;
+		cub->game->plane_y = -0.66;
 	}
 }
 

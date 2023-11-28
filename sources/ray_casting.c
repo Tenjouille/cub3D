@@ -36,8 +36,8 @@ void	ray_cast(t_cub *cub)
 		// printf("valeur de x : %d\n", x);
 		camera = 2 * x / (double)cub->window_x - 1;
 		// printf("camera : %f\n", camera);
-		diray_x = cub->game->p_ori_x + cub->game->fov_length * camera;
-      	diray_y = cub->game->p_ori_y + cub->game->fov_width * camera;
+		diray_x = cub->game->p_ori_x + cub->game->plane_x * camera;
+      	diray_y = cub->game->p_ori_y + cub->game->plane_y * camera;
 		// printf("ray x : %f\n", diray_x);
 		// printf("ray y : %f\n", diray_y);
 		map_x = (int)cub->game->p_pos_x;
@@ -46,34 +46,34 @@ void	ray_cast(t_cub *cub)
 		// printf("map y : %d\n", map_y);
 		if (diray_x != 0)
 			delta_dist_x = fabs(1 / diray_x);
-		// else
-		// 	delta_dist_x = fabs(1 / pow(10, 30));
+		else
+			delta_dist_x = INT_MAX;
 		// printf("delta_x : %f\n", delta_dist_x);
 		if (diray_y != 0)
 			delta_dist_y = fabs(1 / diray_y);
-		// else
-		// 	delta_dist_y = fabs(1 / pow(10, 30));
+		else
+			delta_dist_y = INT_MAX;
 		// printf("delta_y : %f\n", delta_dist_y);
 		// printf("\n");
 		if (diray_x < 0)
 		{
 			step_x = -1;
-			side_dist_x = (cub->game->p_pos_x - (double)map_x) * delta_dist_x;
+			side_dist_x = (cub->game->p_pos_x - map_x) * delta_dist_x;
 		}
 		else
 		{
 			step_x = 1;
-			side_dist_x = ((double)map_x + 1 - cub->game->p_pos_x) * delta_dist_x;
+			side_dist_x = (map_x + 1 - cub->game->p_pos_x) * delta_dist_x;
 		}
 		if (diray_y < 0)
 		{
 			step_y = -1;
-			side_dist_y = (cub->game->p_pos_y - (double)map_y) * delta_dist_y;
+			side_dist_y = (cub->game->p_pos_y - map_y) * delta_dist_y;
 		}
 		else
 		{
 			step_y = 1;
-			side_dist_y = ((double)map_y + 1 - cub->game->p_pos_y) * delta_dist_y;
+			side_dist_y = (map_y + 1 - cub->game->p_pos_y) * delta_dist_y;
 		}
 		hit = 0;
 		// nbhit = 0;

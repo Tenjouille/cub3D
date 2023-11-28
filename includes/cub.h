@@ -26,12 +26,12 @@
 # define WE_TEXT 2
 # define EA_TEXT 3
 
-# define WINWIDTH 1280
-# define WINHEIGHT 720
+# define WINWIDTH 1920
+# define WINHEIGHT 1080
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 
-# define MOVESPEED 0.01
+# define MOVESPEED 0.03
 # define ROTSPEED 0.01
 
 typedef struct s_img
@@ -49,8 +49,8 @@ typedef struct s_game
 	double	p_pos_y;
 	double	p_ori_x;
 	double	p_ori_y;
-	double	fov_length;
-	double	fov_width;
+	double	plane_x;
+	double	plane_y;
 	double	cur_time;
 	double	old_time;
 	int		key_w;

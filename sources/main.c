@@ -97,8 +97,8 @@ int	main(int ac, char **av)
 {
 	t_cub	cub;
 
-	cub.window_x = 1280;
-	cub.window_y = 720;
+	cub.window_x = 1920;
+	cub.window_y = 1080;
 	if (ft_parsing(ac, av, &cub))
 		return (1);
 	cub.mlx = mlx_init();
