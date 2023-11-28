@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:15:00 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:45:12 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s || !f)
 		return (0);
-	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	res = ft_malloc(sizeof(char) * (ft_strlen(s) + 1), 0, 0, 0);
 	if (!res)
 		return (0);
 	while (s[i])

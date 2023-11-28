@@ -5,6 +5,7 @@ int	end_of_prog(t_cub *cub)
 	mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
+	ft_malloc(0, 1, 0, 0);
 	exit (1);
 }
 
@@ -68,31 +69,6 @@ int	ft_argv_parsing(int ac, char **av)
 	return (0);
 }
 
-char	**ft_get_map(char **desc)
-{
-	char	**map;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (desc[i])
-		i++;
-	j = i - 1;
-	while (!ft_strchr(desc[j], '.') && !ft_strchr(desc[j], ','))
-		j--;
-	j++;
-	map = malloc(sizeof(char*) * (i - j + 1));
-	if (!map)
-		return (ft_putstr_fd("malloc FAILURE\n", 2), NULL);
-	while (desc[j] && j < i)
-		map[k++] = ft_strdup(desc[j++]);
-	map[k] = 0;
-	return (map);
-}
-
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -100,18 +76,19 @@ int	main(int ac, char **av)
 	cub.window_x = 1280;
 	cub.window_y = 720;
 	if (ft_parsing(ac, av, &cub))
-		return (1);
+		return (ft_malloc(0, 1, 0, 0), 1);
 	cub.mlx = mlx_init();
 	if (!cub.mlx)
-		return (1);
+		return (ft_malloc(0, 1, 0, 0), 1);
 	cub.win = mlx_new_window(cub.mlx, cub.window_x, cub.window_y, "Cub3D");
 	if (!cub.win)
-		return (1);
+		return (ft_malloc(0, 1, 0, 0), 1);
 	game_init(&cub);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
 	mlx_hook(cub.win, KeyRelease, KeyReleaseMask, &keyboard_release, &cub);
 	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
 	mlx_loop_hook(cub.mlx, game_loop, &cub);
 	mlx_loop(cub.mlx);
+	ft_malloc(0, 1, 0, 0);
 	return (0);
 }

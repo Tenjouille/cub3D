@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:33:18 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/28 00:14:22 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s)
 	len = 0;
 	while (s[len])
 		len++;
-	dup = malloc(sizeof(char) * (len + 1));
+	dup = ft_malloc(sizeof(char) * (len + 1), 0, 0, 0);
 	if (!dup)
 		return (0);
 	len = 0;

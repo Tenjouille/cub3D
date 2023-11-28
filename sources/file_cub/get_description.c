@@ -15,9 +15,7 @@ char	*ft_strdup_better(char *str)
 		else if (str[i++])
 			len++;
 	}
-	res = malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
+	res = ft_malloc(sizeof(char) * (len + 1), 0, 0, 0);
 	i = 0;
 	len = 0;
 	while (str[i])
@@ -39,7 +37,7 @@ char	**ft_sorting_tab(char **unsort, char **res)
 	i = 0;
 	while (unsort[i])
 	{
-		j = 0;	
+		j = 0;
 		while (unsort[i][j] == ' ' || unsort[i][j] == '\t')
 			j++;
 		if (unsort[i][j] == 'N')
@@ -68,7 +66,7 @@ char	**ft_sort_desc(char	**unsort)
 	int		len;
 
 	i = 0;
-	desc = ft_calloc(sizeof(char), 7);
+	desc = ft_malloc(sizeof(char *) * 7, 0, 0, 0);
 	while (i < 7)
 	{
 		j = 0;
@@ -80,7 +78,7 @@ char	**ft_sort_desc(char	**unsort)
 			else if (unsort[i][j++])
 				len++;
 		}
-		desc[i] = calloc(sizeof(char), len + 1);
+		desc[i] = ft_calloc(sizeof(char), len + 1);
 		if (!desc[i])
 			return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
 		i++;
@@ -103,40 +101,38 @@ int	ft_desclen(char *desc)
 	{
 		if (ft_empty_line(buf))
 		{
-			free(buf);
+			ft_malloc(0, 0, 1, buf);
 			buf = get_next_line(fd);
 			continue ;
 		}
-		free(buf);
+		ft_malloc(0, 0, 1, buf);
 		i++;
 		buf = get_next_line(fd);
 	}
-	// printf("%d\n", i);
-	return (close(fd), free(buf), i);
+	return (close(fd), i);
 }
 
 char	**ft_get_desc(char *file)
 {
 	int		fd;
 	int		i;
+	int		len;
 	char	**desc;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (ft_putstr_fd("OPEN FAILURE\n", 2), NULL);
-	desc = ft_calloc(sizeof(char*), ft_desclen(file) + 1);
-	if (!desc)
-		return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
+	len = ft_desclen(file);
+	desc = ft_calloc(sizeof(char *), len + 1);
 	desc[i] = get_next_line(fd);
 	while (desc[i])
 	{
 		if (ft_empty_line(desc[i]))
-			free(desc[i]);
+			ft_malloc(0, 0, 1, desc[i]);
 		else
 			i++;
 		desc[i] = get_next_line(fd);
 	}
 	return (desc);
 }
-
