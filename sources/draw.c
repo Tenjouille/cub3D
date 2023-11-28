@@ -12,19 +12,8 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	get_color(t_cub *cub, int x, int y, int texture)
 {
-	// if (texture == EA_TEXT)
 	return (*(int *)(cub->textures[texture].addr + (y * cub->textures[texture].rowlen + x
 			* (cub->textures[texture].bpp / 8))));
-	// if (texture == WE_TEXT)
-	// 	return (*(int *)(cub->textures[WE_TEXT].addr + (y * cub->textures[WE_TEXT].rowlen + x
-	// 			* (cub->textures[WE_TEXT].bpp / 8))));
-	// if (texture == NO_TEXT)
-	// 	return (*(int *)(cub->textures[NO_TEXT].addr + (y * cub->textures[NO_TEXT].rowlen + x
-	// 			* (cub->textures[NO_TEXT].bpp / 8))));
-	// if (texture == SO_TEXT)
-	// 	return (*(int *)(cub->textures[SO_TEXT].addr + (y * cub->textures[SO_TEXT].rowlen + x
-	// 			* (cub->textures[SO_TEXT].bpp / 8))));
-	// return (0);
 }
 
 void	draw_textures(t_cub *cub, int line_height, int side, int x, double ray_length, double diray_x, double diray_y)
