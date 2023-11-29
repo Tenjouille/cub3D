@@ -69,6 +69,8 @@ void	check_hit(t_cub *cub, t_ray *ray)
 		ray->ray_length = ray->side_dist_x - ray->delta_dist_x;
 	else
 		ray->ray_length = ray->side_dist_y - ray->delta_dist_y;
+	if (ray->ray_length < 0.001)
+		ray->ray_length = 0.005;
 	ray->line_height = cub->window_y / (ray->ray_length);
 }
 
@@ -81,6 +83,11 @@ void	ray_cast(t_cub *cub)
 	cub->img->addr = mlx_get_data_addr(cub->img->mlx_img,
 			&(cub->img->bpp), &(cub->img->rowlen),
 			&(cub->img->end));
+	cub->mini_img = malloc(sizeof(t_img) * 1);
+	cub->mini_img->mlx_img = mlx_new_image(cub->mlx, cub->window_x, cub->window_y);
+	cub->mini_img->addr = mlx_get_data_addr(cub->mini_img->mlx_img,
+			&(cub->mini_img->bpp), &(cub->mini_img->rowlen),
+			&(cub->mini_img->end));
 	x = 0;
 	while (x < cub->window_x)
 	{
@@ -88,9 +95,12 @@ void	ray_cast(t_cub *cub)
 		set_sidedist(cub, cub->ray);
 		check_hit(cub, cub->ray);
 		draw_textures(cub, cub->ray, x);
+		draw_mini_map(cub, x);
 		x++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img->mlx_img);
+	mlx_destroy_image(cub->mlx, cub->mini_img->mlx_img);
 	free(cub->img);
+	free(cub->mini_img);
 }

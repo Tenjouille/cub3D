@@ -28,7 +28,7 @@ int	ft_argv_parsing(int ac, char **av)
 	return (0);
 }
 
-char	**ft_get_map(char **desc)
+char	**ft_get_map(t_cub *cub, char **desc)
 {
 	char	**map;
 	int		i;
@@ -50,6 +50,7 @@ char	**ft_get_map(char **desc)
 	while (desc[j] && j < i)
 		map[k++] = ft_strdup(desc[j++]);
 	map[k] = 0;
+	cub->map_height = k - 1;
 	return (map);
 }
 

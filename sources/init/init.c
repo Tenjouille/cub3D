@@ -56,6 +56,7 @@ void	game_init(t_cub *cub)
 {
 	cub->game = malloc(sizeof(t_game) * 1);
 	cub->ray = malloc(sizeof(t_ray) * 1);
+	cub->mini = malloc(sizeof(t_mini) * 1);
 	init_values(cub);
 	init_images(cub);
 	get_player_pos(cub);

@@ -11,6 +11,8 @@ void	init_values(t_cub *cub)
 	cub->game->texture = 0;
 	cub->game->cur_time = 0;
 	cub->game->old_time = 0;
+	cub->mini->mini_map_x = cub->window_x - 10 - (cub->window_x / 5);
+	cub->mini->mini_map_y = 10 + (cub->window_y / 5);
 }
 
 void	get_first_orientation(t_cub *cub, char c)

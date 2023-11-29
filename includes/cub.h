@@ -95,6 +95,17 @@ typedef	struct s_ray
 	int		draw_end;
 }			t_ray;
 
+typedef	struct s_mini
+{
+	int			size_x;
+	int			size_y;
+	int			wall_size;
+	int			mini_map_x;
+	int			mini_map_y;
+	int			map_x;
+	int			map_y;
+}			t_mini;
+
 typedef struct s_cub
 {
 	void		*mlx;
@@ -109,6 +120,9 @@ typedef struct s_cub
 	int			floor[4];
 	int			ceiling[4];
 	char		**map;
+	t_mini		*mini;
+	t_img		*mini_img;
+	int			map_height;
 }			t_cub;
 
 /*		TOOLS		*/
@@ -127,6 +141,7 @@ void	get_first_orientation(t_cub *cub, char c);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_textures(t_cub *cub, t_ray *ray, int x);
 void	draw_lines(t_cub *cub, int line_height, int side, int x);
+void	draw_mini_map(t_cub *cub, int x);
 /*		MOVES		*/
 int		keyboard_stuff(int keysym, t_cub *cub);
 int		keyboard_release(int keysym, t_cub *cub);
@@ -163,7 +178,7 @@ int		ft_scan_map(char **map, t_cub *cub);
 // void	ft_list_push_back(t_mem **begin_list, void *data);
 // void	*malloc(size_t size, int clear, int clear_one, void *data);
 /*		MAIN		*/
-char	**ft_get_map(char **desc);
+char	**ft_get_map(t_cub *cub, char **desc);
 int		ft_argv_parsing(int ac, char **av);
 int		keyboard_stuff(int keysym, t_cub *cub);
 int		end_of_prog(t_cub *cub);

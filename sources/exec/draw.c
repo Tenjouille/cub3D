@@ -61,17 +61,26 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	pick_texture(cub, cub->ray);
 	i = ray->draw_start;
 	while (i >= 0)
-		my_mlx_pixel_put(cub->img, x, i--, 0x0055555);
+	{
+		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
+			my_mlx_pixel_put(cub->img, x, i, 0x0055555);
+		i--;
+	}
 	i = ray->draw_start;
 	while (i <= ray->draw_end)
 	{
-		my_mlx_pixel_put(cub->img, x, i,
-			get_color(cub, ray->tex_x, ray->tex_pos, cub->game->texture));
+		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
+			my_mlx_pixel_put(cub->img, x, i,
+				get_color(cub, ray->tex_x, ray->tex_pos, cub->game->texture));
 		ray->tex_pos += ray->step;
 		i++;
 	}
 	while (i < cub->window_y)
-		my_mlx_pixel_put(cub->img, x, i++, 0x00555455);
+	{
+		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
+			my_mlx_pixel_put(cub->img, x, i, 0x00555455);
+		i++;
+	}
 }
 
 // void	draw_lines(t_cub *cub, int line_height, int side, int x)
