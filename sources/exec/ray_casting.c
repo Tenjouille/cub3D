@@ -69,7 +69,7 @@ void	check_hit(t_cub *cub, t_ray *ray)
 		ray->ray_length = ray->side_dist_x - ray->delta_dist_x;
 	else
 		ray->ray_length = ray->side_dist_y - ray->delta_dist_y;
-	if (ray->ray_length < 0.001)
+	if (ray->ray_length < 0.005)
 		ray->ray_length = 0.005;
 	ray->line_height = cub->window_y / (ray->ray_length);
 }
