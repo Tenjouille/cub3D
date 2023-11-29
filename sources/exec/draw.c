@@ -61,7 +61,7 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	pick_texture(cub, cub->ray);
 	i = ray->draw_start;
 	while (i >= 0)
-		my_mlx_pixel_put(cub->img, x, i--, 0x00AABBFF);
+		my_mlx_pixel_put(cub->img, x, i--, 0x0055555);
 	i = ray->draw_start;
 	while (i <= ray->draw_end)
 	{
