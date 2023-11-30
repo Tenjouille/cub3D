@@ -29,32 +29,6 @@ int	ft_argv_parsing(int ac, char **av)
 	return (0);
 }
 
-char	**ft_get_map(t_cub *cub, char **desc)
-{
-	char	**map;
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (desc[i])
-		i++;
-	j = i - 1;
-	while (!ft_strchr(desc[j], '.') && !ft_strchr(desc[j], ','))
-		j--;
-	j++;
-	map = malloc(sizeof(char*) * (i - j + 1));
-	if (!map)
-		return (ft_putstr_fd("malloc FAILURE\n", 2), NULL);
-	while (desc[j] && j < i)
-		map[k++] = ft_strdup(desc[j++]);
-	map[k] = 0;
-	cub->map_height = k - 1;
-	return (map);
-}
-
 int	main(int ac, char **av)
 {
 	t_cub	cub;
