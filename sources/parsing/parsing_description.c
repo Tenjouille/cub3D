@@ -20,7 +20,7 @@ int	ft_check_texture_path(char *path)
 	return (0);
 }
 
-int	ft_check_NSEW(char **desc, char *dir)
+int	ft_check_nsew(char **desc, char *dir)
 {
 	int	i;
 	int	j;
@@ -75,8 +75,6 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 			}
 		}
 		buf = ft_calloc(sizeof(char), len + 1);
-		if (!buf)
-			return (ft_putstr_fd("CALLOC FAILURE\n", 2), 1);
 		i = tmp;
 		len = 0;
 		while (color[i] && color[i] != ',' && color[i] != '\n')
@@ -92,7 +90,7 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 			cub->floor[rgb] = ft_atoi(buf);
 		else
 			cub->ceiling[rgb] = ft_atoi(buf);
-		free(buf);
+		ft_malloc(0, 0, 1, buf);
 		rgb++;
 		i++;
 	}
@@ -101,18 +99,10 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 	cub->floor[3] = -1;
 	cub->ceiling[3] = -1;
 	i = 0;
-	// while (i < 4)
-	// {
-	// 	if (FC == 'F')
-	// 		printf("%d\n", cub->floor[i]);
-	// 	if (FC == 'C')
-	// 		printf("%d\n", cub->ceiling[i]);
-	// 	i++;
-	// }
 	return (0);
 }
 
-int	ft_check_FC(char **desc, char FC, t_cub *cub)
+int	ft_check_fc(char **desc, char FC, t_cub *cub)
 {
 	int	i;
 	int	j;
@@ -146,17 +136,17 @@ int	ft_scan_desc(char **desc, t_cub *cub)
 		i++;
 	if (i != 6)
 		return (ft_map_error_msg(), 1);
-	if (ft_check_NSEW(desc, "NO"))
+	if (ft_check_nsew(desc, "NO"))
 		return (1);
-	if (ft_check_NSEW(desc, "SO"))
+	if (ft_check_nsew(desc, "SO"))
 		return (1);
-	if (ft_check_NSEW(desc, "WE"))
+	if (ft_check_nsew(desc, "WE"))
 		return (1);
-	if (ft_check_NSEW(desc, "EA"))
+	if (ft_check_nsew(desc, "EA"))
 		return (1);
-	if (ft_check_FC(desc, 'F', cub))
+	if (ft_check_fc(desc, 'F', cub))
 		return (1);
-	if (ft_check_FC(desc, 'C', cub))
+	if (ft_check_fc(desc, 'C', cub))
 		return (1);
 	return (0);
 }

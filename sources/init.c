@@ -1,5 +1,14 @@
 #include "../includes/cub.h"
 
+void	init_textures(t_cub *cub)
+{
+	cub->textures = ft_malloc(sizeof(t_textures) * 1, 0, 0, 0);
+	cub->textures->ea = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
+	cub->textures->we = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
+	cub->textures->no = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
+	cub->textures->so = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
+}
+
 void	init_images(t_cub *cub)
 {
 	char	*path;
@@ -104,7 +113,7 @@ void	init_values(t_cub * cub)
 
 void	game_init(t_cub *cub)
 {
-	cub->game = malloc(sizeof(t_game) * 1);
+	cub->game =ft_malloc(sizeof(t_game) * 1, 0, 0, 0);
 	init_values(cub);
 	init_images(cub);
 	get_player_pos(cub);

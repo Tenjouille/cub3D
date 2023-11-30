@@ -26,7 +26,7 @@ void	ray_cast(t_cub *cub)
 
 	int		line_height;
 
-	cub->img = malloc(sizeof(t_img) * 1);
+	cub->img = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
 	cub->img->mlx_img = mlx_new_image(cub->mlx, cub->window_x, cub->window_y);
 	cub->img->addr = mlx_get_data_addr(cub->img->mlx_img, &(cub->img->bpp), &(cub->img->rowlen),
 								&(cub->img->end));
@@ -116,5 +116,5 @@ void	ray_cast(t_cub *cub)
 	// printf("line height : %d\n", line_height);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img->mlx_img);
-	free(cub->img);
+	ft_malloc(0, 0, 1, cub->img);
 }

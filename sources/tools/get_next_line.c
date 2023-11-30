@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:46:24 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 17:02:02 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/11/28 07:02:23 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,20 @@ char	*read_line(int fd, char *remember)
 	char	*buff;
 	int		size;
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (0);
+	buff = ft_malloc((BUFFER_SIZE + 1) * sizeof(char), 0, 0, 0);
 	size = 1;
 	while (!ft_strchr_gnl(remember, '\n') && size != 0)
 	{
 		size = read(fd, buff, BUFFER_SIZE);
 		if (size == -1)
 		{
-			free(buff);
+			ft_malloc(0, 0, 1, buff);
 			return (0);
 		}
 		buff[size] = '\0';
 		remember = ft_strjoin_gnl(remember, buff);
 	}
-	free(buff);
+	ft_malloc(0, 0, 1, buff);
 	return (remember);
 }
 
@@ -46,7 +44,7 @@ char	*current_line(char	*remember)
 		return (0);
 	while (remember[len] && remember[len] != '\n')
 		len++;
-	curr_line = malloc((len + 2) * sizeof(char));
+	curr_line = ft_malloc((len + 2) * sizeof(char), 0, 0, 0);
 	if (!curr_line)
 		return (0);
 	len = 0;
@@ -75,10 +73,10 @@ char	*next_line(char *remember)
 		i++;
 	if (!remember[i])
 	{
-		free(remember);
+		ft_malloc(0, 0, 1, remember);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1));
+	str = ft_malloc(sizeof(char) * (ft_strlen_gnl(remember) - i + 1), 0, 0, 0);
 	if (!str)
 		return (NULL);
 	i++;
@@ -86,7 +84,7 @@ char	*next_line(char *remember)
 	while (remember[i])
 		str[j++] = remember[i++];
 	str[j] = '\0';
-	free(remember);
+	ft_malloc(0, 0, 1, remember);
 	return (str);
 }
 
@@ -117,7 +115,7 @@ char	*get_next_line(int fd)
 // 	{
 // 		line = get_next_line(fd);
 // 		printf("%s", line);
-// 		free(line);
+// 		ft_ma0, 0, 1, lloc(line);
 // 		boucle++;
 // 	}
 // 	close(fd);

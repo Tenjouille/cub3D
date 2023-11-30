@@ -7,7 +7,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	if (y < 0 || y > WINHEIGHT - 1 || x < 0 || x > WINWIDTH - 1)
 		return ;
 	dst = img->addr + (y * img->rowlen + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	get_color(t_cub *cub, int x, int y, int texture)
