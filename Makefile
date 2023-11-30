@@ -4,7 +4,9 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD
 HEADERS = -I ./include
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \
-	errors/error_msg.c init.c moves.c draw.c ray_casting.c \
+	errors/error_msg.c\
+	init/init.c init/init_values.c \
+	exec/moves.c exec/draw.c exec/ray_casting.c exec/keyboard_mouse.c exec/mini_map.c\
 	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c tools/ft_empty_line.c tools/ft_is_char.c \
 	file_cub/get_description.c \
 	parsing/parsing.c parsing/parsing_description.c parsing/parsing_map.c
@@ -55,6 +57,8 @@ build:
 	mkdir build/sources/file_cub
 	mkdir build/sources/parsing
 	mkdir build/sources/memory_manager
+	mkdir build/sources/exec
+	mkdir build/sources/init
 
 build/%.o: %.c | build
 	@$(CC) $(CFLAGS) $(HEADERS) -I/usr/include -Imlx_linux -c $< -o $@

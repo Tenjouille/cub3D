@@ -31,8 +31,8 @@
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 
-# define MOVESPEED 0.03
-# define ROTSPEED 0.01
+# define MOVESPEED 0.05
+# define ROTSPEED 0.02
 
 typedef struct s_img
 {
@@ -70,6 +70,42 @@ typedef struct s_textures
 	t_img	*ea;
 }			t_textures;
 
+typedef	struct s_ray
+{
+	double	camera;
+	double	diray_x;
+	double	diray_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	ray_length;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+	int		draw_start;
+	int		draw_end;
+}			t_ray;
+
+typedef	struct s_mini
+{
+	int			size_x;
+	int			size_y;
+	int			wall_size;
+	int			mini_map_x;
+	int			mini_map_y;
+	int			map_x;
+	int			map_y;
+}			t_mini;
+
 typedef struct s_cub
 {
 	void		*mlx;
@@ -80,9 +116,13 @@ typedef struct s_cub
 	t_game		*game;
 	t_img		textures[4];
 	t_img		*img;
+	t_ray		*ray;
 	int			floor[4];
 	int			ceiling[4];
 	char		**map;
+	t_mini		*mini;
+	t_img		*mini_img;
+	int			map_height;
 }			t_cub;
 
 /*		TOOLS		*/
@@ -95,11 +135,16 @@ void	ft_map_error_msg(void);
 /*		INIT		*/
 void	game_init(t_cub *cub);
 int		game_loop(t_cub *cub);
+void	init_values(t_cub *cub);
+void	get_first_orientation(t_cub *cub, char c);
 /*		DRAW		*/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	draw_textures(t_cub *cub, int line_height, int side, int x, double ray_length, double diray_x, double diray_y);
+void	draw_textures(t_cub *cub, t_ray *ray, int x);
 void	draw_lines(t_cub *cub, int line_height, int side, int x);
+void	draw_mini_map(t_cub *cub, int x);
 /*		MOVES		*/
+int		keyboard_stuff(int keysym, t_cub *cub);
+int		keyboard_release(int keysym, t_cub *cub);
 void	move_up(t_cub *cub);
 void	move_left(t_cub *cub);
 void	move_down(t_cub *cub);
@@ -134,7 +179,7 @@ int		ft_fill_map(char **map, int x, int y);
 // void	ft_list_push_back(t_mem **begin_list, void *data);
 // void	*malloc(size_t size, int clear, int clear_one, void *data);
 /*		MAIN		*/
-char	**ft_get_map(char **desc);
+char	**ft_get_map(t_cub *cub, char **desc);
 int		ft_argv_parsing(int ac, char **av);
 int		keyboard_stuff(int keysym, t_cub *cub);
 int		end_of_prog(t_cub *cub);

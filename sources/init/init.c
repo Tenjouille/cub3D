@@ -1,13 +1,4 @@
-#include "../includes/cub.h"
-
-void	init_textures(t_cub *cub)
-{
-	cub->textures = ft_malloc(sizeof(t_textures) * 1, 0, 0, 0);
-	cub->textures->ea = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
-	cub->textures->we = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
-	cub->textures->no = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
-	cub->textures->so = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
-}
+#include "../../includes/cub.h"
 
 void	init_images(t_cub *cub)
 {
@@ -18,60 +9,22 @@ void	init_images(t_cub *cub)
 	path = NULL;
 	x = 64;
 	y = 64;
-	path = "textures/my_wall.xpm";
+	path = "textures/wooden_box.xpm";
 	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[NO_TEXT].addr = mlx_get_data_addr(cub->textures[NO_TEXT].mlx_img,
 		&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen, &cub->textures[NO_TEXT].end);
-	path = "textures/colorstone.xpm";
+	path = "textures/wooden_box.xpm";
 	cub->textures[SO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[SO_TEXT].addr = mlx_get_data_addr(cub->textures[SO_TEXT].mlx_img,
 		&cub->textures[SO_TEXT].bpp, &cub->textures[SO_TEXT].rowlen, &cub->textures[SO_TEXT].end);
-	path = "textures/eagle.xpm";
+	path = "textures/wooden_box.xpm";
 	cub->textures[WE_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[WE_TEXT].addr = mlx_get_data_addr(cub->textures[WE_TEXT].mlx_img,
 		&cub->textures[WE_TEXT].bpp, &cub->textures[WE_TEXT].rowlen, &cub->textures[WE_TEXT].end);
-	path = "textures/mossy.xpm";
+	path = "textures/wooden_box.xpm";
 	cub->textures[EA_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, path, &x, &y);
 	cub->textures[EA_TEXT].addr = mlx_get_data_addr(cub->textures[EA_TEXT].mlx_img,
 		&cub->textures[EA_TEXT].bpp, &cub->textures[EA_TEXT].rowlen, &cub->textures[EA_TEXT].end);
-}
-
-void	get_first_orientation(t_cub *cub, char c)
-{
-	if (c == 'N')
-	{
-		cub->game->p_ori_x = 0;
-		cub->game->p_ori_y = -1;
-		cub->game->plane_x = 0.66;
-		cub->game->plane_y = 0;
-	}
-	if (c == 'E')
-	{
-		cub->game->p_ori_x = 1;
-		cub->game->p_ori_y = 0;
-		cub->game->plane_x = 0;
-		cub->game->plane_y = 0.66;
-	}
-	if (c == 'S')
-	{
-		cub->game->p_ori_x = 0;
-		cub->game->p_ori_y = 1;
-		cub->game->plane_x = -0.66;
-		cub->game->plane_y = 0;
-	}
-	if (c == 'W')
-	{
-		cub->game->p_ori_x = -1;
-		cub->game->p_ori_y = 0;
-		cub->game->plane_x = 0;
-		cub->game->plane_y = -0.66;
-	}
-}
-
-void	init_fov_and_time(t_cub *cub)
-{
-	cub->game->cur_time = 0;
-	cub->game->old_time = 0;
 }
 
 void	get_player_pos(t_cub *cub)
@@ -87,33 +40,23 @@ void	get_player_pos(t_cub *cub)
 		{
 			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
 				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
-				{
-					cub->game->p_pos_x = j + 0.5;
-					cub->game->p_pos_y = i + 0.5;
-					get_first_orientation(cub, cub->map[i][j]);
-					return ;
-				}
+			{
+				cub->game->p_pos_x = j + 0.5;
+				cub->game->p_pos_y = i + 0.5;
+				get_first_orientation(cub, cub->map[i][j]);
+				return ;
+			}
 				j++;
 		}
 		i++;
 	}
 }
 
-void	init_values(t_cub * cub)
-{
-	cub->game->key_w = 0;
-	cub->game->key_a = 0;
-	cub->game->key_s = 0;
-	cub->game->key_d = 0;
-	cub->game->key_left = 0;
-	cub->game->key_right = 0;
-	cub->game->texture = 0;
-	init_fov_and_time(cub);
-}
-
 void	game_init(t_cub *cub)
 {
-	cub->game =ft_malloc(sizeof(t_game) * 1, 0, 0, 0);
+	cub->game = ft_malloc(sizeof(t_game) * 1, 0, 0, 0);
+	cub->ray = ft_malloc(sizeof(t_ray) * 1, 0, 0, 0);
+	cub->mini = ft_malloc(sizeof(t_mini) * 1, 0, 0, 0);
 	init_values(cub);
 	init_images(cub);
 	get_player_pos(cub);
