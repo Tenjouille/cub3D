@@ -1,21 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 18:02:31 by rleger            #+#    #+#             */
-/*   Updated: 2023/11/23 16:08:27 by tbourdea         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cub.h"
 
 void	free_list(t_mem *list_ptr)
 {
 	free(list_ptr->data);
 	free(list_ptr);
+	return ;
 }
 
 void	ft_list_remove_if(t_mem **begin_list, void *data_ref)
