@@ -31,6 +31,7 @@ void	ft_memclear(t_mem **lst, int stop)
 	(*lst) = NULL;
 	if (stop)
 		exit(1);
+	return ;
 }
 
 void	exit_failure_malloc(void *data)
