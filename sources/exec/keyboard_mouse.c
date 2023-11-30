@@ -17,8 +17,10 @@ int	keyboard_stuff(int keysym, t_cub *cub)
 		cub->game->key_right = 1;
 	if (keysym == KEY_LEFT)
 		cub->game->key_left = 1;
-	else
-		return (0);
+	if (keysym == KEY_M && cub->mini->display == 0)
+		cub->mini->display = 1;
+	else if (keysym == KEY_M && cub->mini->display == 1)
+		cub->mini->display = 0;
 	return (42);
 }
 
@@ -36,7 +38,34 @@ int	keyboard_release(int keysym, t_cub *cub)
 		cub->game->key_right = 0;
 	if (keysym == KEY_LEFT)
 		cub->game->key_left = 0;
-	else
-		return (0);
 	return (42);
+}
+
+int	mouse_press(int keycode, int x, int y, t_cub *cub)
+{
+	(void)keycode;
+	(void)y;
+
+	printf("x : %d\n", x);
+	if (x < cub->mouse_x)
+	{
+		cub->mouse_dir = -1;
+		cub->mouse_x = x;
+	}
+	else if (x > cub->mouse_x)
+	{
+		cub->mouse_dir = -1;
+		cub->mouse_x = x;
+	}
+	return (0);
+}
+
+int	mouse_release(int keycode, int x, int y, t_cub *cub)
+{
+	(void)x;
+	(void)y;
+	(void)keycode;
+
+	cub->mouse_dir = 0;
+	return (0);
 }

@@ -95,7 +95,8 @@ void	ray_cast(t_cub *cub)
 		set_sidedist(cub, cub->ray);
 		check_hit(cub, cub->ray);
 		draw_textures(cub, cub->ray, x);
-		draw_mini_map(cub, x);
+		if (cub->mini->display == 1)
+			draw_mini_map(cub, x);
 		x++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);

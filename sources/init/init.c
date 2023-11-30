@@ -76,6 +76,10 @@ int	game_loop(t_cub *cub)
 		rotate_right(cub);
 	if (cub->game->key_left)
 		rotate_left(cub);
+	if (cub->mouse_dir == 1)
+		rotate_right(cub);
+	if (cub->mouse_dir == -1)
+		rotate_left(cub);
 	ray_cast(cub);
 	return (0);
 }

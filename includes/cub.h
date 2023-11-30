@@ -18,6 +18,7 @@
 # define KEY_A 97
 # define KEY_D 100
 # define KEY_S 115
+# define KEY_M 109
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
@@ -33,6 +34,8 @@
 
 # define MOVESPEED 0.05
 # define ROTSPEED 0.02
+
+# define MINIRATIO 10
 
 typedef struct s_img
 {
@@ -104,6 +107,7 @@ typedef	struct s_mini
 	int			mini_map_y;
 	int			map_x;
 	int			map_y;
+	int			display;
 }			t_mini;
 
 typedef struct s_cub
@@ -123,6 +127,8 @@ typedef struct s_cub
 	t_mini		*mini;
 	t_img		*mini_img;
 	int			map_height;
+	int			mouse_x;
+	int			mouse_dir;
 }			t_cub;
 
 /*		TOOLS		*/
@@ -151,6 +157,8 @@ void	move_down(t_cub *cub);
 void	move_right(t_cub *cub);
 void	rotate_right(t_cub *cub);
 void	rotate_left(t_cub *cub);
+int		mouse_press(int keycode, int x, int y, t_cub *cub);
+int		mouse_release(int keycode, int x, int y, t_cub *cub);
 /*		RAYCASTING		*/
 void	ray_cast(t_cub *cub);
 /*		FILE_CUB	*/

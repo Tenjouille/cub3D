@@ -62,23 +62,20 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	i = ray->draw_start;
 	while (i >= 0)
 	{
-		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
-			my_mlx_pixel_put(cub->img, x, i, 0x0055555);
+		my_mlx_pixel_put(cub->img, x, i, 0x0055555);
 		i--;
 	}
 	i = ray->draw_start;
 	while (i <= ray->draw_end)
 	{
-		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
-			my_mlx_pixel_put(cub->img, x, i,
+		my_mlx_pixel_put(cub->img, x, i,
 				get_color(cub, ray->tex_x, ray->tex_pos, cub->game->texture));
 		ray->tex_pos += ray->step;
 		i++;
 	}
 	while (i < cub->window_y)
 	{
-		if ((i < 10 || i > cub->mini->mini_map_y) || (x < cub->mini->mini_map_x || x > cub->window_x - 10))
-			my_mlx_pixel_put(cub->img, x, i, 0x00555455);
+		my_mlx_pixel_put(cub->img, x, i, 0x00555455);
 		i++;
 	}
 }
