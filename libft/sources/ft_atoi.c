@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgeorge <tgeorge@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:32:18 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/05/03 15:57:50 by tgeorge          ###   ########.fr       */
+/*   Updated: 2023/12/05 15:54:32 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,28 @@ int	ft_atoi(const char *str)
 {
 	int	res;
 	int	i;
-	int	sign;
+	int	count;
 
 	i = 0;
 	res = 0;
-	sign = 1;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	count = 0;
+	if (!str || !str[0])
+		return (-1);
+	while (str[i] == ' ' || str[i] == '\t')
 	{
-		if (str[i] == '-')
-			sign *= -1;
+		count++;
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
+		res = res * 10 + (str[i++] - 48);
+	while (str[i] == ' ' || str[i] == '\t')
 	{
-		res = res * 10 + (str[i] - 48);
+		count++;
 		i++;
 	}
-	return (res * sign);
+	if (str[i] || i - count > 3)
+		return (-1);
+	return (res);
 }
 
 // int	main(int ac, char **av)

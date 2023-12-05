@@ -15,7 +15,7 @@ char	*ft_strdup_better(char *str)
 		else if (str[i++])
 			len++;
 	}
-	res = ft_malloc(sizeof(char) * (len + 1), 0, 0, 0);
+	res = ft_malloc(sizeof(char) * (len), 0, 0, 0);
 	i = 0;
 	len = 0;
 	while (str[i])
@@ -25,7 +25,7 @@ char	*ft_strdup_better(char *str)
 		else
 			res[len++] = str[i++];
 	}
-	res[len] = '\0';
+	res[len - 1] = '\0';
 	return (res);
 }
 
@@ -134,5 +134,6 @@ char	**ft_get_desc(char *file)
 			i++;
 		desc[i] = get_next_line(fd);
 	}
+	desc[i] = NULL;
 	return (desc);
 }
