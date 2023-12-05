@@ -133,6 +133,7 @@ typedef struct s_cub
 
 /*		TOOLS		*/
 char	*ft_strnchr(const char *s, int c, int size);
+int		ft_strcount(char *str, char *to_count);
 int		ft_empty_line(char *str);
 int		ft_is_char(char c, char *charset);
 int		ft_is_char(char c, char *charset);
