@@ -128,7 +128,7 @@ typedef struct s_cub
 	t_img		*mini_img;
 	int			map_height;
 	int			mouse_x;
-	int			mouse_dir;
+	double		rotation_speed;
 }			t_cub;
 
 /*		TOOLS		*/
@@ -160,6 +160,7 @@ void	rotate_right(t_cub *cub);
 void	rotate_left(t_cub *cub);
 int		mouse_press(int keycode, int x, int y, t_cub *cub);
 int		mouse_release(int keycode, int x, int y, t_cub *cub);
+int		mouse_move(int keycode, int x, int y, t_cub *cub);
 /*		RAYCASTING		*/
 void	ray_cast(t_cub *cub);
 /*		FILE_CUB	*/

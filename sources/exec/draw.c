@@ -17,8 +17,10 @@ int	get_color(t_cub *cub, int x, int y, int texture)
 			* (cub->textures[texture].bpp / 8))));
 }
 
-void	set_textures_variables(t_cub *cub, t_ray *ray)
+void	set_textures_variables(t_cub *cub, t_ray *ray, int x)
 {
+	(void)x;
+	
 	ray->wall_x = 0;
 	ray->tex_pos = 0;
 	ray->draw_start = -ray->line_height / 2 + cub->window_y / 2;
@@ -32,6 +34,8 @@ void	set_textures_variables(t_cub *cub, t_ray *ray)
 	else
 		ray->wall_x = cub->game->p_pos_x + ray->ray_length * ray->diray_x;
 	ray->wall_x -= floor(ray->wall_x);
+	// if (x == 0)
+	// 	printf("wall_x : %f\n", ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x * (double)TEXWIDTH);
 	if ((ray->side == 0 && ray->diray_x > 0)
 		|| (ray->side == 1 && ray->diray_y < 0))
@@ -57,7 +61,7 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 {
 	int		i;
 
-	set_textures_variables(cub, cub->ray);
+	set_textures_variables(cub, cub->ray, x);
 	pick_texture(cub, cub->ray);
 	i = ray->draw_start;
 	while (i >= 0)

@@ -14,8 +14,8 @@ void	init_values(t_cub *cub)
 	cub->mini->mini_map_x = cub->window_x - 10 - (cub->window_x / 5);
 	cub->mini->mini_map_y = 10 + (cub->window_y / 5);
 	cub->mini->display = 1;
-	cub->mouse_dir = 0;
 	cub->mouse_x = 0;
+	cub->rotation_speed = 0;
 }
 
 void	get_first_orientation(t_cub *cub, char c)
