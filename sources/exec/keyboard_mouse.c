@@ -41,24 +41,24 @@ int	keyboard_release(int keysym, t_cub *cub)
 	return (42);
 }
 
-int	mouse_press(int keycode, int x, int y, t_cub *cub)
-{
-	// (void)keycode;
-	(void)y;
+// int	mouse_press(int keycode, int x, int y, t_cub *cub)
+// {
+// 	// (void)keycode;
+// 	(void)y;
 
-	printf("x : %d\n", x);
-	if (keycode == 1)
-	{
-		cub->mouse_dir = -1;
-		// cub->mouse_x = x;
-	}
-	else if (keycode == 3)
-	{
-		cub->mouse_dir = 1;
-		// cub->mouse_x = x;
-	}
-	return (0);
-}
+// 	printf("x : %d\n", x);
+// 	if (keycode == 1)
+// 	{
+// 		cub->mouse_dir = -1;
+// 		// cub->mouse_x = x;
+// 	}
+// 	else if (keycode == 3)
+// 	{
+// 		cub->mouse_dir = 1;
+// 		// cub->mouse_x = x;
+// 	}
+// 	return (0);
+// }
 
 // int	mouse_press(int keycode, int x, int y, t_cub *cub)
 // {
@@ -69,18 +69,18 @@ int	mouse_press(int keycode, int x, int y, t_cub *cub)
 // 	return (0);
 // }
 
-int	mouse_release(int keycode, int x, int y, t_cub *cub)
-{
-	(void)x;
-	(void)y;
-	(void)keycode;
+// int	mouse_release(int keycode, int x, int y, t_cub *cub)
+// {
+// 	(void)x;
+// 	(void)y;
+// 	(void)keycode;
 
-	// if (keycode == 1)
-	// 	cub->mouse_dir = 0;
-	// if (keycode == 1)
-	cub->mouse_dir = 0;
-	return (0);
-}
+// 	// if (keycode == 1)
+// 	// 	cub->mouse_dir = 0;
+// 	// if (keycode == 1)
+// 	cub->mouse_dir = 0;
+// 	return (0);
+// }
 
 // int	mouse_release(int keycode, int x, int y, t_cub *cub)
 // {

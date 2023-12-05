@@ -64,6 +64,8 @@ void	game_init(t_cub *cub)
 
 int	game_loop(t_cub *cub)
 {
+	int	y;
+
 	if (cub->game->key_w)
 		move_up(cub);
 	if (cub->game->key_a)
@@ -76,10 +78,12 @@ int	game_loop(t_cub *cub)
 		rotate_right(cub);
 	if (cub->game->key_left)
 		rotate_left(cub);
-	if (cub->mouse_dir == 1)
+	mlx_mouse_get_pos(cub->mlx, cub->win, &cub->mouse_x, &y);
+	if (cub->mouse_x > WINWIDTH / 2)
 		rotate_right(cub);
-	if (cub->mouse_dir == -1)
+	else if (cub->mouse_x < WINWIDTH / 2)
 		rotate_left(cub);
+	mlx_mouse_move(cub->mlx, cub->win, WINWIDTH / 2, WINHEIGHT / 2);
 	ray_cast(cub);
 	return (0);
 }
