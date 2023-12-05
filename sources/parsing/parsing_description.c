@@ -15,7 +15,7 @@ int	ft_find_not_digit(char *str)
 int	ft_check_texture_path(char *path)
 {
 	int	i;
-	
+
 	i = ft_strlen(path);
 	while (path[i] != '.')
 		i--;
@@ -50,11 +50,37 @@ int	ft_check_nsew(char **desc, char *dir)
 	return (0);
 }
 
+char	*ft_check_color_loop(char *color, int *i)
+{
+	int		len;
+	int		tmp;
+	char	*buf;
+
+	len = 0;
+	tmp = *i;
+	while (color[*i] && color[*i] != ',' && color[*i] != '\n')
+	{
+		*i += 1;
+		len++;
+	}
+	buf = ft_calloc(sizeof(char), len + 1);
+	*i = tmp;
+	len = 0;
+	while (color[*i] && color[*i] != ',' && color[*i] != '\n')
+	{
+		buf[len] = color[*i];
+		*i += 1;
+		len++;
+	}
+	buf[len] = '\0';
+	if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
+		return (ft_map_error_msg(), NULL);
+	return (buf);
+}
+
 int	ft_check_color(char *color, char FC, t_cub *cub)
 {
 	int		i;
-	int		tmp;
-	int		len;
 	int		rgb;
 	char	*buf;
 
@@ -66,22 +92,9 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		return (ft_map_error_msg(), 1);
 	while (color[i] && rgb < 3)
 	{
-		len = 0;
-		tmp = i;
-		while (color[i] && color[i] != ',' && color[i] != '\n')
-		{
-			i++;
-			len++;
-		}
-		buf = ft_calloc(sizeof(char), len + 1);
-		i = tmp;
-		len = 0;
-		while (color[i] && color[i] != ',' && color[i] != '\n')
-			buf[len++] = color[i++];
-		buf[len] = '\0';
-		printf("%d \n", ft_atoi(buf));
-		if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
-			return (ft_map_error_msg(), 1);
+		buf = ft_check_color_loop(color, &i);
+		if (!buf)
+			return (1);
 		if (FC == 'F')
 			cub->floor[rgb] = ft_atoi(buf);
 		else
@@ -94,7 +107,6 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		return (ft_map_error_msg(), 1);
 	cub->floor[3] = -1;
 	cub->ceiling[3] = -1;
-	i = 0;
 	return (0);
 }
 
@@ -128,7 +140,7 @@ int	ft_scan_desc(char **desc, t_cub *cub)
 
 	i = 0;
 	if (!desc || !desc[i])
-		return(ft_map_error_msg(), 1);
+		return (ft_map_error_msg(), 1);
 	while (desc[i] && (ft_strchr(desc[i], '.') || ft_strchr(desc[i], ',')))
 		i++;
 	if (i != 6)

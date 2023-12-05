@@ -9,10 +9,6 @@ void	init_images(t_cub *cub)
 	// path = NULL;
 	x = 64;
 	y = 64;
-	printf("%s\n", cub->desc[0]);
-	printf("%s\n", cub->desc[1]);
-	printf("%s\n", cub->desc[2]);
-	printf("%s\n", cub->desc[3]);
 	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, &cub->desc[0][2], &x, &y);
 	cub->textures[NO_TEXT].addr = mlx_get_data_addr(cub->textures[NO_TEXT].mlx_img,
 		&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen, &cub->textures[NO_TEXT].end);
