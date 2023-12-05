@@ -78,12 +78,12 @@ void	ray_cast(t_cub *cub)
 {
 	int		x;
 
-	cub->img = malloc(sizeof(t_img) * 1);
+	cub->img = ft_malloc(sizeof(t_img) * 1, 0, 0, 0);
 	cub->img->mlx_img = mlx_new_image(cub->mlx, cub->window_x, cub->window_y);
 	cub->img->addr = mlx_get_data_addr(cub->img->mlx_img,
 			&(cub->img->bpp), &(cub->img->rowlen),
 			&(cub->img->end));
-	cub->mini_img = malloc(sizeof(t_img) * 1);
+	cub->mini_img = ft_malloc(sizeof(t_img) * 1, 0 , 0, 0);
 	cub->mini_img->mlx_img = mlx_new_image(cub->mlx, cub->window_x, cub->window_y);
 	cub->mini_img->addr = mlx_get_data_addr(cub->mini_img->mlx_img,
 			&(cub->mini_img->bpp), &(cub->mini_img->rowlen),
@@ -102,6 +102,6 @@ void	ray_cast(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img->mlx_img, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img->mlx_img);
 	mlx_destroy_image(cub->mlx, cub->mini_img->mlx_img);
-	free(cub->img);
-	free(cub->mini_img);
+	// free(cub->img);
+	// free(cub->mini_img);
 }

@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);
 	mlx_hook(cub.win, 4, 1l << 2, &mouse_press, &cub);
 	mlx_hook(cub.win, 5, 1l << 3, &mouse_release, &cub);
+	// mlx_hook(cub.win, 6, 1l << 6, &mouse_move, &cub);
 	mlx_loop_hook(cub.mlx, game_loop, &cub);
 	mlx_loop(cub.mlx);
 	ft_malloc(0, 1, 0, 0);

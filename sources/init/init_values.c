@@ -16,6 +16,7 @@ void	init_values(t_cub *cub)
 	cub->mini->display = 1;
 	cub->mouse_dir = 0;
 	cub->mouse_x = 0;
+	cub->mouse_press = 0;
 }
 
 void	get_first_orientation(t_cub *cub, char c)

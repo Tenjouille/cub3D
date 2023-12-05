@@ -13,46 +13,6 @@ void	draw_char(t_cub *cub, int x)
 	}
 }
 
-// int	get_coords(t_cub *cub, int x, int y)
-// {
-// 	int		dist_x;
-// 	int		dist_y;
-// 	double	coord_x;
-// 	double	coord_y;
-// 	int		real_coord_x;
-// 	int		real_coord_y;
-
-// 	dist_x = cub->mini->mini_map_x + cub->mini->size_x / 2 - x;
-// 	dist_y = 10 + cub->mini->size_y / 2 - y;
-// 	coord_x = cub->game->p_pos_x - dist_x / cub->mini->wall_size - (double)(dist_x % cub->mini->wall_size) / cub->mini->wall_size;
-// 	coord_y = cub->game->p_pos_y - dist_y / cub->mini->wall_size - (double)(dist_y % cub->mini->wall_size) / cub->mini->wall_size;
-// 	real_coord_x = (int)coord_x;
-// 	real_coord_y = (int)coord_y;
-// 	// if (x == cub->mini->mini_map_x + 120 && y == cub->mini->mini_map_y - 1)
-// 	// {
-// 	// 	// printf("wall_size : %d\n", cub->mini->wall_size);
-// 	// 	printf("map height : %d \n", cub->map_height);
-// 	// 	printf("dist_x : %d\ncoord_x : %f\n", dist_x, coord_x);
-// 	// 	printf("dist_y : %d\ncoord_y : %f\n\n", dist_y, coord_y);
-// 	// 	printf("real_coord_y : %d\n\n", real_coord_y);
-// 	// 	// printf("dist_x / cub->mini->wall_size : %d\n", dist_x / cub->mini->wall_size);
-// 	// 	// printf("dist_x %% cub->mini->wall_size : %d\n", dist_x % cub->mini->wall_size);
-// 	// }
-// 	if (coord_y >= 0 && real_coord_y <= (double)cub->map_height)
-// 	{
-// 		if (coord_x >= 0 && coord_x <= (double)ft_strlen(cub->map[real_coord_y]))
-// 		{
-// 			if (cub->map[real_coord_y][real_coord_x] == '1')
-// 				return (1);
-// 			if (cub->map[real_coord_y][real_coord_x] == 'F' || cub->map[real_coord_y][real_coord_x] == 'N'
-// 				|| cub->map[real_coord_y][real_coord_x] == 'S' || cub->map[real_coord_y][real_coord_x] == 'E'
-// 					|| cub->map[real_coord_y][real_coord_x] == 'W')
-// 				return (2);
-// 		}
-// 	}
-// 	return (0);
-// }
-
 int	get_coords(t_cub *cub, int x, int y)
 {
 	int		dist_x;
@@ -61,36 +21,23 @@ int	get_coords(t_cub *cub, int x, int y)
 	double	coord_y;
 	int		real_coord_x;
 	int		real_coord_y;
-	double	angle;
-	double	turn_x;
-	double	turn_y;
-	int		x_centre;
-	int		y_centre;
 
-	if (cub->game->p_ori_y < 0)
-		angle = atan(cub->game->p_ori_y / cub->game->p_ori_x);
-	else
-		angle = -atan(cub->game->p_ori_y / cub->game->p_ori_x);
-	x_centre = cub->mini->mini_map_x + cub->mini->size_x / 2;
-	y_centre = 10 + cub->mini->size_y / 2;
-	turn_x = (x - x_centre) * cos(angle) + (y - y_centre) * sin(angle) + x_centre;
-	turn_y = -((x - x_centre) * sin(angle)) + (y - y_centre) * cos(angle) + y_centre;
-	dist_x = cub->mini->mini_map_x + cub->mini->size_x / 2 - (int)turn_x;
-	dist_y = 10 + cub->mini->size_y / 2 - (int)turn_y;
+	dist_x = cub->mini->mini_map_x + cub->mini->size_x / 2 - x;
+	dist_y = 10 + cub->mini->size_y / 2 - y;
 	coord_x = cub->game->p_pos_x - dist_x / cub->mini->wall_size - (double)(dist_x % cub->mini->wall_size) / cub->mini->wall_size;
 	coord_y = cub->game->p_pos_y - dist_y / cub->mini->wall_size - (double)(dist_y % cub->mini->wall_size) / cub->mini->wall_size;
 	real_coord_x = (int)coord_x;
 	real_coord_y = (int)coord_y;
-	if (x == cub->mini->mini_map_x + 120 && y == cub->mini->mini_map_y - 1)
-	{
-		// printf("wall_size : %d\n", cub->mini->wall_size);
-		// printf("map height : %d \n", cub->map_height);
-		// printf("dist_x : %d\ncoord_x : %f\n", dist_x, coord_x);
-		// printf("dist_y : %d\ncoord_y : %f\n\n", dist_y, coord_y);
-		// printf("real_coord_y : %d\n\n", real_coord_y);
-		// printf("dist_x / cub->mini->wall_size : %d\n", dist_x / cub->mini->wall_size);
-		// printf("dist_x %% cub->mini->wall_size : %d\n", dist_x % cub->mini->wall_size);
-	}
+	// if (x == cub->mini->mini_map_x + 120 && y == cub->mini->mini_map_y - 1)
+	// {
+	// 	// printf("wall_size : %d\n", cub->mini->wall_size);
+	// 	printf("map height : %d \n", cub->map_height);
+	// 	printf("dist_x : %d\ncoord_x : %f\n", dist_x, coord_x);
+	// 	printf("dist_y : %d\ncoord_y : %f\n\n", dist_y, coord_y);
+	// 	printf("real_coord_y : %d\n\n", real_coord_y);
+	// 	// printf("dist_x / cub->mini->wall_size : %d\n", dist_x / cub->mini->wall_size);
+	// 	// printf("dist_x %% cub->mini->wall_size : %d\n", dist_x % cub->mini->wall_size);
+	// }
 	if (coord_y >= 0 && real_coord_y <= (double)cub->map_height)
 	{
 		if (coord_x >= 0 && coord_x <= (double)ft_strlen(cub->map[real_coord_y]))
@@ -105,6 +52,59 @@ int	get_coords(t_cub *cub, int x, int y)
 	}
 	return (0);
 }
+
+// int	get_coords(t_cub *cub, int x, int y)
+// {
+// 	int		dist_x;
+// 	int		dist_y;
+// 	double	coord_x;
+// 	double	coord_y;
+// 	int		real_coord_x;
+// 	int		real_coord_y;
+// 	double	angle;
+// 	double	turn_x;
+// 	double	turn_y;
+// 	int		x_centre;
+// 	int		y_centre;
+
+// 	if (cub->game->p_ori_y < 0)
+// 		angle = atan(cub->game->p_ori_y / cub->game->p_ori_x);
+// 	else
+// 		angle = -atan(cub->game->p_ori_y / cub->game->p_ori_x);
+// 	x_centre = cub->mini->mini_map_x + cub->mini->size_x / 2;
+// 	y_centre = 10 + cub->mini->size_y / 2;
+// 	turn_x = (x - x_centre) * cos(angle) + (y - y_centre) * sin(angle) + x_centre;
+// 	turn_y = -((x - x_centre) * sin(angle)) + (y - y_centre) * cos(angle) + y_centre;
+// 	dist_x = cub->mini->mini_map_x + cub->mini->size_x / 2 - (int)turn_x;
+// 	dist_y = 10 + cub->mini->size_y / 2 - (int)turn_y;
+// 	coord_x = cub->game->p_pos_x - dist_x / cub->mini->wall_size - (double)(dist_x % cub->mini->wall_size) / cub->mini->wall_size;
+// 	coord_y = cub->game->p_pos_y - dist_y / cub->mini->wall_size - (double)(dist_y % cub->mini->wall_size) / cub->mini->wall_size;
+// 	real_coord_x = (int)coord_x;
+// 	real_coord_y = (int)coord_y;
+// 	if (x == cub->mini->mini_map_x + 120 && y == cub->mini->mini_map_y - 1)
+// 	{
+// 		// printf("wall_size : %d\n", cub->mini->wall_size);
+// 		// printf("map height : %d \n", cub->map_height);
+// 		// printf("dist_x : %d\ncoord_x : %f\n", dist_x, coord_x);
+// 		// printf("dist_y : %d\ncoord_y : %f\n\n", dist_y, coord_y);
+// 		// printf("real_coord_y : %d\n\n", real_coord_y);
+// 		// printf("dist_x / cub->mini->wall_size : %d\n", dist_x / cub->mini->wall_size);
+// 		// printf("dist_x %% cub->mini->wall_size : %d\n", dist_x % cub->mini->wall_size);
+// 	}
+// 	if (coord_y >= 0 && real_coord_y <= (double)cub->map_height)
+// 	{
+// 		if (coord_x >= 0 && coord_x <= (double)ft_strlen(cub->map[real_coord_y]))
+// 		{
+// 			if (cub->map[real_coord_y][real_coord_x] == '1')
+// 				return (1);
+// 			if (cub->map[real_coord_y][real_coord_x] == 'F' || cub->map[real_coord_y][real_coord_x] == 'N'
+// 				|| cub->map[real_coord_y][real_coord_x] == 'S' || cub->map[real_coord_y][real_coord_x] == 'E'
+// 					|| cub->map[real_coord_y][real_coord_x] == 'W')
+// 				return (2);
+// 		}
+// 	}
+// 	return (0);
+// }
 
 void	draw_mini_map(t_cub *cub, int x)
 {
