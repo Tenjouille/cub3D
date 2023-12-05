@@ -79,7 +79,6 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		while (color[i] && color[i] != ',' && color[i] != '\n')
 			buf[len++] = color[i++];
 		buf[len] = '\0';
-		printf("%d \n", ft_atoi(buf));
 		if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
 			return (ft_map_error_msg(), 1);
 		if (FC == 'F')
