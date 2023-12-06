@@ -79,12 +79,12 @@ int	ft_scan_map(char **map, t_cub *cub)
 			if (ft_is_char(map[y][x], "NSEW"))
 				count++;
 		if (!ft_is_char(map[y][x], "\n") && map[y][x])
-			return (ft_map_error_msg(), 1);
+			return (1);
 		y++;
 		x = -1;
 	}
 	if (count != 1 || ft_map_parsing(map))
-		return (ft_map_error_msg(), 1);
+		return (1);
 	return (0);
 }
 

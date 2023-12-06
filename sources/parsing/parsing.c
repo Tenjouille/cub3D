@@ -20,7 +20,7 @@ int	ft_check_texture_path(char *path)
 	while (path[i] != '.')
 		i--;
 	if (ft_strncmp(&path[i], ".xpm", 4))
-		return (ft_map_error_msg(), 1);
+		return (1);
 	return (0);
 }
 

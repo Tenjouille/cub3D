@@ -8,7 +8,7 @@ int	ft_check_nsew(char *desc, char *dir)
 	while (desc && (desc[i] == ' ' || desc[i] == '\t'))
 		i++;
 	if (ft_strncmp(desc, dir, 2))
-		return (ft_map_error_msg(), 1);
+		return (1);
 	i += 2;
 	while (desc[i] == ' ' || desc[i] == '\t')
 		i++;
@@ -37,7 +37,7 @@ char	*ft_check_color_loop(t_cub *cub, char *color, int *i, int rgb)
 	*i = tmp + len;
 	buf[len] = '\0';
 	if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
-		return (ft_map_error_msg(), NULL);
+		return (NULL);
 	if ((char)cub->FC == 'F')
 		cub->floor[rgb] = ft_atoi(buf);
 	else
@@ -56,7 +56,7 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 	while (color[i] == FC || color[i] == ' ' || color[i] == '\t')
 		i++;
 	if (ft_find_not_digit(&color[i]))
-		return (ft_map_error_msg(), 1);
+		return (1);
 	while (rgb < 3 && color[i])
 	{
 		buf = ft_check_color_loop(cub, color, &i, rgb);
@@ -67,7 +67,7 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		i++;
 	}
 	if (rgb != 3)
-		return (ft_map_error_msg(), 1);
+		return (1);
 	cub->floor[3] = -1;
 	cub->ceiling[3] = -1;
 	return (0);
@@ -95,11 +95,11 @@ int	ft_scan_desc(char **desc, t_cub *cub)
 
 	i = 0;
 	if (!desc || !desc[i])
-		return (ft_map_error_msg(), 1);
+		return (1);
 	while (desc[i] && (ft_strchr(desc[i], '.') || ft_strchr(desc[i], ',')))
 		i++;
 	if (i != 6)
-		return (ft_map_error_msg(), 1);
+		return (1);
 	if (ft_check_nsew(desc[0], "NO"))
 		return (1);
 	if (ft_check_nsew(desc[1], "SO"))

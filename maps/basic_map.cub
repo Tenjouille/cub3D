@@ -3,19 +3,19 @@
 C 42          ,42        ,							250									
 
 
-SO							./path_to_the_south_texture
-                        WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+SO							./textures/wooden_box.xpm
+                        WE ./textures/wooden_box.xpm
+EA ./textures/wooden_box.xpm
 F            135,						0,1         
 
 
 
-					NO         					 ./path_to_the_north_texture
+					NO         					 ./textures/wooden_box.xpm
 
 
 11111
 10001
 11101
-10101
-1N001
+10N001
+10001
 11111
