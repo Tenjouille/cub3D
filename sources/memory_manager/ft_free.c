@@ -1,6 +1,5 @@
 #include "../../includes/cub.h"
 
-
 int	free_mlx(t_cub *cub)
 {
 	if (cub->textures[NO_TEXT].mlx_img)

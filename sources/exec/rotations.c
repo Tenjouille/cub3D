@@ -14,13 +14,15 @@ void	rotate_right(t_cub *cub)
 
 	get_rotate_speed(cub);
 	old_dir_x = cub->game->p_ori_x;
-	cub->game->p_ori_x = cub->game->p_ori_x * cos(cub->rotation_speed) - cub->game->p_ori_y * sin(cub->rotation_speed);
-	cub->game->p_ori_y = old_dir_x * sin(cub->rotation_speed) + cub->game->p_ori_y * cos(cub->rotation_speed);
+	cub->game->p_ori_x = cub->game->p_ori_x * cos(cub->rotation_speed)
+		- cub->game->p_ori_y * sin(cub->rotation_speed);
+	cub->game->p_ori_y = old_dir_x * sin(cub->rotation_speed)
+		+ cub->game->p_ori_y * cos(cub->rotation_speed);
 	old_plane_x = cub->game->plane_x;
 	cub->game->plane_x = cub->game->plane_x * cos(cub->rotation_speed) - \
 		cub->game->plane_y * sin(cub->rotation_speed);
-	cub->game->plane_y = old_plane_x * sin(cub->rotation_speed) +\
-		cub->game->plane_y * cos(cub->rotation_speed);
+	cub->game->plane_y = old_plane_x * sin(cub->rotation_speed)
+		+ cub->game->plane_y * cos(cub->rotation_speed);
 }
 
 void	rotate_left(t_cub *cub)
@@ -30,13 +32,13 @@ void	rotate_left(t_cub *cub)
 
 	get_rotate_speed(cub);
 	old_dir_x = cub->game->p_ori_x;
-	cub->game->p_ori_x = cub->game->p_ori_x * cos(-cub->rotation_speed) -\
-		cub->game->p_ori_y * sin(-cub->rotation_speed);
-	cub->game->p_ori_y = old_dir_x * sin(-cub->rotation_speed) +\
-		cub->game->p_ori_y * cos(-cub->rotation_speed);
+	cub->game->p_ori_x = cub->game->p_ori_x * cos(-cub->rotation_speed)
+		- cub->game->p_ori_y * sin(-cub->rotation_speed);
+	cub->game->p_ori_y = old_dir_x * sin(-cub->rotation_speed)
+		+ cub->game->p_ori_y * cos(-cub->rotation_speed);
 	old_plane_x = cub->game->plane_x;
-	cub->game->plane_x = cub->game->plane_x * cos(-cub->rotation_speed) -\
-		cub->game->plane_y * sin(-cub->rotation_speed);
-	cub->game->plane_y = old_plane_x * sin(-cub->rotation_speed) +\
-		cub->game->plane_y * cos(-cub->rotation_speed);
+	cub->game->plane_x = cub->game->plane_x * cos(-cub->rotation_speed)
+		- cub->game->plane_y * sin(-cub->rotation_speed);
+	cub->game->plane_y = old_plane_x * sin(-cub->rotation_speed)
+		+ cub->game->plane_y * cos(-cub->rotation_speed);
 }

@@ -24,6 +24,24 @@ void	init_values(t_cub *cub)
 	cub->textures[WE_TEXT].mlx_img = NULL;
 }
 
+void	get_first_orientation_two(t_cub *cub, char c)
+{
+	if (c == 'S')
+	{
+		cub->game->p_ori_x = 0;
+		cub->game->p_ori_y = 1;
+		cub->game->plane_x = -0.66;
+		cub->game->plane_y = 0;
+	}
+	if (c == 'W')
+	{
+		cub->game->p_ori_x = -1;
+		cub->game->p_ori_y = 0;
+		cub->game->plane_x = 0;
+		cub->game->plane_y = -0.66;
+	}
+}
+
 void	get_first_orientation(t_cub *cub, char c)
 {
 	if (c == 'N')
@@ -40,18 +58,5 @@ void	get_first_orientation(t_cub *cub, char c)
 		cub->game->plane_x = 0;
 		cub->game->plane_y = 0.66;
 	}
-	if (c == 'S')
-	{
-		cub->game->p_ori_x = 0;
-		cub->game->p_ori_y = 1;
-		cub->game->plane_x = -0.66;
-		cub->game->plane_y = 0;
-	}
-	if (c == 'W')
-	{
-		cub->game->p_ori_x = -1;
-		cub->game->p_ori_y = 0;
-		cub->game->plane_x = 0;
-		cub->game->plane_y = -0.66;
-	}
+	get_first_orientation_two(cub, c);
 }

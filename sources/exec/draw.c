@@ -1,31 +1,8 @@
 #include "../../includes/cub.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (y < 0 || y > WINHEIGHT - 1 || x < 0 || x > WINWIDTH - 1)
-		return ;
-	dst = img->addr + (y * img->rowlen + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	get_color(t_cub *cub, int x, int y, int texture)
-{
-	return (*(int *)(cub->textures[texture].addr
-		+ (y * cub->textures[texture].rowlen + x
-			* (cub->textures[texture].bpp / 8))));
-}
-
-int	get_rgb(int *color)
-{
-	return (color[0] * 0x10000 + color[1] * 0x100 + color[2]);
-}
-
 void	set_textures_variables(t_cub *cub, t_ray *ray, int x)
 {
 	(void)x;
-	
 	ray->wall_x = 0;
 	ray->tex_pos = 0;
 	ray->draw_start = -ray->line_height / 2 + cub->window_y / 2;
@@ -39,8 +16,6 @@ void	set_textures_variables(t_cub *cub, t_ray *ray, int x)
 	else
 		ray->wall_x = cub->game->p_pos_x + ray->ray_length * ray->diray_x;
 	ray->wall_x -= floor(ray->wall_x);
-	// if (x == 0)
-	// 	printf("wall_x : %f\n", ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x * (double)TEXWIDTH);
 	if ((ray->side == 0 && ray->diray_x > 0)
 		|| (ray->side == 1 && ray->diray_y < 0))
@@ -78,7 +53,7 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	while (i <= ray->draw_end)
 	{
 		my_mlx_pixel_put(cub->img, x, i,
-				get_color(cub, ray->tex_x, ray->tex_pos, cub->game->texture));
+			get_color(cub, ray->tex_x, ray->tex_pos, cub->game->texture));
 		ray->tex_pos += ray->step;
 		i++;
 	}

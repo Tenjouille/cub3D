@@ -151,6 +151,7 @@ void	cub_init(t_cub *cub);
 int		game_loop(t_cub *cub);
 void	init_values(t_cub *cub);
 void	get_first_orientation(t_cub *cub, char c);
+void	init_images(t_cub *cub);
 /*		DRAW		*/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_textures(t_cub *cub, t_ray *ray, int x);

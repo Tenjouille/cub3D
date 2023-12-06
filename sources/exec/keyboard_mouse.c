@@ -1,6 +1,5 @@
 #include "../../includes/cub.h"
 
-
 int	keyboard_stuff(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
