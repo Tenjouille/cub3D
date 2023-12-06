@@ -66,6 +66,9 @@ char	**ft_sort_desc(char	**unsort)
 	int		len;
 
 	i = 0;
+	len = 0;
+	if (ft_bigstrlen(unsort) < 9)
+		return (NULL);
 	desc = ft_calloc(sizeof(char *), 7);
 	while (i < 7)
 	{
@@ -79,8 +82,6 @@ char	**ft_sort_desc(char	**unsort)
 				len++;
 		}
 		desc[i] = ft_calloc(sizeof(char), len + 1);
-		if (!desc[i])
-			return (ft_putstr_fd("CALLOC FAILURE\n", 2), NULL);
 		i++;
 	}
 	return (ft_sorting_tab(unsort, desc));

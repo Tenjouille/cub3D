@@ -24,28 +24,19 @@ int	ft_check_texture_path(char *path)
 	return (0);
 }
 
-int	ft_check_nsew(char **desc, char *dir)
+int	ft_check_nsew(char *desc, char *dir)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
-	while (desc[i] && (desc[i][j] == ' ' || desc[i][j] == '\t'))
-		j++;
-	while (desc[i] && ft_strncmp(&desc[i][j], dir, 2))
-	{
-		j = 0;
+	while (desc && (desc[i] == ' ' || desc[i] == '\t'))
 		i++;
-		while (desc[i] && (desc[i][j] == ' ' || desc[i][j] == '\t'))
-			j++;
-	}
-	if (!desc[i])
+	if (ft_strncmp(desc, dir, 2))
 		return (ft_map_error_msg(), 1);
-	j += 2;
-	while (desc[i][j] == ' ' || desc[i][j] == '\t')
-		j++;
-	if (ft_check_texture_path(&desc[i][j]))
+	i += 2;
+	while (desc[i] == ' ' || desc[i] == '\t')
+		i++;
+	if (ft_check_texture_path(&desc[i]))
 		return (1);
 	return (0);
 }
@@ -90,7 +81,7 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		i++;
 	if (ft_find_not_digit(&color[i]))
 		return (ft_map_error_msg(), 1);
-	while (color[i] && rgb < 3)
+	while (rgb < 3 && color[i] )
 	{
 		buf = ft_check_color_loop(color, &i);
 		if (!buf)
@@ -110,26 +101,17 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 	return (0);
 }
 
-int	ft_check_fc(char **desc, char FC, t_cub *cub)
+int	ft_check_fc(char *desc, char FC, t_cub *cub)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
-	while (desc[i][j] == ' ' || desc[i][j] == '\t')
-		j++;
-	while (desc[i] && desc[i][j] != FC)
-	{
-		j = 0;
+	while (desc[i] == ' ' || desc[i] == '\t')
 		i++;
-		while (desc[i][j] == ' ' || desc[i][j] == '\t')
-			j++;
-	}
-	if (!desc[i])
+	if (desc[i] != FC)
 		return (1);
-	j++;
-	if (ft_strcount(desc[i], ",") != 2 || ft_check_color(&desc[i][j], FC, cub))
+	i++;
+	if (ft_strcount(desc, ",") != 2 || ft_check_color(&desc[i], FC, cub))
 		return (1);
 	return (0);
 }
@@ -145,17 +127,17 @@ int	ft_scan_desc(char **desc, t_cub *cub)
 		i++;
 	if (i != 6)
 		return (ft_map_error_msg(), 1);
-	if (ft_check_nsew(desc, "NO"))
+	if (ft_check_nsew(desc[0], "NO"))
 		return (1);
-	if (ft_check_nsew(desc, "SO"))
+	if (ft_check_nsew(desc[1], "SO"))
 		return (1);
-	if (ft_check_nsew(desc, "WE"))
+	if (ft_check_nsew(desc[3], "WE"))
 		return (1);
-	if (ft_check_nsew(desc, "EA"))
+	if (ft_check_nsew(desc[2], "EA"))
 		return (1);
-	if (ft_check_fc(desc, 'F', cub))
+	if (ft_check_fc(desc[4], 'F', cub))
 		return (1);
-	if (ft_check_fc(desc, 'C', cub))
+	if (ft_check_fc(desc[5], 'C', cub))
 		return (1);
 	return (0);
 }
