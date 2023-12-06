@@ -108,6 +108,12 @@ typedef	struct s_mini
 	int			map_x;
 	int			map_y;
 	int			display;
+	int			dist_x;
+	int			dist_y;
+	double		coord_x;
+	double		coord_y;
+	int			real_coord_x;
+	int			real_coord_y;
 }			t_mini;
 
 typedef struct s_cub
