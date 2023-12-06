@@ -9,8 +9,7 @@ SRC = main.c \
 	exec/moves.c exec/draw.c exec/ray_casting.c exec/keyboard_mouse.c exec/mini_map.c exec/rotations.c exec/draw_tools.c\
 	tools/ft_strnchr.c tools/get_next_line.c tools/get_next_line_utils.c tools/ft_empty_line.c tools/ft_is_char.c tools/ft_strcount.c \
 	memory_manager/ft_free.c memory_manager/malloc_machine.c \
-	file_cub/get_description.c \
-	parsing/parsing.c parsing/parsing_description.c parsing/parsing_map.c
+	parsing/parsing.c parsing/parsing_description.c parsing/parsing_map.c parsing/get_description.c
 SRC_PATH = sources/
 MY_SOURCES := $(addprefix $(SRC_PATH),$(SRC))
 OBJ = $(MY_SOURCES:.c=.o)

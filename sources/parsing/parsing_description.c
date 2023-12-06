@@ -1,29 +1,5 @@
 #include "../../includes/cub.h"
 
-int	ft_find_not_digit(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != ',' && str[i] != '\n'
-			&& (str[i] < '0' || str[i] > '9'))
-			return (1);
-	return (0);
-}
-
-int	ft_check_texture_path(char *path)
-{
-	int	i;
-
-	i = ft_strlen(path);
-	while (path[i] != '.')
-		i--;
-	if (ft_strncmp(&path[i], ".xpm", 4))
-		return (ft_map_error_msg(), 1);
-	return (0);
-}
-
 int	ft_check_nsew(char *desc, char *dir)
 {
 	int	i;
@@ -41,7 +17,7 @@ int	ft_check_nsew(char *desc, char *dir)
 	return (0);
 }
 
-char	*ft_check_color_loop(char *color, int *i)
+char	*ft_check_color_loop(t_cub *cub, char *color, int *i, int rgb)
 {
 	int		len;
 	int		tmp;
@@ -49,23 +25,23 @@ char	*ft_check_color_loop(char *color, int *i)
 
 	len = 0;
 	tmp = *i;
-	while (color[*i] && color[*i] != ',' && color[*i] != '\n')
-	{
-		*i += 1;
+	while (color[*i + len] && color[*i + len] != ',' && color[*i + len] != '\n')
 		len++;
-	}
 	buf = ft_calloc(sizeof(char), len + 1);
-	*i = tmp;
 	len = 0;
-	while (color[*i] && color[*i] != ',' && color[*i] != '\n')
+	while (color[*i + len] && color[*i + len] != ',' && color[*i + len] != '\n')
 	{
-		buf[len] = color[*i];
-		*i += 1;
+		buf[len] = color[*i + len];
 		len++;
 	}
+	*i = tmp + len;
 	buf[len] = '\0';
 	if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
 		return (ft_map_error_msg(), NULL);
+	if ((char)cub->FC == 'F')
+		cub->floor[rgb] = ft_atoi(buf);
+	else
+		cub->ceiling[rgb] = ft_atoi(buf);
 	return (buf);
 }
 
@@ -81,15 +57,11 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		i++;
 	if (ft_find_not_digit(&color[i]))
 		return (ft_map_error_msg(), 1);
-	while (rgb < 3 && color[i] )
+	while (rgb < 3 && color[i])
 	{
-		buf = ft_check_color_loop(color, &i);
+		buf = ft_check_color_loop(cub, color, &i, rgb);
 		if (!buf)
 			return (1);
-		if (FC == 'F')
-			cub->floor[rgb] = ft_atoi(buf);
-		else
-			cub->ceiling[rgb] = ft_atoi(buf);
 		ft_malloc(0, 0, 1, buf);
 		rgb++;
 		i++;
@@ -106,6 +78,7 @@ int	ft_check_fc(char *desc, char FC, t_cub *cub)
 	int	i;
 
 	i = 0;
+	cub->FC = (int)FC;
 	while (desc[i] == ' ' || desc[i] == '\t')
 		i++;
 	if (desc[i] != FC)

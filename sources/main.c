@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	cub.window_y = 1080;
 	cub_init(&cub);
 	if (ft_parsing(ac, av, &cub))
-		return (ft_malloc(0, 1, 0, 0), 1);
+		end_of_prog(&cub, 1);
 	game_init(&cub);
 	mlx_do_key_autorepeatoff(cub.mlx);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);

@@ -134,6 +134,7 @@ typedef struct s_cub
 	t_img		*mini_img;
 	int			map_height;
 	int			mouse_x;
+	int			FC;
 	double		rotation_speed;
 }			t_cub;
 
