@@ -17,6 +17,11 @@ int	get_color(t_cub *cub, int x, int y, int texture)
 			* (cub->textures[texture].bpp / 8))));
 }
 
+int	get_rgb(int *color)
+{
+	return (color[0] * 0x10000 + color[1] * 0x100 + color[2]);
+}
+
 void	set_textures_variables(t_cub *cub, t_ray *ray, int x)
 {
 	(void)x;
@@ -66,7 +71,7 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	i = ray->draw_start;
 	while (i >= 0)
 	{
-		my_mlx_pixel_put(cub->img, x, i, 0x0055555);
+		my_mlx_pixel_put(cub->img, x, i, get_rgb(cub->ceiling));
 		i--;
 	}
 	i = ray->draw_start;
@@ -79,7 +84,7 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 	}
 	while (i < cub->window_y)
 	{
-		my_mlx_pixel_put(cub->img, x, i, 0x00555455);
+		my_mlx_pixel_put(cub->img, x, i, get_rgb(cub->floor));
 		i++;
 	}
 }

@@ -126,9 +126,9 @@ void	draw_mini_map(t_cub *cub, int x)
 		if (coords == 1)
 			my_mlx_pixel_put(cub->img, x, y, 0x0000FF00);
 		else if (coords == 2)
-			my_mlx_pixel_put(cub->img, x, y, 0x00555455);
+			my_mlx_pixel_put(cub->img, x, y, get_rgb(cub->floor));
 		else
-			my_mlx_pixel_put(cub->img, x, y, 0x00000000);
+			my_mlx_pixel_put(cub->img, x, y, get_rgb(cub->ceiling));
 		y++;
 	}
 	draw_char(cub, x);

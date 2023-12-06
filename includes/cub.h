@@ -149,7 +149,9 @@ void	get_first_orientation(t_cub *cub, char c);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_textures(t_cub *cub, t_ray *ray, int x);
 void	draw_lines(t_cub *cub, int line_height, int side, int x);
+int		get_rgb(int *color);
 void	draw_mini_map(t_cub *cub, int x);
+int		get_color(t_cub *cub, int x, int y, int texture);
 /*		MOVES		*/
 int		keyboard_stuff(int keysym, t_cub *cub);
 int		keyboard_release(int keysym, t_cub *cub);
