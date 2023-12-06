@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:13 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/11/23 17:02:16 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:10:05 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	**ft_split(char const *s, char c);
 int		ft_nbstring(char const *s, char c);
 
 size_t	ft_strlen(const char *str);
+size_t	ft_bigstrlen(char **str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
