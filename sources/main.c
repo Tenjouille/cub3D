@@ -37,6 +37,7 @@ int	ft_argv_parsing(int ac, char **av)
 	return (0);
 }
 
+// mlx_mouse_hide(cub.mlx, cub.win); Avant le autorepeatoff
 int	main(int ac, char **av)
 {
 	t_cub	cub;
@@ -47,7 +48,6 @@ int	main(int ac, char **av)
 	if (ft_parsing(ac, av, &cub))
 		return (ft_malloc(0, 1, 0, 0), 1);
 	game_init(&cub);
-	// mlx_mouse_hide(cub.mlx, cub.win);
 	mlx_do_key_autorepeatoff(cub.mlx);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
 	mlx_hook(cub.win, KeyRelease, KeyReleaseMask, &keyboard_release, &cub);
