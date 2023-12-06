@@ -29,12 +29,14 @@ char	*ft_strdup_better(char *str)
 	return (res);
 }
 
-char	**ft_sorting_tab(char **unsort, char **res)
+char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (ft_bigstrlen(unsort) - ft_bigstrlen(cub->map) > 6)
+		return (NULL);
 	while (unsort[i])
 	{
 		j = 0;
@@ -42,15 +44,15 @@ char	**ft_sorting_tab(char **unsort, char **res)
 			j++;
 		if (unsort[i][j] == 'N')
 			res[0] = ft_strdup_better(&unsort[i][j]);
-		if (unsort[i][j] == 'S')
+		else if (unsort[i][j] == 'S')
 			res[1] = ft_strdup_better(&unsort[i][j]);
-		if (unsort[i][j] == 'E')
+		else if (unsort[i][j] == 'E')
 			res[2] = ft_strdup_better(&unsort[i][j]);
-		if (unsort[i][j] == 'W')
+		else if (unsort[i][j] == 'W')
 			res[3] = ft_strdup_better(&unsort[i][j]);
-		if (unsort[i][j] == 'F')
+		else if (unsort[i][j] == 'F')
 			res[4] = ft_strdup_better(&unsort[i][j]);
-		if (unsort[i][j] == 'C')
+		else if (unsort[i][j] == 'C')
 			res[5] = ft_strdup_better(&unsort[i][j]);
 		i++;
 	}
@@ -58,7 +60,7 @@ char	**ft_sorting_tab(char **unsort, char **res)
 	return (res);
 }
 
-char	**ft_sort_desc(char	**unsort)
+char	**ft_sort_desc(t_cub *cub, char	**unsort)
 {
 	char	**desc;
 	int		i;
@@ -84,7 +86,7 @@ char	**ft_sort_desc(char	**unsort)
 		desc[i] = ft_calloc(sizeof(char), len + 1);
 		i++;
 	}
-	return (ft_sorting_tab(unsort, desc));
+	return (ft_sorting_tab(cub, unsort, desc));
 }
 
 int	ft_desclen(char *desc)

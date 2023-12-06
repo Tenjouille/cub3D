@@ -3,19 +3,21 @@
 C 42          ,42        ,							250									
 
 
-SO							./textures/wooden_box.xpm
-                        WE ./textures/wooden_box.xpm
-EA ./textures/wooden_box.xpm
+SO							./textures/neon1.xpm
+                        WE ./textures/neon2.xpm
+EA ./textures/neon3.xpm
 F            135,						0,1         
 
 
-
-					NO         					 ./textures/wooden_box.xpm
-
+					NO         					 ./textures/neon4.xpm
 
 11111
 10001
 11101
-10N001
-10001
+10101
+1N001
 11111
+
+
+
+
