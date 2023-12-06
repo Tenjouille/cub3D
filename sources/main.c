@@ -1,13 +1,20 @@
 #include "../includes/cub.h"
 
-int	end_of_prog(t_cub *cub)
+int	end_of_prog(t_cub *cub, int ret)
 {
-	mlx_destroy_window(cub->mlx, cub->win);
-	mlx_do_key_autorepeaton(cub->mlx);
-	mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
+	free_mlx(cub);
+	if (cub->mlx)
+	{
+		if (cub->win)
+			mlx_destroy_window(cub->mlx, cub->win);
+		mlx_do_key_autorepeaton(cub->mlx);
+		mlx_destroy_display(cub->mlx);
+		free(cub->mlx);
+	}
 	ft_malloc(0, 1, 0, 0);
-	exit (1);
+	if (ret == 1)
+		ft_map_error_msg();
+	exit (ret);
 }
 
 int	ft_argv_parsing(int ac, char **av)
@@ -36,23 +43,9 @@ int	main(int ac, char **av)
 
 	cub.window_x = 1920;
 	cub.window_y = 1080;
+	cub_init(&cub);
 	if (ft_parsing(ac, av, &cub))
-	{
-		mlx_do_key_autorepeaton(cub.mlx);
 		return (ft_malloc(0, 1, 0, 0), 1);
-	}
-	cub.mlx = mlx_init();
-	if (!cub.mlx)
-	{
-		mlx_do_key_autorepeaton(cub.mlx);
-		return (ft_malloc(0, 1, 0, 0), 1);
-	}
-	cub.win = mlx_new_window(cub.mlx, cub.window_x, cub.window_y, "Cub3D");
-	if (!cub.win)
-	{
-		mlx_do_key_autorepeaton(cub.mlx);
-		return (ft_malloc(0, 1, 0, 0), 1);
-	}
 	game_init(&cub);
 	// mlx_mouse_hide(cub.mlx, cub.win);
 	mlx_do_key_autorepeatoff(cub.mlx);

@@ -4,7 +4,7 @@
 int	keyboard_stuff(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
-		end_of_prog(cub);
+		end_of_prog(cub, 0);
 	if (keysym == KEY_W)
 		cub->game->key_w = 1;
 	if (keysym == KEY_S)

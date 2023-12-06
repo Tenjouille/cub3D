@@ -1,7 +1,7 @@
-WE./textures/my_wall.xpm
-NO./textures/greystone.xpm
-SO./textures/mossy.xpm
-EA./textures/wooden_box.xpm
+WE./textures/neon1.xpm
+NO./textures/neon2.xpm
+SO./textures/neon3.xpm
+EA./textures/neon4.xpm
 
 FC 144,238,144
 C 1,1,1
