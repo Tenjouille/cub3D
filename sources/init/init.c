@@ -2,23 +2,29 @@
 
 void	init_images(t_cub *cub)
 {
-	// char	*path;
 	int		x;
 	int		y;
 
-	// path = NULL;
 	x = 64;
 	y = 64;
 	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, &cub->desc[0][2], &x, &y);
+	if (!cub->textures[NO_TEXT].mlx_img)
+		end_of_prog(cub, 1);
 	cub->textures[NO_TEXT].addr = mlx_get_data_addr(cub->textures[NO_TEXT].mlx_img,
 		&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen, &cub->textures[NO_TEXT].end);
 	cub->textures[SO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, &cub->desc[1][2], &x, &y);
+	if (!cub->textures[SO_TEXT].mlx_img)
+		end_of_prog(cub, 1);
 	cub->textures[SO_TEXT].addr = mlx_get_data_addr(cub->textures[SO_TEXT].mlx_img,
 		&cub->textures[SO_TEXT].bpp, &cub->textures[SO_TEXT].rowlen, &cub->textures[SO_TEXT].end);
 	cub->textures[WE_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, &cub->desc[3][2], &x, &y);
+	if (!cub->textures[WE_TEXT].mlx_img)
+		end_of_prog(cub, 1);
 	cub->textures[WE_TEXT].addr = mlx_get_data_addr(cub->textures[WE_TEXT].mlx_img,
 		&cub->textures[WE_TEXT].bpp, &cub->textures[WE_TEXT].rowlen, &cub->textures[WE_TEXT].end);
 	cub->textures[EA_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx, &cub->desc[2][2], &x, &y);
+	if (!cub->textures[EA_TEXT].mlx_img)
+		end_of_prog(cub, 1);
 	cub->textures[EA_TEXT].addr = mlx_get_data_addr(cub->textures[EA_TEXT].mlx_img,
 		&cub->textures[EA_TEXT].bpp, &cub->textures[EA_TEXT].rowlen, &cub->textures[EA_TEXT].end);
 }
@@ -47,15 +53,34 @@ void	get_player_pos(t_cub *cub)
 		i++;
 	}
 }
+int	init_mlx(t_cub *cub)
+{
+	cub->mlx = mlx_init();
+	if (!cub->mlx)
+		return (ft_malloc(0, 1, 0, 0), 1);
+	return (0);
+}
 
-void	game_init(t_cub *cub)
+void	cub_init(t_cub *cub)
 {
 	cub->game = ft_malloc(sizeof(t_game) * 1, 0, 0, 0);
 	cub->ray = ft_malloc(sizeof(t_ray) * 1, 0, 0, 0);
 	cub->mini = ft_malloc(sizeof(t_mini) * 1, 0, 0, 0);
 	init_values(cub);
+	init_mlx(cub);
+}
+
+int		game_init(t_cub *cub)
+{
 	init_images(cub);
+	cub->win = mlx_new_window(cub->mlx, cub->window_x, cub->window_y, "Cub3D");
+	if (!cub->win)
+	{
+		mlx_do_key_autorepeaton(cub->mlx);
+		return (ft_malloc(0, 1, 0, 0), 1);
+	}
 	get_player_pos(cub);
+	return (0);
 }
 
 int	game_loop(t_cub *cub)

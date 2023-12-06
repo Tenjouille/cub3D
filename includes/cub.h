@@ -29,8 +29,8 @@
 
 # define WINWIDTH 1920
 # define WINHEIGHT 1080
-# define TEXWIDTH 64
-# define TEXHEIGHT 64
+# define TEXWIDTH 100
+# define TEXHEIGHT 100
 
 # define MOVESPEED 0.05
 # define ROTSPEED 0.02
@@ -140,7 +140,8 @@ int		ft_is_char(char c, char *charset);
 /*		ERRORS		*/
 void	ft_map_error_msg(void);
 /*		INIT		*/
-void	game_init(t_cub *cub);
+int		game_init(t_cub *cub);
+void	cub_init(t_cub *cub);
 int		game_loop(t_cub *cub);
 void	init_values(t_cub *cub);
 void	get_first_orientation(t_cub *cub, char c);
@@ -180,18 +181,11 @@ int		ft_scan_desc(char **desc, t_cub *cub);
 int		ft_scan_map(char **map, t_cub *cub);
 int		ft_fill_map(char **map, int x, int y);
 // /*		MEMORY_MANAGER		*/
-// void	free_list(t_mem *list_ptr);
-// void	ft_list_remove_if(t_mem **begin_list, void *data_ref);
-// void	ft_free(t_mem **memory, void *data);
-// void	ft_memclear(t_mem **lst, int stop);
-// void	exit_failure_malloc(void *data);
-// t_mem	*ft_create_elem(void *data);
-// void	ft_list_push_back(t_mem **begin_list, void *data);
-// void	*malloc(size_t size, int clear, int clear_one, void *data);
+int		free_mlx(t_cub *cub);
 /*		MAIN		*/
 char	**ft_get_map(t_cub *cub, char **desc);
 int		ft_argv_parsing(int ac, char **av);
 int		keyboard_stuff(int keysym, t_cub *cub);
-int		end_of_prog(t_cub *cub);
+int		end_of_prog(t_cub *cub, int ret);
 
 #endif

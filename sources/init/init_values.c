@@ -2,6 +2,8 @@
 
 void	init_values(t_cub *cub)
 {
+	cub->mlx = NULL;
+	cub->win = NULL;
 	cub->game->key_w = 0;
 	cub->game->key_a = 0;
 	cub->game->key_s = 0;
@@ -13,9 +15,13 @@ void	init_values(t_cub *cub)
 	cub->game->old_time = 0;
 	cub->mini->mini_map_x = cub->window_x - 10 - (cub->window_x / 5);
 	cub->mini->mini_map_y = 10 + (cub->window_y / 5);
-	cub->mini->display = 1;
+	cub->mini->display = 0;
 	cub->mouse_x = 0;
 	cub->rotation_speed = 0;
+	cub->textures[NO_TEXT].mlx_img = NULL;
+	cub->textures[SO_TEXT].mlx_img = NULL;
+	cub->textures[EA_TEXT].mlx_img = NULL;
+	cub->textures[WE_TEXT].mlx_img = NULL;
 }
 
 void	get_first_orientation(t_cub *cub, char c)

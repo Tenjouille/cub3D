@@ -1,5 +1,19 @@
 #include "../../includes/cub.h"
 
+
+int	free_mlx(t_cub *cub)
+{
+	if (cub->textures[NO_TEXT].mlx_img)
+		mlx_destroy_image(cub->mlx, cub->textures[NO_TEXT].mlx_img);
+	if (cub->textures[SO_TEXT].mlx_img)
+		mlx_destroy_image(cub->mlx, cub->textures[SO_TEXT].mlx_img);
+	if (cub->textures[EA_TEXT].mlx_img)
+		mlx_destroy_image(cub->mlx, cub->textures[EA_TEXT].mlx_img);
+	if (cub->textures[WE_TEXT].mlx_img)
+		mlx_destroy_image(cub->mlx, cub->textures[WE_TEXT].mlx_img);
+	return (1);
+}
+
 void	free_list(t_mem *list_ptr)
 {
 	free(list_ptr->data);
