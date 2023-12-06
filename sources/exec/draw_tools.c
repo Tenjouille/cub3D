@@ -12,9 +12,10 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	get_color(t_cub *cub, int x, int y, int texture)
 {
-	return (*(int *)(cub->textures[texture].addr
-		+ (y * cub->textures[texture].rowlen + x
-			* (cub->textures[texture].bpp / 8))));
+	(void)texture;
+	return (*(int *)(cub->textures[cub->game->texture].addr
+		+ (y * cub->textures[cub->game->texture].rowlen + x
+			* (cub->textures[cub->game->texture].bpp / 8))));
 }
 
 int	get_rgb(int *color)

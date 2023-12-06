@@ -29,8 +29,8 @@
 
 # define WINWIDTH 1920
 # define WINHEIGHT 1080
-# define TEXWIDTH 100
-# define TEXHEIGHT 100
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
 
 # define MOVESPEED 0.05
 # define ROTSPEED 0.02
