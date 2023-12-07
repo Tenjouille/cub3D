@@ -26,14 +26,10 @@ int	ft_check_texture_path(char *path)
 
 int	ft_parsing(int ac, char **av, t_cub *cub)
 {
-	int	i = 0;
-
 	if (ft_argv_parsing(ac, av))
 		return (1);
 	cub->desc = ft_get_desc(av[1]);
 	cub->map = ft_get_map(cub, cub->desc);
-	while (cub->desc[i])
-		printf("%s", cub->desc[i++]);
 	cub->desc = ft_sort_desc(cub, cub->desc);
 	if (!cub->desc || ft_scan_desc(cub->desc, cub))
 		return (1);
