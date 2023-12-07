@@ -70,6 +70,7 @@ int	ft_check_color(char *color, char FC, t_cub *cub)
 		return (1);
 	cub->floor[3] = -1;
 	cub->ceiling[3] = -1;
+	i = 0;
 	return (0);
 }
 

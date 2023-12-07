@@ -7,7 +7,7 @@ int	ft_find_not_digit(char *str)
 	i = -1;
 	while (str[++i])
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != ',' && str[i] != '\n'
-			&& (str[i] < '0' || str[i] > '9'))
+			&& str[i] != '+' && (str[i] < '0' || str[i] > '9'))
 			return (1);
 	return (0);
 }
@@ -32,9 +32,6 @@ int	ft_parsing(int ac, char **av, t_cub *cub)
 	if (!cub->desc)
 		return (1);
 	cub->map = ft_get_map(cub, cub->desc);
-	// int i = 0;
-	// while (cub->map[i])
-	// 	printf("%s", cub->map[i++]);
 	cub->desc = ft_sort_desc(cub, cub->desc);
 	if (!cub->desc || ft_scan_desc(cub->desc, cub))
 		return (ft_map_error_msg(), 1);
