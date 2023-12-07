@@ -16,11 +16,14 @@ void	set_textures_variables(t_cub *cub, t_ray *ray, int x)
 	else
 		ray->wall_x = cub->game->p_pos_x + ray->ray_length * ray->diray_x;
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = (int)(ray->wall_x * (double)TEXWIDTH);
+	ray->tex_x = (int)(ray->wall_x
+			* (double)cub->textures[cub->game->texture].tex_width);
 	if ((ray->side == 0 && ray->diray_x > 0)
 		|| (ray->side == 1 && ray->diray_y < 0))
-		ray->tex_x = TEXWIDTH - ray->tex_x - 1;
-	ray->step = 1 * (double)TEXHEIGHT / ray->line_height;
+		ray->tex_x = cub->textures[cub->game->texture].tex_width
+			- ray->tex_x - 1;
+	ray->step = 1 * (double)cub->textures[cub->game->texture].tex_height
+		/ ray->line_height;
 	ray->tex_pos = (ray->draw_start - WINHEIGHT
 			/ 2 + ray->line_height / 2) * ray->step;
 }
@@ -41,8 +44,8 @@ void	draw_textures(t_cub *cub, t_ray *ray, int x)
 {
 	int		i;
 
-	set_textures_variables(cub, cub->ray, x);
 	pick_texture(cub, cub->ray);
+	set_textures_variables(cub, cub->ray, x);
 	i = ray->draw_start;
 	while (i >= 0)
 	{

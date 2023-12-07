@@ -1,7 +1,7 @@
-WE./textures/neon1.xpm
-NO./textures/neon2.xpm
-SO./textures/neon3.xpm
-EA./textures/neon4.xpm
+WE./textures/we.xpm
+NO./textures/no.xpm
+SO./textures/so.xpm
+EA./textures/ea.xpm
 
 F 50,0,100
 C 150,75,135

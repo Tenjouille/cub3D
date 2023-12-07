@@ -2,13 +2,10 @@
 
 void	init_images_two(t_cub *cub)
 {
-	int		x;
-	int		y;
-
-	x = 64;
-	y = 64;
 	cub->textures[WE_TEXT].mlx_img
-		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[3][2], &x, &y);
+		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[3][2],
+			&cub->textures[WE_TEXT].tex_width,
+			&cub->textures[WE_TEXT].tex_height);
 	if (!cub->textures[WE_TEXT].mlx_img)
 		end_of_prog(cub, 1);
 	cub->textures[WE_TEXT].addr
@@ -16,7 +13,9 @@ void	init_images_two(t_cub *cub)
 			&cub->textures[WE_TEXT].bpp, &cub->textures[WE_TEXT].rowlen,
 			&cub->textures[WE_TEXT].end);
 	cub->textures[EA_TEXT].mlx_img
-		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[2][2], &x, &y);
+		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[2][2],
+			&cub->textures[EA_TEXT].tex_width,
+			&cub->textures[EA_TEXT].tex_height);
 	if (!cub->textures[EA_TEXT].mlx_img)
 		end_of_prog(cub, 1);
 	cub->textures[EA_TEXT].addr
@@ -27,13 +26,9 @@ void	init_images_two(t_cub *cub)
 
 void	init_images(t_cub *cub)
 {
-	int		x;
-	int		y;
-
-	x = 64;
-	y = 64;
 	cub->textures[NO_TEXT].mlx_img = mlx_xpm_file_to_image(cub->mlx,
-			&cub->desc[0][2], &x, &y);
+			&cub->desc[0][2], &cub->textures[NO_TEXT].tex_width,
+			&cub->textures[NO_TEXT].tex_height);
 	if (!cub->textures[NO_TEXT].mlx_img)
 		end_of_prog(cub, 1);
 	cub->textures[NO_TEXT].addr
@@ -41,7 +36,9 @@ void	init_images(t_cub *cub)
 			&cub->textures[NO_TEXT].bpp, &cub->textures[NO_TEXT].rowlen,
 			&cub->textures[NO_TEXT].end);
 	cub->textures[SO_TEXT].mlx_img
-		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[1][2], &x, &y);
+		= mlx_xpm_file_to_image(cub->mlx, &cub->desc[1][2],
+			&cub->textures[SO_TEXT].tex_width,
+			&cub->textures[SO_TEXT].tex_height);
 	if (!cub->textures[SO_TEXT].mlx_img)
 		end_of_prog(cub, 1);
 	cub->textures[SO_TEXT].addr

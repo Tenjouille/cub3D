@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 		end_of_prog(&cub, 0);
 	game_init(&cub);
 	mlx_do_key_autorepeatoff(cub.mlx);
+	mlx_mouse_move(cub.mlx, cub.win, WINWIDTH / 2, WINHEIGHT / 2);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
 	mlx_hook(cub.win, KeyRelease, KeyReleaseMask, &keyboard_release, &cub);
 	mlx_hook(cub.win, 17, 1l << 17, &end_of_prog, &cub);

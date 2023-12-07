@@ -29,13 +29,12 @@
 
 # define WINWIDTH 1920
 # define WINHEIGHT 1080
-# define TEXWIDTH 64
-# define TEXHEIGHT 64
 
 # define MOVESPEED 0.05
 # define ROTSPEED 0.02
 
 # define MINIRATIO 10
+# define MOUSE_RATIO 20
 
 typedef struct s_img
 {
@@ -44,6 +43,8 @@ typedef struct s_img
 	int		bpp;
 	int		rowlen;
 	int		end;
+	int		tex_width;
+	int		tex_height;
 }			t_img;
 
 typedef struct s_game
