@@ -30,6 +30,9 @@ int	ft_parsing(int ac, char **av, t_cub *cub)
 		return (1);
 	cub->desc = ft_get_desc(av[1]);
 	cub->map = ft_get_map(cub, cub->desc);
+	int i = 0;
+	while (cub->map[i])
+		printf("%s", cub->map[i++]);
 	cub->desc = ft_sort_desc(cub, cub->desc);
 	if (!cub->desc || ft_scan_desc(cub->desc, cub))
 		return (ft_map_error_msg(), 1);

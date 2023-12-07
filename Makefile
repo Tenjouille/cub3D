@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -MMD
+CFLAGS = -Wall -Wextra -Werror -g -MMD -fsanitize=address
 HEADERS = -I ./include
 LFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 SRC = main.c \

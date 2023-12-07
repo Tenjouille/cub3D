@@ -29,7 +29,10 @@ int	init_mlx(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
-		return (ft_malloc(0, 1, 0, 0), 1);
+	{
+		ft_malloc(0, 1, 0, 0);
+		exit (1);
+	}
 	return (0);
 }
 
@@ -49,7 +52,8 @@ int	game_init(t_cub *cub)
 	if (!cub->win)
 	{
 		mlx_do_key_autorepeaton(cub->mlx);
-		return (ft_malloc(0, 1, 0, 0), 1);
+		ft_malloc(0, 1, 0, 0);
+		exit (1);
 	}
 	get_player_pos(cub);
 	return (0);

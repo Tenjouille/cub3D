@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	cub.window_y = 1080;
 	cub_init(&cub);
 	if (ft_parsing(ac, av, &cub))
-		end_of_prog(&cub, 0);
+		end_of_prog(&cub, 2);
 	game_init(&cub);
 	mlx_do_key_autorepeatoff(cub.mlx);
 	mlx_mouse_move(cub.mlx, cub.win, WINWIDTH / 2, WINHEIGHT / 2);
