@@ -2,9 +2,9 @@
 
 int	ft_check_around(char **map, int x, int y)
 {
-	if (y <= 0 || y > (int)ft_strlen(map[y - 1])
+	if (y <= 0 || x > (int)ft_strlen(map[y - 1])
 		|| !ft_is_char(map[y - 1][x], "0F1NSEW")
-		|| !map[y + 1] || y > (int)ft_strlen(map[y + 1])
+		|| !map[y + 1] || x > (int)ft_strlen(map[y + 1])
 		|| !ft_is_char(map[y + 1][x], "0F1NSEW")
 		|| x <= 0 || !ft_is_char(map[y][x - 1], "01FNSEW")
 		|| !map[y][x + 1] || !ft_is_char(map[y][x + 1], "01FNSEW"))
