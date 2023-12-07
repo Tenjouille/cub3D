@@ -1,6 +1,6 @@
 #include "../../includes/cub.h"
 
-char	*ft_strdup_better(char *str)
+char	*ft_strdup_better(char *str, int type)
 {
 	int		i;
 	int		len;
@@ -10,7 +10,7 @@ char	*ft_strdup_better(char *str)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
+		if ((str[i] == ' ' || str[i] == '\t') && type == 2)
 			i++;
 		else if (str[i++])
 			len++;
@@ -43,20 +43,23 @@ char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
 		while (unsort[i][j] == ' ' || unsort[i][j] == '\t')
 			j++;
 		if (unsort[i][j] == 'N')
-			res[0] = ft_strdup_better(&unsort[i][j]);
+			res[0] = ft_strdup_better(&unsort[i][j], 2);
 		else if (unsort[i][j] == 'S')
-			res[1] = ft_strdup_better(&unsort[i][j]);
+			res[1] = ft_strdup_better(&unsort[i][j], 2);
 		else if (unsort[i][j] == 'E')
-			res[2] = ft_strdup_better(&unsort[i][j]);
+			res[2] = ft_strdup_better(&unsort[i][j], 2);
 		else if (unsort[i][j] == 'W')
-			res[3] = ft_strdup_better(&unsort[i][j]);
+			res[3] = ft_strdup_better(&unsort[i][j], 2);
 		else if (unsort[i][j] == 'F')
-			res[4] = ft_strdup_better(&unsort[i][j]);
+			res[4] = ft_strdup_better(&unsort[i][j], 1);
 		else if (unsort[i][j] == 'C')
-			res[5] = ft_strdup_better(&unsort[i][j]);
+			res[5] = ft_strdup_better(&unsort[i][j], 1);
 		i++;
 	}
 	res[6] = 0;
+	i = 0;
+	while (res[i])
+		printf("%s", res[i++]);
 	return (res);
 }
 
@@ -93,8 +96,10 @@ int	ft_desclen(char *desc)
 {
 	int		fd;
 	int		i;
+	int		map;
 	char	*buf;
 
+	map = 0;
 	i = 0;
 	fd = open(desc, O_RDONLY);
 	if (fd < 0)
@@ -102,7 +107,10 @@ int	ft_desclen(char *desc)
 	buf = get_next_line(fd);
 	while (buf)
 	{
-		if (ft_empty_line(buf))
+		if (!ft_empty_line(buf) && !ft_strchr(desc, ',')
+			&& !ft_strchr(desc, '.'))
+			map = 1;
+		if (ft_empty_line(desc) && !map)
 		{
 			ft_malloc(0, 0, 1, buf);
 			buf = get_next_line(fd);
@@ -127,16 +135,23 @@ char	**ft_get_desc(char *file)
 	if (fd < 0)
 		return (ft_putstr_fd("OPEN FAILURE\n", 2), NULL);
 	len = ft_desclen(file);
+	// printf("%d\n", len);
 	desc = ft_calloc(sizeof(char *), len + 1);
 	desc[i] = get_next_line(fd);
 	while (desc[i])
 	{
-		if (ft_empty_line(desc[i]))
+		if (!ft_empty_line(desc[i]) && !ft_strchr(desc[i], ',')
+			&& !ft_strchr(desc[i], '.'))
+			len = 0;
+		if (ft_empty_line(desc[i]) && len)
 			ft_malloc(0, 0, 1, desc[i]);
 		else
 			i++;
 		desc[i] = get_next_line(fd);
 	}
 	desc[i] = NULL;
+	// i = 0;
+	// while (desc[i])
+	// 	printf("%s", desc[i++]);
 	return (desc);
 }

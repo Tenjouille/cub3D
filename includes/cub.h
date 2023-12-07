@@ -173,7 +173,7 @@ void	rotate_left(t_cub *cub);
 /*		RAYCASTING		*/
 void	ray_cast(t_cub *cub);
 /*		FILE_CUB	*/
-char	*ft_strdup_better(char *str);
+char	*ft_strdup_better(char *str, int type);
 char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res);
 char	**ft_sort_desc(t_cub *cub, char	**unsort);
 int		ft_desclen(char *desc);

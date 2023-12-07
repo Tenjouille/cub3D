@@ -1,0 +1,25 @@
+[0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/file_does_not_exist[0m
+Error: The map needs to be in a .cub file
+[0;31mProgram failed[0m
+[0;34m------------------------[0m
+[0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/map_subject.cub[0m
+[0;32mProgram successed[0m
+[0;34m------------------------[0m
+[0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/map_space_end_tab_nl_etc.cub[0m
+Error
+ Bad map configuration.
+Here is an exemple of valid map to run cu3D : 
+
+NO ./path_to_north_texture
+SO ./path_to_south_texture
+WE ./path_to_west_texture
+EA ./path_to_the_east_texture
+F 255,0,0
+C 0,0,255
+111111
+100101
+101001
+1100N1
+111111
+[0;31mProgram failed[0m
+[0;34m------------------------[0m
