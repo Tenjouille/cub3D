@@ -6,7 +6,7 @@
 /*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:32:18 by tgeorge           #+#    #+#             */
-/*   Updated: 2023/12/05 15:54:32 by tbourdea         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:07:42 by tbourdea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_atoi(const char *str)
 		count++;
 		i++;
 	}
+	if (!str[i])
+		return (-1);
 	while (str[i] >= '0' && str[i] <= '9')
 		res = res * 10 + (str[i++] - 48);
 	while (str[i] == ' ' || str[i] == '\t')

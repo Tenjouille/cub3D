@@ -20,7 +20,7 @@ char	*ft_strdup_better(char *str, int type)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
+		if ((str[i] == ' ' || str[i] == '\t') && type == 2)
 			i++;
 		else
 			res[len++] = str[i++];
@@ -57,9 +57,9 @@ char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
 		i++;
 	}
 	res[6] = 0;
-	i = 0;
-	while (res[i])
-		printf("%s", res[i++]);
+	// i = 0;
+	// while (res[i])
+	// 	printf("%s\n", res[i++]);
 	return (res);
 }
 
