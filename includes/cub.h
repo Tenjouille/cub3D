@@ -21,6 +21,8 @@
 # define KEY_M 109
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define KEY_P 112
+# define KEY_SHIFT 65505
 
 # define NO_TEXT 0
 # define SO_TEXT 1
@@ -137,6 +139,9 @@ typedef struct s_cub
 	int			mouse_x;
 	int			FC;
 	double		rotation_speed;
+	int			mouse_active;
+	int			run;
+	double		movespeed;
 }			t_cub;
 
 /*		TOOLS		*/

@@ -17,11 +17,14 @@ void	init_values(t_cub *cub)
 	cub->mini->mini_map_y = 10 + (cub->window_y / 5);
 	cub->mini->display = 0;
 	cub->mouse_x = 0;
-	cub->rotation_speed = 0;
+	cub->rotation_speed = ROTSPEED;
 	cub->textures[NO_TEXT].mlx_img = NULL;
 	cub->textures[SO_TEXT].mlx_img = NULL;
 	cub->textures[EA_TEXT].mlx_img = NULL;
 	cub->textures[WE_TEXT].mlx_img = NULL;
+	cub->mouse_active = 0;
+	cub->run = 0;
+	cub->movespeed = MOVESPEED;
 }
 
 void	get_first_orientation_two(t_cub *cub, char c)

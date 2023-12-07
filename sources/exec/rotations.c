@@ -2,9 +2,12 @@
 
 void	get_rotate_speed(t_cub *cub)
 {
-	cub->rotation_speed = (double)ROTSPEED * (double)((double)1 + MOUSE_RATIO
+	if (cub->mouse_active)
+		cub->rotation_speed = (double)ROTSPEED * (double)((double)1 + MOUSE_RATIO
 			* (double)((double)((int)fabs((double)cub->mouse_x
 						- (double)(WINWIDTH / 2)) / (double)(WINWIDTH / 2))));
+	else
+		cub->rotation_speed = ROTSPEED;
 }
 
 void	rotate_right(t_cub *cub)

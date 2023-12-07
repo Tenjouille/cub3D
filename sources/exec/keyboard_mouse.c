@@ -20,6 +20,8 @@ int	keyboard_stuff(int keysym, t_cub *cub)
 		cub->mini->display = 1;
 	else if (keysym == KEY_M && cub->mini->display == 1)
 		cub->mini->display = 0;
+	if (keysym == KEY_SHIFT)
+		cub->run = 1;
 	return (42);
 }
 
@@ -37,5 +39,11 @@ int	keyboard_release(int keysym, t_cub *cub)
 		cub->game->key_right = 0;
 	if (keysym == KEY_LEFT)
 		cub->game->key_left = 0;
+	if (keysym == KEY_P && cub->mouse_active == 0)
+		cub->mouse_active = 1;
+	else if (keysym == KEY_P && cub->mouse_active == 1)
+		cub->mouse_active = 0;
+	if (keysym == KEY_SHIFT)
+		cub->run = 0;
 	return (42);
 }
