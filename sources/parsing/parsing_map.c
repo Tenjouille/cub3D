@@ -101,7 +101,7 @@ char	**ft_get_map(t_cub *cub, char **desc)
 	while (desc[i])
 		i++;
 	j = i - 1;
-	while (!ft_strchr(desc[j], '.') && !ft_strchr(desc[j], ','))
+	while (j >= 0 && !ft_strchr(desc[j], '.') && !ft_strchr(desc[j], ','))
 		j--;
 	j++;
 	map = ft_malloc(sizeof(char *) * (i - j + 1), 0, 0, 0);

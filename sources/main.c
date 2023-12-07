@@ -22,18 +22,18 @@ int	ft_argv_parsing(int ac, char **av)
 	int	i;
 
 	if (ac == 1)
-		return (ft_putstr_fd("Please, enter a map to play with\n", 2), 1);
+		return (ft_putstr_fd("Error: Please, enter a map to play with\n", 2), 1);
 	if (ac != 2)
-		return (ft_putstr_fd("Too many arguments to run cub\n", 2), 1);
+		return (ft_putstr_fd("Error: Too many arguments to run cub\n", 2), 1);
 	i = ft_strlen(av[1]) - 1;
 	if (i < 0)
-		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
 	while (av[1][i] != '.' && i != 0)
 		i--;
 	if (av[1][i] != '.')
-		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
 	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
-		return (ft_putstr_fd("The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	cub.window_y = 1080;
 	cub_init(&cub);
 	if (ft_parsing(ac, av, &cub))
-		end_of_prog(&cub, 1);
+		end_of_prog(&cub, 0);
 	game_init(&cub);
 	mlx_do_key_autorepeatoff(cub.mlx);
 	mlx_hook(cub.win, KeyPress, KeyPressMask, &keyboard_stuff, &cub);
