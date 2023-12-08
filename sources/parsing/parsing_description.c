@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_description.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:43:52 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:43:53 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 int	ft_check_nsew(char *desc, char *dir)
@@ -38,7 +50,7 @@ char	*ft_check_color_loop(t_cub *cub, char *color, int *i, int rgb)
 	buf[len] = '\0';
 	if (ft_atoi(buf) < 0 || ft_atoi(buf) > 255)
 		return (NULL);
-	if ((char)cub->FC == 'F')
+	if ((char)cub->fc == 'F')
 		cub->floor[rgb] = ft_atoi(buf);
 	else
 		cub->ceiling[rgb] = ft_atoi(buf);
@@ -79,7 +91,7 @@ int	ft_check_fc(char *desc, char FC, t_cub *cub)
 	int	i;
 
 	i = 0;
-	cub->FC = (int)FC;
+	cub->fc = (int)FC;
 	while (desc[i] == ' ' || desc[i] == '\t')
 		i++;
 	if (desc[i] != FC)

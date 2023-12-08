@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:43:25 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:43:26 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 void	get_player_pos(t_cub *cub)
@@ -23,17 +35,6 @@ void	get_player_pos(t_cub *cub)
 		}
 		i++;
 	}
-}
-
-int	init_mlx(t_cub *cub)
-{
-	cub->mlx = mlx_init();
-	if (!cub->mlx)
-	{
-		ft_malloc(0, 1, 0, 0);
-		exit (1);
-	}
-	return (0);
 }
 
 void	cub_init(t_cub *cub)
@@ -62,7 +63,7 @@ int	game_init(t_cub *cub)
 void	get_movespeed(t_cub *cub)
 {
 	if (cub->run == 1)
-		cub->movespeed = 2* MOVESPEED;
+		cub->movespeed = 2 * MOVESPEED;
 	else
 		cub->movespeed = MOVESPEED;
 }
@@ -93,6 +94,5 @@ int	game_loop(t_cub *cub)
 			rotate_left(cub);
 		mlx_mouse_move(cub->mlx, cub->win, WINWIDTH / 2, WINHEIGHT / 2);
 	}
-	ray_cast(cub);
-	return (0);
+	return (ray_cast(cub), 0);
 }

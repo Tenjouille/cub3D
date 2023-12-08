@@ -179,137 +179,32 @@
 [32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test2.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test2_no_endnl.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test3.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test4.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test5.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test6.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_test_giant.cub[0m
-Error
- Bad map configuration.
-Here is an exemple of valid map to run cu3D : 
-
-NO ./path_to_north_texture
-SO ./path_to_south_texture
-WE ./path_to_west_texture
-EA ./path_to_the_east_texture
-F 255,0,0
-C 0,0,255
-111111
-100101
-101001
-1100N1
-111111
-[0;31mProgram failed[0m
-[31;7mRESULT: Wrong[0m
+[0;32mProgram successed[0m
+[32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
 [0;34mProgress on : /sgoinfre/goinfre/Perso/vlepille/pub/cub3D_test_maps/ok_WE_direction.cub[0m
 [0;32mProgram successed[0m
@@ -335,5 +230,5 @@ C 0,0,255
 [0;32mProgram successed[0m
 [32;7mRESULT: Correct[0m
 [0;34m------------------------[0m
-[32;7mTotal of ok: 51/58[0m
-[31;7mTotal of ko: 7/58[0m
+[32;7mTotal of ok: 58/58[0m
+[31;7mTotal of ko: 0/58[0m

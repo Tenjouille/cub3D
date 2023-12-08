@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:47:42 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:47:43 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -76,7 +88,7 @@ typedef struct s_textures
 	t_img	*ea;
 }			t_textures;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	double	camera;
 	double	diray_x;
@@ -101,7 +113,7 @@ typedef	struct s_ray
 	int		draw_end;
 }			t_ray;
 
-typedef	struct s_mini
+typedef struct s_mini
 {
 	int			size_x;
 	int			size_y;
@@ -137,7 +149,7 @@ typedef struct s_cub
 	t_img		*mini_img;
 	int			map_height;
 	int			mouse_x;
-	int			FC;
+	int			fc;
 	double		rotation_speed;
 	int			mouse_active;
 	int			run;
@@ -185,6 +197,7 @@ int		ft_desclen(char *desc);
 char	**ft_get_desc(char *file);
 /*		PARSING		*/
 int		ft_parsing(int ac, char **av, t_cub *cub);
+int		init_fd(char *desc);
 int		ft_find_not_digit(char *str);
 int		ft_check_texture_path(char *path);
 int		ft_check_nsew(char *desc, char *dir);
@@ -193,11 +206,12 @@ int		ft_check_fc(char *desc, char FC, t_cub *cub);
 int		ft_scan_desc(char **desc, t_cub *cub);
 int		ft_scan_map(char **map, t_cub *cub);
 int		ft_fill_map(char **map, int x, int y);
-// /*		MEMORY_MANAGER		*/
+/*		MEMORY_MANAGER		*/
 int		free_mlx(t_cub *cub);
 /*		MAIN		*/
 char	**ft_get_map(t_cub *cub, char **desc);
 int		ft_argv_parsing(int ac, char **av);
+int		init_mlx(t_cub *cub);
 int		keyboard_stuff(int keysym, t_cub *cub);
 int		end_of_prog(t_cub *cub, int ret);
 

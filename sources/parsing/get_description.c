@@ -1,32 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_description.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:43:49 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:43:50 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
-char	*ft_strdup_better(char *str, int type)
+int	j_passing_whitespaces(int i, int j, char **unsort)
 {
-	int		i;
-	int		len;
-	char	*res;
-
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if ((str[i] == ' ' || str[i] == '\t') && type == 2)
-			i++;
-		else if (str[i++])
-			len++;
-	}
-	res = ft_malloc(sizeof(char) * (len), 0, 0, 0);
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if ((str[i] == ' ' || str[i] == '\t') && type == 2)
-			i++;
-		else
-			res[len++] = str[i++];
-	}
-	res[len - 1] = '\0';
-	return (res);
+	j = 0;
+	while (unsort[i][j] == ' ' || unsort[i][j] == '\t')
+		j++;
+	return (j);
 }
 
 char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
@@ -39,9 +30,7 @@ char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
 		return (NULL);
 	while (unsort[i])
 	{
-		j = 0;
-		while (unsort[i][j] == ' ' || unsort[i][j] == '\t')
-			j++;
+		j = j_passing_whitespaces(i, j, unsort);
 		if (unsort[i][j] == 'N')
 			res[0] = ft_strdup_better(&unsort[i][j], 2);
 		else if (unsort[i][j] == 'S')
@@ -57,9 +46,6 @@ char	**ft_sorting_tab(t_cub *cub, char **unsort, char **res)
 		i++;
 	}
 	res[6] = 0;
-	// i = 0;
-	// while (res[i])
-	// 	printf("%s\n", res[i++]);
 	return (res);
 }
 
@@ -101,9 +87,7 @@ int	ft_desclen(char *desc)
 
 	map = 0;
 	i = 0;
-	fd = open(desc, O_RDONLY);
-	if (fd < 0)
-		return (ft_putstr_fd("OPEN FAILURE\n", 2), 1);
+	fd = init_fd(desc);
 	buf = get_next_line(fd);
 	while (buf)
 	{
@@ -135,7 +119,6 @@ char	**ft_get_desc(char *file)
 	if (fd < 0)
 		return (ft_putstr_fd("OPEN FAILURE\n", 2), NULL);
 	len = ft_desclen(file);
-	// printf("%d\n", len);
 	desc = ft_calloc(sizeof(char *), len + 1);
 	desc[i] = get_next_line(fd);
 	while (desc[i])
@@ -150,8 +133,5 @@ char	**ft_get_desc(char *file)
 		desc[i] = get_next_line(fd);
 	}
 	desc[i] = NULL;
-	// i = 0;
-	// while (desc[i])
-	// 	printf("%s", desc[i++]);
 	return (desc);
 }

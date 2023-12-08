@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotations.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:43:12 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:43:13 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 void	get_rotate_speed(t_cub *cub)
 {
 	if (cub->mouse_active)
-		cub->rotation_speed = (double)ROTSPEED * (double)((double)1 + MOUSE_RATIO
-			* (double)((double)((int)fabs((double)cub->mouse_x
-						- (double)(WINWIDTH / 2)) / (double)(WINWIDTH / 2))));
+		cub->rotation_speed = (double)ROTSPEED
+			* (double)((double)1 + MOUSE_RATIO
+				* (double)((double)((int)fabs((double)cub->mouse_x
+							- (double)(WINWIDTH / 2))
+						/ (double)(WINWIDTH / 2))));
 	else
 		cub->rotation_speed = ROTSPEED;
 }

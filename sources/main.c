@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbourdea <tbourdea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 11:44:46 by tbourdea          #+#    #+#             */
+/*   Updated: 2023/12/08 11:44:47 by tbourdea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub.h"
 
 int	end_of_prog(t_cub *cub, int ret)
@@ -22,18 +34,34 @@ int	ft_argv_parsing(int ac, char **av)
 	int	i;
 
 	if (ac == 1)
-		return (ft_putstr_fd("Error: Please, enter a map to play with\n", 2), 1);
+		return (ft_putstr_fd("Error: Please, enter a map to play with\n", 2),
+			1);
 	if (ac != 2)
-		return (ft_putstr_fd("Error: Too many arguments to run cub\n", 2), 1);
+		return (ft_putstr_fd("Error: Too many arguments to run cub\n", 2),
+			1);
 	i = ft_strlen(av[1]) - 1;
 	if (i < 0)
-		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2),
+			1);
 	while (av[1][i] != '.' && i != 0)
 		i--;
 	if (av[1][i] != '.')
-		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2),
+			1);
 	if (ft_strncmp(&av[1][i], ".cub", ft_strlen(&av[1][i])))
-		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2), 1);
+		return (ft_putstr_fd("Error: The map needs to be in a .cub file\n", 2),
+			1);
+	return (0);
+}
+
+int	init_mlx(t_cub *cub)
+{
+	cub->mlx = mlx_init();
+	if (!cub->mlx)
+	{
+		ft_malloc(0, 1, 0, 0);
+		exit (1);
+	}
 	return (0);
 }
 
