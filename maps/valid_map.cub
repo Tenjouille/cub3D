@@ -1,0 +1,11 @@
+NO ./textures/wooden_box.xpm
+SO ./textures/colorstone.xpm
+EA ./textures/mossy.xpm
+WE ./textures/greystone.xpm
+
+F 135,0,1
+C 42,42,250									
+
+111
+1N1
+111
